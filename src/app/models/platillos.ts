@@ -11,7 +11,8 @@ public tiempo:String,
 public Etiquetas:String,
 public piezas:String,
 public tamaPrice:String,
-public Active:Number
+public Active:Number,
+public descTime:String,
 
 		){
 

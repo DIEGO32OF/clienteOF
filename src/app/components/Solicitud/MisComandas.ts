@@ -19,191 +19,283 @@ declare var $: any;
 export class ComandasComponent implements OnInit {
   MyComanda: boolean;
   final_data: any[] = [];
+  Service_dom: any[] = [];
   order: any[] = [];
   final_datas: any[] = [];
   keys: string[];
   llave: string;
+  NamePlaton:string;
   modals: any[] = [];
+  locaOrdenar:string='';
   locaCuenta: string = '';
   locaComanda: string = '';
   locaTermino: string = '';
   CountComandaC: number = 0;
   CountFinishC: number = 0;
+  myTokenMesaje: string = '';
+  needCode: boolean = false;
 
   constructor(private activatedRoute: ActivatedRoute, private _getService: GetService) {
     this.activatedRoute.params.subscribe((params: Params) => {
       let tipo = params['typer'];
       let local = params['Esta'];
 
-      if (tipo && local) {
-        this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
-        this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
-        this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
-        console.log(this.locaTermino);
-        this.final_data = [];
-        this.keys = [];
-        var date_ = new Date();
-        let month = '' + (date_.getMonth() + 1);
-        let day = '' + date_.getDate();
-        let year = date_.getFullYear();
-        let hour = date_.getHours();
-        let minute = date_.getMinutes().toString();
+      let token = this._getService.getCookie('verificaexpired');// params['Toke']; //this._getService.getCookie('verificaexpired');
 
-        if (minute.length < 2) minute = '0' + minute;
-        if (month.length < 2) month = '0' + month;
-        if (day.length < 2) day = '0' + day;
+      if (token != null) {
+        token = atob(token);//.replace('_', '.').replace('_', '.');
 
-        var fechaSolicitado = [day, month, year].join('/') + ' ' + hour + minute;
-        var solodia = fechaSolicitado.split(' ');
+        //  this._getService.validaToken(token).subscribe(
+        //    response => {
+        //      console.log(response);
+        var localescook = token.split('||');
 
-        this._getService.getComandas(local).subscribe(data => {
-          this.CountComandaC = 0;
-          this.CountFinishC = 0;
-          this.final_data = [];
-          this.final_datas = [];
-          data.forEach((childSnapshot) => {
-            console.log(childSnapshot);
+        if (localescook[0].replace('"', '') == tipo && localescook[1].replace('"', '') == local) {
 
-            if (childSnapshot.Estatus == '4') {
-              console.log(childSnapshot);
-              this.CountFinishC += +1;
-            }
-            this._getService.ComandasGetCode(local, childSnapshot.$key).subscribe(snap => {
+          if (tipo && local) {
+            this.locaOrdenar = '/Ordenar/dnE6XnhrjrU_/' + local;
+            this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
+            this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
+            this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
 
-              if((snap[0].Estatus=='0'||snap[0].Estatus=='1')&& snap[0].isCode!=undefined){
-              //  if(childSnapshot.Mesa!=undefined)
-              this.CountComandaC+=+1;
-            }
+            this.final_data = [];
+            this.Service_dom = [];
+            this.keys = [];
+            var date_ = new Date();
+            let month = '' + (date_.getMonth() + 1);
+            let day = '' + date_.getDate();
+            let year = date_.getFullYear();
+            let hour = date_.getHours();
+            let minute = date_.getMinutes().toString();
 
-              var aunatiempo = "alert alert-success alert-dismissible fade in";
-              if (snap[0] != undefined) {
-                if (snap[0].fechaCreado != undefined) {
-                  var yatarde = snap[0].fechaCreado.split(' ');
-                  var hora = yatarde[1].replace(':', '');
+            if (minute.length < 2) minute = '0' + minute;
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
 
-
-                  let horahoy = +solodia[1];
-                  if (horahoy - +hora >= 10) {
-                    aunatiempo = "alert alert-warning alert-dismissible fade in";
+            var fechaSolicitado = [day, month, year].join('/') + ' ' + hour + minute;
+            var solodia = fechaSolicitado.split(' ');
+      
+            this._getService.signUp(tipo, local, fechaSolicitado.replace('/', '|').replace('/', '|').replace('/', '|').replace(':', '-').replace(':', '-').replace(':', '-').replace(' ', '_')).subscribe(
+              response => {
+                if (response.local) {
+                  if (response.local.id_Menu != null) {
+                    if (response.local.id_Menu.need_Code == 1)
+                      this.needCode = true;
                   }
                 }
 
-                if (snap[0].FechaEntregado != undefined) {
+                  this._getService.getServicioDomi(local, '').subscribe(respServicio => {
 
-                  this.final_data.push({
-                    snap,
-                    codigo: childSnapshot.$key,
-                    mesa: snap[0].Mesa,
-                    isCode: childSnapshot.isCode,
-                    yatardo: aunatiempo,
-                    fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
-                    Estatus: childSnapshot.Estatus,
-                    FechaEntregado: this._getService.formatoDate(childSnapshot.FechaEntregado)//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
-                  });
+            this._getService.getComandas(local).subscribe(data => {
+              this.CountComandaC = 0;
+              this.CountFinishC = 0;
+              
+           
 
+              
+                this.Service_dom = [];
+                this.final_data = [];
 
+                this.final_datas = [];
 
-                  this.final_datas.push({
-                    fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
-                    id: childSnapshot.$key
-                  });
-
-                  //snap.forEach((dontWork) => {
-                  //  console.log(dontWork);
-                  //if(dontWork.Estatus=='0'){
-
-                  //this.final_data.push({
-                  //  Estatus:'0',
-                  //  //FechaEntregado:this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
-                  //codigo:childSnapshot.$key,
-                  //mesa:snap[0].Mesa,
-                  //iscode:snap[0].isCode,
-                  //yatardo:aunatiempo,
-                  //fecha:+snap[0].fechaCreado.replace(' ','').replace(':','').replace('/','').replace('/',''),
+               if (respServicio.ServiceFounder != null) {
+                 this.Service_dom =  respServicio.ServiceFounder;
+                  //  .push({
+                  //  correo: respServicio.ServiceFounder.Correo,
+                  //  direccion: respServicio.ServiceFounder.Direccion,
+                  //  nombre: respServicio.ServiceFounder.Nombre,
+                  //  telefono: respServicio.ServiceFounder.Telefono,
+                  //  id: respServicio.ServiceFounder._id,
                   //});
-                  //}
-                  //});
+                }
+             // });
+
+              data.forEach((childSnapshot) => {
 
 
+                if (childSnapshot.Estatus == '4') {
 
-
-
-
-
+                  this.CountFinishC += +1;
+                }
+                if (childSnapshot.callMesero != undefined) {
+                  if (childSnapshot.callMesero)
+                    this.CountFinishC += +1;
                 }
 
-
-                else {
-                  if (snap[0].fechaCreado != undefined) {
-                    this.final_data.push({
-                      snap,
-                      codigo: childSnapshot.$key,
-                      mesa: snap[0].Mesa,
-                      isCode: childSnapshot.isCode,
-                      yatardo: aunatiempo,
-                      fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
-                      Estatus: childSnapshot.Estatus,
-                      //FechaEntregado:childSnapshot.FechaEntregado.replace(' ','').replace(':','').replace('/','').replace('/',''),
-                    });
-
-                    var noCofirm = false;
-                    var snaper = new Array();
-                    var ifConfirm = false;
-                    snap.forEach((dontWork) => {
-                      if ((dontWork.Estatus == '0' || dontWork.Estatus == '1') && childSnapshot.FechaEntregado != undefined) {
-                        if (dontWork.isconfirm == undefined) {
-                          noCofirm = true;
-                        }
-                        snaper.push(dontWork);
-                      }
-                    });
-
-                    if (snaper.length > 0) {
-                      if (noCofirm) {
-                        this.final_data.push({
-                          Estatus: '0',
-                          //  FechaEntregado:this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
-                          codigo: childSnapshot.$key,
-                          mesa: snap[0].Mesa,
-                          isCode: !noCofirm,//childSnapshot.isCode,
-                          yatardo: aunatiempo,
-                          fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
-                          isconfirm: 1,
-                          snap: snaper
-                        });
-                      }
-                      else {
-                        this.final_data.push({
-                          Estatus: '0',
-                          //  FechaEntregado:this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
-                          codigo: childSnapshot.$key,
-                          mesa: snap[0].Mesa,
-                          isCode: !noCofirm,//childSnapshot.isCode,
-                          yatardo: aunatiempo,
-                          fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
-                          snap: snaper
-                        });
-                      }
+                this._getService.ComandasGetCode(local, childSnapshot.$key).subscribe(snap => {
+                  if (snap[0] != undefined) {
+                    if ((snap[0].Estatus == '0' || snap[0].Estatus == '1' || snap[0].Estatus == '') && snap[0].isCode != undefined) {
+                      //  if(childSnapshot.Mesa!=undefined)
+                      this.CountComandaC += +1;
                     }
 
 
-                    this.final_datas.push({
-                      fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
-                      id: childSnapshot.$key
-                    });
-                    //console.log(this.final_data);
+
+
+
+                    var aunatiempo = "alert alert-success alert-dismissible fade in";
+                    if (snap[0] != undefined) {
+                      if (snap[0].fechaCreado != undefined) {
+                        var yatarde = snap[0].fechaCreado.split(' ');
+                        var hora = yatarde[1].replace(':', '');
+
+
+                        let horahoy = +solodia[1];
+                        if (horahoy - +hora >= 10) {
+                          aunatiempo = "alert alert-warning alert-dismissible fade in";
+                        }
+                      }
+
+                      if (snap[0].FechaEntregado != undefined) {
+
+                        //this.TraemeServicios(childSnapshot.idService, local);
+                        var DomServ = this.Service_dom.filter(x => x._id === childSnapshot.idService);
+
+                        this.final_data.push({
+                          snap,
+                          codigo: childSnapshot.$key,
+                          mesa: snap[0].Mesa,
+                          isCode: childSnapshot.isCode,
+                          yatardo: aunatiempo,
+                          fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
+                          Estatus: childSnapshot.Estatus,
+                          FechaEntregado: this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
+                          plus: snap[0].plus,
+                          Allevar: childSnapshot.Allevar,
+                          servicioDom: DomServ
+
+                        });
+
+
+
+                        this.final_datas.push({
+                          fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
+                          id: childSnapshot.$key
+                        });
+
+                        //snap.forEach((dontWork) => {
+                        //  console.log(dontWork);
+                        //if(dontWork.Estatus=='0'){
+
+                        //this.final_data.push({
+                        //  Estatus:'0',
+                        //  //FechaEntregado:this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
+                        //codigo:childSnapshot.$key,
+                        //mesa:snap[0].Mesa,
+                        //iscode:snap[0].isCode,
+                        //yatardo:aunatiempo,
+                        //fecha:+snap[0].fechaCreado.replace(' ','').replace(':','').replace('/','').replace('/',''),
+                        //});
+                        //}
+                        //});
+                      }
+
+
+                      else {
+                        if (snap[0].fechaCreado != undefined) {
+                          if (childSnapshot.idService != '' && childSnapshot.idService != undefined)
+                            //this.TraemeServicios(childSnapshot.idService, local);
+                            var DomService = this.Service_dom.filter(x => x._id === childSnapshot.idService);             
+                          //ya esta modificado
+                          this.final_data.push({
+                            snap,
+                            codigo: childSnapshot.$key,
+                            mesa: snap[0].Mesa,
+                            isCode: childSnapshot.isCode,
+                            yatardo: aunatiempo,
+                            fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
+                            Estatus: childSnapshot.Estatus,
+                            plus: snap[0].plus,
+                            Allevar: childSnapshot.Allevar,
+                            servicioDom: DomService
+                            //FechaEntregado:childSnapshot.FechaEntregado.replace(' ','').replace(':','').replace('/','').replace('/',''),
+                          });
+
+
+
+
+                          var noCofirm = false;
+                          var snaper = new Array();
+                          var ifConfirm = false;
+                          snap.forEach((dontWork) => {
+                            if ((dontWork.Estatus == '0' || dontWork.Estatus == '1') && childSnapshot.FechaEntregado != undefined) {
+                              if (dontWork.isconfirm == undefined) {
+                                noCofirm = true;
+                              }
+                              snaper.push(dontWork);
+                            }
+                          });
+
+                          if (snaper.length > 0) {
+                            if (noCofirm) {
+                              this.final_data.push({
+                                Estatus: '0',
+                                //  FechaEntregado:this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
+                                codigo: childSnapshot.$key,
+                                mesa: snap[0].Mesa,
+                                isCode: !noCofirm,//childSnapshot.isCode,
+                                yatardo: aunatiempo,
+                                fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
+                                isconfirm: 1,
+                                plus: snap[0].plus,
+                                Allevar: childSnapshot.Allevar,
+                                snap: snaper,
+                                servicioDom: DomService
+                              });
+                            }
+                            else {
+                              this.final_data.push({
+                                Estatus: '0',
+                                //  FechaEntregado:this._getService.formatoDate(childSnapshot.FechaEntregado),//.replace(' ','').replace('T',' ').replace('/','').replace('/',''),
+                                codigo: childSnapshot.$key,
+                                mesa: snap[0].Mesa,
+                                isCode: !noCofirm,//childSnapshot.isCode,
+                                yatardo: aunatiempo,
+                                fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
+                                plus: snap[0].plus,
+                                Allevar: childSnapshot.Allevar,
+                                snap: snaper,
+                                servicioDom: DomService
+                              });
+                            }
+                          }
+
+
+                          this.final_datas.push({
+                            fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
+                            id: childSnapshot.$key
+                          });
+
+                        }
+                      }
+
+                      this.final_datas.sort(function (a, b) { return b.fecha - a.fecha });
+                      
+
+                    }
+                  //});
                   }
-                }
+                });
 
-                this.final_datas.sort(function(a, b) { return a.fecha - b.fecha });
-
-              }
-
+              });
+              });
             });
-
-
           });
-        })
+
+      }
+      }
+            else {
+              // fallo el token o expiro
+
+                this.myTokenMesaje= 'La sesion expiro; Debe de abrir esta pantalla desde su panel de control';
+            }
+      //    });
+        //  document.getElementById('mesajeTOk').style.visibility = "hidden";
+      }
+      else {
+        //no hay token
+      //  document.getElementById('mesajeTOk').style.visibility = 'visible';
+    this.myTokenMesaje= 'La sesion expiro; Debe de abrir esta pantalla desde su panel de control';
 
       }
     });
@@ -218,34 +310,85 @@ export class ComandasComponent implements OnInit {
     this.final_data.forEach(model => {
       if (code == model.codigo) {
         model.snap.forEach(prec => {
-          console.log(prec);
-          if (prec.precio != undefined)
-            sum += +prec.precio;
+          if (prec.costo != undefined && prec.Estatus!=6 && prec.Estatus!=3)
+            sum += +prec.costo;
         });
       }
     });
     return sum;
   }
 
+  //TraemeServicios(idServicio, local) {
+  //  console.log(idServicio);
+  //  
+
+  //  if (idServicio != '' && idServicio != undefined) {
+
+
+  //    this._getService.getServicioDomi(local, idServicio).subscribe(respServicio => {
+       
+  //      if (respServicio.ServiceFounder != null) {
+  //        this.Service_dom.push({
+  //          correo: respServicio.ServiceFounder.Correo,
+  //          direccion: respServicio.ServiceFounder.Direccion,
+  //          nombre: respServicio.ServiceFounder.Nombre,
+  //          telefono: respServicio.ServiceFounder.Telefono,
+  //          id: respServicio.ServiceFounder._id,
+  //        });
+  //      }
+  //    });
+  //  }
+  //}
+
+
+  // toWork(Codigo, id, Comanda) {
+  //   console.log(id+'--'+Codigo);
+  //
+  //   this.activatedRoute.params.subscribe((params: Params) => {
+  //     let tipo = params['typer'];
+  //     let local = params['Esta'];
+  //
+  //
+  //     Comanda.snap.forEach((toSave) => {
+  //           var idMongo = localStorage.getItem('ComandaLevantada');
+  //       if (toSave.isconfirm != undefined) {
+  //
+  //         toSave.Estatus = '2';
+  //         this._getService.setNewplato(idMongo, toSave).subscribe(respuesta => {
+  //           console.log(respuesta);
+  //         });
+  //       }
+  //       if(idMongo==toSave.id){
+  //         toSave.Estatus = '2';
+  //           console.log(toSave);
+  //       }
+  //
+  //     });
+  //     console.log(Comanda);
+  //     this._getService.BeginWorkPlato(local, Codigo, id);
+  //     //aqui hay que guardar las que entraron cuando se entrego el plato
+  //   });
+  // }
 
   toWork(Codigo, id, Comanda) {
-    this.activatedRoute.params.subscribe((params: Params) => {
-      let tipo = params['typer'];
-      let local = params['Esta'];
-      this._getService.BeginWorkPlato(local, Codigo, id);
 
-      Comanda.snap.forEach((toSave) => {
-        if (toSave.isconfirm != undefined) {
-          var idMongo = localStorage.getItem('ComandaLevantada');
-          toSave.Estatus = '2';
-          this._getService.setNewplato(idMongo, toSave).subscribe(respuesta => {
-            console.log(respuesta);
-          });
-        }
-      });
-      //aqui hay que guardar las que entraron cuando se entrego el plato
-    });
-  }
+   this.activatedRoute.params.subscribe((params: Params) => {
+     let tipo = params['typer'];
+     let local = params['Esta'];
+     this._getService.BeginWorkPlato(local, Codigo, id);
+
+     Comanda.snap.forEach((toSave) => {
+       if (toSave.isconfirm != undefined && toSave.Estatus != '8') {
+         var idMongo = localStorage.getItem('ComandaLevantada');
+         toSave.Estatus = '2';
+         this._getService.setNewplato(idMongo, toSave).subscribe(respuesta => {
+           
+         });
+       }
+     });
+     //aqui hay que guardar las que entraron cuando se entrego el plato
+   });
+ }
 
 
   EntregaOrden(Comanda) {
@@ -261,15 +404,16 @@ export class ComandasComponent implements OnInit {
         }
       });
       Comanda.snap = snaper;
+      
       this._getService.setComandaEntregada(local, Comanda.codigo, Comanda, Comanda.snap[0].$key).subscribe(respuesta => {
         if (respuesta.Comandas._id != undefined) {
-          console.log(respuesta.Comandas._id)
+          
           localStorage.setItem('ComandaLevantada', respuesta.Comandas._id);
         }
       });
 
     });
-    console.log(this.CountComandaC);
+    
     //if(this.CountComandaC>0)
     //this.CountComandaC=this.CountComandaC-1;
   }
@@ -360,6 +504,51 @@ export class ComandasComponent implements OnInit {
     });
   }
 
+  formatoDate(date, hora) {
+    var d = new Date(date),//date.replace("GMT+0000","").replace("GMT+0100","")),
+      month = '' + (d.getMonth() + 1),
+      day = '' + d.getDate(),
+      year = d.getFullYear(),
+
+      hour = '' + d.getHours(),
+      minute = '' + d.getMinutes();
+
+
+    if (month.length < 2) month = '0' + month;
+    if (day.length < 2) day = '0' + day;
+    if (hour.length < 2) hour = '0' + hour;
+    if (minute.length < 2) minute = '0' + minute;
+
+    if (hora != '') {
+      hour = hora;
+      minute = '00';
+    }
+    var myfec = [day, month, year].join('/') + ' ' + hour + ':' + minute;
+
+    return myfec;
+  }
+
+  Imprime(id) {
+    
+    this.activatedRoute.params.subscribe((params: Params) => {
+      let tipo = params['typer'];
+      let local = params['Esta'];
+
+      var myfechoria = new Date();
+      var fecha = this.formatoDate(myfechoria, '');
+      this._getService.signUp(tipo, local, fecha.replace('/', '|').replace('/', '|').replace('/', '|').replace(':', '-').replace(':', '-').replace(':', '-').replace(' ', '_')).subscribe(
+        respuestada => {
+          var innerContents = document.getElementById(id).innerHTML;
+
+          var popupWinindow = window.open('', '_blank', 'width=800,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
+          popupWinindow.document.open();
+          popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()"><div style="text-align:center"><h2>' + respuestada.local.Nombre + '</h2><hr><span><small>Dirección: ' + respuestada.local.Domicilio + '</small></span><h6>' + fecha + '</h6></div><p></p>' + innerContents + '</body></html>');
+          popupWinindow.document.close();
+
+        });
+    });
+  }
+
   declinComand(Comanda, tambienBloqueo) {
 
     this.activatedRoute.params.subscribe((params: Params) => {
@@ -367,10 +556,8 @@ export class ComandasComponent implements OnInit {
       let local = params['Esta'];
       if (tambienBloqueo) {
         //aqui meter el q si lo declina meter una cookie o local storage para que no pueda levantar ordenes solo en locales que no ocupan codigo
-        var d = new Date();
-        d.setTime(d.getTime() + (60 * 24 * 60 * 60 * 1000));
-        var expires = "expires=" + d['toGMTString']();
-        document.cookie = "sendValue" + "=" + Comanda.codigo + "_" + local + ";" + expires + ";path=/";
+
+          this._getService.BlockOrderUser(local, Comanda.codigo);
       }
 
       this._getService.declineComand(local, Comanda.codigo);
@@ -388,13 +575,39 @@ export class ComandasComponent implements OnInit {
   abreCampo(code, llave) {
     //  $('#'+code).css('visibility', 'visible');
     this.llave = llave;
+    document.getElementById('divCanceloide_'+code).style.height="100px";
     document.getElementById(code).style.visibility = "visible";
     document.getElementById('btn_' + code).style.visibility = "visible";
-    $("html, body").delay(1000).animate({ scrollTop: $('#btn_' + code).offset().top }, 2000);
-  }
+    //$("html, body").delay(1000).animate({ scrollTop: $('#btn_' + code).offset().top }, 2000);
+   }
+
+   comienzaEditar(code, llave, nombre){
+     document.getElementById('divEditoide_'+code).style.height="100px";//("height","70px");
+ 	     this.llave = llave;
+ 		 this.NamePlaton=nombre;
+     document.getElementById(code+'_').style.visibility = "visible";
+     document.getElementById('btnEdit_' + code).style.visibility = "visible";
+   }
+
+   EditaPlato(Codigo, id, nombrePlato) {
+     document.getElementById('divEditoide_'+Codigo).style.height="0px";
+     var comentario = (<HTMLInputElement>document.getElementById(Codigo+'_')).value;
+   
+     if (comentario != '') {
+       this.activatedRoute.params.subscribe((params: Params) => {
+         let tipo = params['typer'];
+         let local = params['Esta'];
+
+         this._getService.EditPlato(local, Codigo, id, comentario,nombrePlato);
+
+
+       });
+     }
+   }
 
   CancelPlatillo(Codigo, id) {
     var comentario = (<HTMLInputElement>document.getElementById(Codigo)).value;
+    document.getElementById('divCanceloide_'+Codigo).style.height="0px";
     if (comentario != '') {
       this.activatedRoute.params.subscribe((params: Params) => {
         let tipo = params['typer'];

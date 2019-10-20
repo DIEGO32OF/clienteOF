@@ -1,0 +1,59 @@
+<div class="menu_area">
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <div class="navbar-header">
+
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+
+        <a class="navbar-brand" href="https://comandaof.firebaseapp.com/ordenofacil/dnE6XnhrjrU_/algo">Ordeno <span style="color:#37c6f5">Facil</span></a>
+
+
+      </div>
+      <div id="navbar" class="navbar-collapse collapse">
+        <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+          <li id="FirmarseLi" style="visibility:visible"><!--<a href="javascript:openLog()" runat="server" id="aFirm">Log in</a>--></li>
+          <li><a href="https://comandaof.firebaseapp.com/ordenofacil/dnE6XnhrjrU_/ZZK5RRX_redirect" style="color: inherit;padding:0px">OrdenoFacil</a></li>
+
+
+
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<h3></h3>
+<!-- this creates a google map on the page with the given lat/lng from -->
+<!-- the component as the initial center of the map: -->
+<div style="height:50px"></div>
+<h3>{{titulo}}</h3>
+                   <button type="button" id="btnNear" class="btn btn-primary" (click)="GetCercas()">
+                     Mostrar Cercanos a mi Ubicación
+                   </button>
+                   <p></p>
+<agm-map [latitude]="lats" [longitude]="lngs" [zoom]="14">
+  <agm-marker *ngFor="let latLong of recomendaciones"
+              [latitude]="latLong.lat" [longitude]="latLong.lng" [label]="A">
+    <agm-info-window    [isOpen]="latLong.id_Hashed==idHas">
+   
+      <strong>
+        <span style="font-size:medium;text-align:center">{{latLong.Nombre}}</span><br /><span style="font-size:small"><p></p>
+  - {{latLong.Domicilio}}<br />
+  - Horarios:{{latLong.nom_img}}<br />
+         
+  - <b *ngIf="latLong.encuesta==1">Cuenta con Servicio a Domicilio</b><br />
+            
+</span><p></p> <button type="button" id="btnLevantadas" class="btn btn-primary">
+          <a [routerLink]="'/menu/dnE6XnhrjrU_/'+latLong.id_Hashed" style="color: inherit; ">
+            Ver Menú
+          </a>
+        </button><p></p><button class="btn btn-primary">Hacer Reservación</button>
+      </strong>
+    </agm-info-window>
+  </agm-marker>
+</agm-map>
+

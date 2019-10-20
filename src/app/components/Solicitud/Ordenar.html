@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Administra tus comandas</title>
+
+
+
+</head>
+<body>
+
+
+  <script src="HTTPS://cdn.socket.io/socket.io-1.2.0.js"></script>
+  <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+
+  <div class="right_col" role="main" style="padding:40px">
+    <div class="">
+      <div class="page-title">
+        <div class="title_left">
+          <h3>Crear Orden</h3>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="clearfix"></div>
+    <div class="row">
+
+      <div class="x_panel">
+        <div class="x_title">
+          <div class="form-group">
+            <button type="button" id="btnLevantadas" class="btn btn-primary">
+              <a [routerLink]="[locaComanda]" style="color: inherit; ">
+                Comandas Levantadas ({{CountComandaC}})
+              </a>
+            </button>
+
+
+            <button type="button" id="btnLevantadas" class="btn btn-primary">
+              <a [routerLink]="[locaTermino]" style="color: inherit; ">
+                Comandas terminadas en Cocina ({{CountFinishC}})
+              </a>
+            </button>
+
+            <button type="button" id="btnCuenta" class="btn btn-primary">
+              <a [routerLink]="[locaCuenta]" style="color: inherit; ">
+                La Cuenta
+              </a>
+            </button>
+
+            <div class="clearfix"></div>
+          </div>
+        </div>
+        <input type="hidden" id="CantProd" />
+        <span id="mesajeTOk" style="color:red"><b>{{myTokenMesaje}}</b></span>
+        <div id="price" name="prce">
+          <div class="container">
+            <div class="row">
+              <button type="button" class="btn btn-primary" (click)="abreComanda()">Ver Orden Actual</button><p></p>
+              <div class="alert alert-success" role="alert" id="alertOrderOk" style="display:none">
+                Se levanto correctamente la Orden. Con el Codigo: {{Mycode}}
+              </div>
+              <h2 class="centered">Nuestro Menu</h2>
+
+            </div>
+            <div class="container">
+              <div class="row">
+
+
+                <div id="Cafesesin" class="collapse"> </div>
+
+                <div class="col-md-4 menuItem" *ngFor="let timers of timessorted">
+
+                  <div class="col-md-4" style="background-color:#A4CAD1;border:1px solid #eee; cursor:pointer" data-toggle="collapse" [attr.data-target]="'#'+timers"><table style="width:100%"><tr><td style="width:93%"><h3>{{timers.replace('_',' ')}} </h3></td><td style="width:7%"><i class="fa fa-plus" style="color:black"></i></td></tr></table></div>
+                  <div [id]="timers" class="collapse">
+                    <ul class="menu">
+                      <ng-container *ngFor="let platos of LocalGet.id_Menu?.menu" class="menu">
+
+                        <li *ngIf="(platos.tiempo==timers|| platos.descTime==timers) && platos.Active==1" style="cursor: pointer; " (click)="abreCantos(platos,false)">
+
+                          <img *ngIf="platos!=undefined" [src]="platos.NomImg" style="width:100%">
+                          <b> {{platos.Nombre}}</b>   <span class="price" *ngIf="platos.precio!=0"><b>${{platos.precio}}</b></span>
+                          <div class="detail">
+                            {{platos.descrip}}.
+
+                          </div>
+                          <p></p>
+
+                        </li>
+
+                      </ng-container>
+
+                    </ul>
+                    <div class="reservation-link">
+                      <button type="button" class="btn reservation-btn" (click)="abreComanda()">Ordenar</button>
+                    </div>
+                  </div>
+                </div>
+
+
+              </div>
+            </div>
+            <div class="reservation-link">
+              <button type="button" class="btn reservation-btn" (click)="abreComanda()">Ordenar</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+        <div id="altos" style="height:100px"></div>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <img *ngIf="modals[0]!=undefined" [src]="modals[0].NomImg" style="width:100%">
+            </div>
+            <div class="modal-body">
+              <div class="alert alert-danger" role="alert" id="alertNotama" style="display:none">
+                <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNotama')">&times;</button>
+                Se debe de seleccionar un tamaño.
+              </div>
+              <h4><b *ngIf="modals[0]!=undefined">{{modals[0].Nombre}}</b></h4>piezas por presentación: {{modals[0].piezas}}<br>{{modals[0].descrip}}<p></p>
+              <h4>  Solicitudes Opcionales al Articulo</h4>
+              <textarea rows="4" placeholder="ej. sin Mayonesa y sin cebolla ó 1 sin cebolla y la otra sin chile" class="form-control wpcf7-text" id="EspefTxt"></textarea>
+              <p></p>
+              <h4>Cantidad:</h4>
+              <table style="width:100%">
+                <tr>
+                  <td> <input type="number" id="NUmProduct" class="form-control wpcf7-text" style="width:60%" placeholder="1" (change)="GuardameCantidad(modals)" /></td>
+                  <td style="width:30%"><span><b>${{modals[0].precio}}</b></span></td>
+                </tr>
+              </table><p></p>
+              <div *ngIf="modals[0]!=undefined">
+                <div *ngIf="modals[0].tamaPrice != ''">
+                  <ul *ngFor="let tamanos of arregloPrTm">
+                    <li *ngIf="tamanos!=''" style="list-style-type: none; border:1px solid #eee;">
+                      <table style="width:100%">
+                        <tr>
+                          <td style="width:60%"><span>{{tamanos}}</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                          <td style="width:40%">  <input type="checkbox" (click)="cantidadTamanos(tamanos)" id="{{tamanos}}" /></td>
+                        </tr>
+                      </table>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <p></p>
+
+              <button type="button" class="btn btn-primary" (click)="agregaPedido(modals,false)">Guardar</button>
+              <button type="button" class="close" data-dismiss="modal">Cerrar</button><p></p>
+              <button type="button" class="btn btn-primary" (click)="agregaPedido(modals,true)">Guardar y Ordenar</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+
+      <div class="modal fade" id="MyModalPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+        <div id="altos" style="height:100px"></div>
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h4 class="modal-title" id="myModalLabel">Tu Orden</h4>
+            </div>
+            <div class="modal-body">
+
+
+
+              <div class="alert alert-danger" role="alert" id="alertNameNece" style="display:none">
+                <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNameNece')">&times;</button>
+                Se debe ingresar un Nombre para identificar tu Orden.
+              </div>
+
+              <div class="alert alert-danger" role="alert" id="alertNoCode" style="display:none">
+                <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNoCode')">&times;</button>
+                Se debe ingresar el numero de mesa.
+              </div>
+
+              <h3>Esta es tu orden:</h3>
+              <table style="width:100%">
+                <tr>
+                  <td><b>Cant|</b></td>
+                  <td><b>Descripción|</b></td>
+                  <td>&nbsp;<b>$ |</b></td>
+                  <td><b>Quitar|</b></td>
+                  <td><b>Modificar</b></td>
+                </tr>
+                <tr *ngFor="let pedidos of comandaSave">
+                  <td>{{pedidos.cantidad}}</td>
+                  <td>{{pedidos.Nombre}} {{pedidos.Especificaciones}}</td>
+                  <td>${{pedidos.costo}}</td>
+                  <td style="text-align:center"><input *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8'" type="checkbox" id="{{pedidos.id}}" (click)="quitarSeleccion(pedidos.id,false)" /> </td>
+                  <td style="text-align:left"><input title="Modificar" *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8'" type="checkbox" id="{{pedidos.id}}" (click)="abreCantos(pedidos,true)" /> </td>
+
+                </tr>
+              </table>
+
+              <p></p>
+              <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
+
+              <table style="width:100%"><tr><td style="width:60%"> <h4>es correcta?  </h4></td><td style="width:40%">total:<span>${{getSum()}}</span></td></tr></table>
+              <table style="width:100%"><tr><td style="width:70%"><h4>La orden es  para llevar? </h4></td><td style="width:30%"><input type="checkbox" id="isForllevarOrder" /> </td></tr></table><p></p>
+              <div *ngIf="needCode">
+                <span>Ingresa el Numero de mesa</span><br>
+                <input type="text" class="form-control" id="CodeNeeded" placeholder="para que mesa es la orden?" />
+              </div>
+              <div *ngIf="!needCode">
+                <span>A que nombre saldrá la orden?</span><br>
+                <input type="text" class="form-control" id="NameOrder" placeholder="Ingresa el Nombre de la orden" />
+              </div>
+              <p></p>
+              <button type="button" class="btn btn-primary" (click)="DameNumPedido()">Ordenar</button>
+              <button type="button" class="btn btn-primaryt" data-dismiss="modal">volver a la carta</button>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+  <!--</body>-->
+

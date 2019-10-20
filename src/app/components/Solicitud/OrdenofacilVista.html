@@ -1,886 +1,1272 @@
 <html lang="es">
 <head>
-    <title>Product App</title>
-    <!-- Bootstrap core CSS -->
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="" />
-    <meta name="author" content="acomer" />
-    <meta name="mobile-web-app-capable" content="yes" />
+  <title>Product App</title>
+  <!-- Bootstrap core CSS -->
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="" />
+  <meta name="author" content="acomer" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <style>
+    .modal-backdropers {
+      background-color: rgba(0,0,0,.0001) !important;
+    }
+  </style>
+
+  <style>
+
+    .controls {
+      margin-left: 25px;
+      margin-top: 5px;
+      border: 1px solid transparent;
+      border-radius: 2px 0 0 2px;
+      box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      height: 32px;
+      outline: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      width: 80%;
+    }
+
+    .@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,800,700,300);
+    @import url(https://fonts.googleapis.com/css?family=Squada+One);
 
 
-<style>
-.controls {
-            margin-left: 25px;
-            margin-top: 5px;
-            border: 1px solid transparent;
-            border-radius: 2px 0 0 2px;
-            box-sizing: border-box;
-            -moz-box-sizing: border-box;
-            height: 32px;
-            outline: none;
-            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
-            width: 80%;
-        }
-</style>
+    #menu {
+      width: 60%;
+      height: 42px;
+      list-style: none;
+      margin: 10px 0 0 0;
+      padding: 25px 10px;
+      border-top: 4px double #AAA;
+      border-bottom: 4px double #AAA;
+      position: relative;
+      text-align: center;
+    }
+
+    #menu li {
+      display: inline-block;
+      width: 173px;
+      margin: 10 10px;
+      position: relative;
+      -webkit-transform: skewy(-3deg);
+      -webkit-backface-visibility: hidden;
+      -webkit-transition: 200ms all;
+    }
+
+      #menu li a {
+        text-transform: uppercase;
+        font-family: 'Squada One', cursive;
+        font-weight: 800;
+        display: block;
+        background: #FFF;
+        padding: 10px 10px;
+        color: #333;
+        font-size: 18px;
+        text-align: center;
+        text-decoration: none;
+        position: relative;
+        z-index: 1;
+        text-shadow: 1px 1px 0px #FFF, 2px 2px 0px #999, 3px 3px 0px #FFF;
+        background-image: -webkit-linear-gradient(top, transparent 0%, rgba(0,0,0,.05) 100%);
+        -webkit-transition: 1s all;
+        background-image: -webkit-linear-gradient(left top, transparent 0%, transparent 25%, rgba(0,0,0,.15) 25%, rgba(0,0,0,.15) 50%, transparent 50%, transparent 75%, rgba(0,0,0,.15) 75%);
+        background-size: 4px 4px;
+        box-shadow: 0 0 0 1px rgba(0,0,0,.4) inset, 0 0 20px -5px rgba(0,0,0,.4), 0 0 0px 3px #FFF inset;
+      }
+
+      #menu li:hover {
+        width: 203px;
+        margin: 0 -5px;
+      }
+
+    #menu a:hover {
+      color: #d90075;
+    }
+
+    #menu li:after,
+    #menu li:before {
+      content: '';
+      position: absolute;
+      width: 50px;
+      height: 100%;
+      background: #BBB;
+      -webkit-transform: skewY(8deg);
+      x-index: -3;
+      border-radius: 4px;
+    }
+
+    #menu li:after {
+      background-image: -webkit-linear-gradient(left, transparent 0%, rgba(0,0,0,.4) 100%);
+      right: 0;
+      top: -4px;
+    }
+
+    #menu li:before {
+      left: 0;
+      bottom: -4px;
+      background-image: -webkit-linear-gradient(right, transparent 0%, rgba(0,0,0,.4) 100%);
+    }
+  </style>
 </head>
 <body>
-  <div *ngIf="!LocalGet">
-        <header id="header">
-
-     <div class="menu_area">
-       <nav class="navbar navbar-default navbar-fixed-top" role="navigation">  <div class="container">
-           <div class="navbar-header">
-
-             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-             </button>
-
-             <a class="navbar-brand" href="index.aspx">Ordeno <span style="color:#37c6f5">Facil</span></a>
 
 
-           </div>
-           <div id="navbar" class="navbar-collapse collapse">
-             <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
-               <li><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>
-              <li id="FirmarseLi" style="visibility:visible" ><a href="javascript:openLog()" runat="server" id="aFirm">Log in</a></li>
-           <li id="NameUserww" ><a href="Dashboard/production/home.aspx" runat="server" id="NameUser"></a></li>
-           <li id="Closese" style="visibility:hidden" ><a href="Index.aspx?logOut=true" runat="server" id="aclosese">Cerrar Sesion</a></li>
+  <div *ngIf="true">
+    <div>
 
+    </div>
+    <input type="hidden" id="lstProds" />
+    <input type="hidden" id="CantProd" />
+    <input type="hidden" id="HFFlagins" />
+    <div id="navbar-main">
+      <!-- Fixed navbar -->
+      <div class="navbar navbar-inverse navbar-fixed-top" style="padding:5px">
+        <div class="container">
 
-             </ul>
-           </div>
-         </div>
-       </nav>
-     </div>
+          <div class="navbar-header">
 
-   </header>
-   <div style="height:48px"></div>
-
- <div class="nohay col-ld-12 col-md-12 col-sm-12" >
-
-
-   <div style="height:25px"></div>
-   <div class="alert alert-danger" role="alert" id="alerterrorRec" style="display:visible " >
-   <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-   Lo sentimos, la suscripción de este establecimiento ha caducado
- </div>
-   <div class="col-ld-12 col-md-12 col-sm-12"><span style="font-size: 26px; color: #ffffff;"><b>Ordeno</b></span><span style="font-size: 26px; color: #37c6f5;"><b>Facil</b></span> <br><span style="font-size: 15px; color: #ffffff;">La mejor forma de atenderte</span></div>
-   <p></p>
-   <div class="col-ld-4 col-md-4 col-sm-4"></div>
-    <div class="col-ld-4 col-md-4 col-sm-4">
-   <div class="input-group">
-                  <input type="text" id="txtfood" class="form-control" placeholder="Busca lugares para comer" (focus)="ShowOptins()" />
-                              <span class="input-group-btn">
-                                                <button id="btnsearch" class="btn btn-primary" Text="Buscar" (click)="SUscribeNews_CLic()" >Buscar</button>
-                                            </span>
-                            </div>
-
-
-                            <div id="OptionsSearch" style="visibility:hidden">
-                              <h3>Buscar por:</h3>
-                                <p></p>
-                              <ul style="background-color:white; margin-bottom:0px; padding:0px; text-align:left">
-                                <li class="col-sm-6 col-md-6"   style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 3px; padding: 15px; background: #fafaf8;width: 100%;">
-                                  <input type='radio' name='Porlocal' value='1' />Por Nombre de Lugar</li>
-                            <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 3px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' name='Pornombre' value='2' />Por nombre de comida</li>
-                            <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 3px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' name='PorComida' value='3' />Por tipo de comida</li>
-                              </ul>
-                            </div>
-
-                              </div>
-                              <div class="col-ld-4 col-md-4 col-sm-4"></div>
-                              <div class="col-ld-12 col-md-12 col-sm-12" style="height:25px"></div>
-<p></p>
-
-<div class="col-ld-4 col-md-4 col-sm-4">
-   <a class="footer-mobile-download-button" href="#"><svg width="26" height="30" viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Apple Icon"><path d="M25.08 9.85c-2.27 1.6-3.4 3.54-3.4 5.8 0 2.7 1.4 4.78 4.2 6.23a16.78 16.78 0 0 1-3.27 5.7C21.18 29.19 19.88 30 18.7 30c-.56 0-1.32-.18-2.28-.55l-.46-.18a7.02 7.02 0 0 0-2.5-.55c-.68 0-1.43.15-2.25.43l-.58.21-.73.3a4.69 4.69 0 0 1-1.74.34c-1.37 0-2.9-1.14-4.56-3.4C1.2 23.33 0 19.8 0 15.95c0-2.73.75-4.92 2.25-6.59a7.61 7.61 0 0 1 5.95-2.5c.92 0 1.78.17 2.58.5l.55.23.58.24c.52.22.94.33 1.25.33.41 0 .86-.1 1.36-.29l.75-.3.57-.2c.9-.33 1.9-.5 2.99-.5a7.6 7.6 0 0 1 6.25 2.97zM18.95 0a6.3 6.3 0 0 1-1.83 5.32 5.88 5.88 0 0 1-4.36 1.94 7.47 7.47 0 0 1-.07-.83c0-1.46.58-2.83 1.74-4.11A6.63 6.63 0 0 1 18.95 0z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">App Store</div></a>
-   <a class="footer-mobile-download-button" href="#"><svg width="27" height="30" viewBox="0 0 27 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Google Play Icon"><path d="M.22.88L14.34 15 .22 29.12a2.53 2.53 0 0 1-.1-.7V1.58c0-.26.04-.5.1-.7zm25.75 12.9c.61.35.96.8.96 1.22 0 .43-.35.88-.96 1.23l-5.54 3.14L16.06 15l4.37-4.37 5.54 3.15zm-24.9 16.2L15.2 15.87l4.14 4.13L2.3 29.67c-.46.26-.88.36-1.23.32zm18.27-19.97l-4.14 4.13L1.07.01A2 2 0 0 1 2.3.33l17.04 9.68z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">Google Play</div></a>
-   </div>
-   <div class="col-ld-4 col-md-4 col-sm-4"></div>
- </div>
-
- <div *ngIf="recomendaciones" class="serviceing_title" style="width:100%; background-color:white" >
- <h2>Lo más Nuevo</h2>
- </div>
-<p></p>
-<div class="row" >
-<div *ngIf="recomendaciones" class="col-md-12 menuItem " style="background-color:white; padding-top:30px ">
-  <ul style="background-color:white; margin-bottom:0px; text-align:left">
-    <li *ngFor="let locales  of recomendaciones" class="col-sm-6 col-md-6"   style="list-style-type: none;  border: 1px solid #eaebeb;
-    border-radius: 3px;
-    padding: 15px;
-    background: #fafaf8;
-    width: 100%;">
-    <a [routerLink]="['/menu/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">
-      <table style="width:100%">
-        <tr><td style="width:14%" ><div *ngFor="let imagenLoc of locales.id_Imgs"><div *ngIf="imagenLoc.tipo==2">  <img [src]="imagenLoc.Nombre" style="width:100%"></div></div></td>
-          <td style="width:2%" ></td>
-          <td style="width:74%"><table><tr><td>
-    <span><b>{{locales.Nombre}}</b></span>
-  </td>
-</tr>
-<tr><td>
-  <div *ngIf="locales.tipo==1">
-  <i class="fa fa-home" ></i>&nbsp;&nbsp;<span style="font-size:x-small" >Antojitos / Tacos /Fonda</span>
-  </div>
-    <div *ngIf="locales.tipo==2">
-<i class="fa fa-beer" ></i>&nbsp;<span style="font-size:x-small" >Bar/Antro</span>
-</div>
-<div *ngIf="locales.tipo==3">
-<i class="fa fa-bitbucket" ></i>&nbsp;<span style="font-size:x-small" >Comida Rapida</span>
-</div>
-<div *ngIf="locales.tipo==4">
-<i class="fa fa-coffee" ></i>&nbsp;<span style="font-size:x-small" >Cafeteria/Postres</span>
- </div>
-<div *ngIf="locales.tipo==5">
-<i class="fa fa-truck" ></i>&nbsp;<span style="font-size:x-small" >Food Truck /Snack comercial</span>
-</div>
-<div *ngIf="locales.tipo==6">
-<i class="fa fa-home" *ngIf="locales.tipo==6"></i>&nbsp;<span style="font-size:x-small" *ngIf="locales.tipo==6">Pizzeria</span>
-</div>
-<div *ngIf="locales.tipo==7">
-<i class="fa fa-cutlery" ></i>&nbsp;<span style="font-size:x-small" >Restaurante</span>
-</div>
-</td></tr>
-</table>
-    </td>
-  <td style="width:10%"><i class="fa fa-arrow-right" aria-hidden="true" title="Ir al Establecimiento"></i></td></tr>
-  </table>
-</a>
-  </li>
-</ul>
-</div>
-</div>
-
-
-   <section id="serviceing">
-       <div class="container">
-  <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="serviceing_area">
-          <div class="serviceing_title">
-            <hr>
-            <h2>OrdenoFacil </h2>
-              <p>La mejor forma de atenderte</p>
+            <div class="pull-left">
+              <ul id="menu" style="margin-top:10px">
+                <li><a href="/"><span *ngIf="LocalGet!= undefined">{{LocalGet.Nombre}}</span></a></li>
+              </ul>
+              <!--<h3 >&nbsp;&nbsp;&nbsp;<span style="font-style:italic;" class="shadow text1">{{LocalGet.Nombre}}</span></h3>-->
+            </div>
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
           </div>
-          <ul class="serviceing_nav">
-            <li>
-              <a class="serviceing_icon" href="#"><i class="fa fa-cutlery"></i></a>
-              <h2>¿Que es OrdenoFacil?</h2>
-              <p>OrdenoFacil tiene la mision de atenderte de la manera mas rapida y eficaz posible, ademas de ofrecerte toda la informacion de tus lugares preferidos. podras buscar lugares o recomendaciones de donde comer o donde encontrar cualquier platillo. </p>
-            <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
-            </li>
-           <li>
-              <a class="serviceing_icon" href="#"><i class="fa fa-mobile"></i></a>
-              <h2>Facil de usar</h2>
-              <p>A través de OrdenoFacil, tu puedes levantar tu orden, solicitar a domicilio, reservar e incluso pagar todo desde tu telefono inteligente, como? facil solo escanea el codigo QR o inserta el codigo en un navegador web, que se encuentra en cada local y listo tendras toda la informacion de ese local.  </p>
-            <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
-            </li>
-            <li>
-              <a class="serviceing_icon" href="#"><i class="fa fa-bolt"></i></a>
-              <h2>Ventajas</h2>
-              <p>Si registras un usuario o descargas la aplicacion de OrdenoFacil, puedes enterarte de las mejores promociones o ganar grandes descuentos antes que nadie. ademas de que en todo momento, .</p>
-            <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+          <div class="navbar-collapse collapse">
+            <ul class="nav navbar-nav pull-right">
+              <li (click)="llamaMese()" *ngIf="needCode">llamar a un mesero&nbsp;&nbsp;&nbsp;</li>
+              <li (click)="abreComanda()">Mi Orden&nbsp;&nbsp;&nbsp;</li>
+              <li><a [routerLink]="['/placesVisit']" style="color: inherit;padding:0px">Mis Lugares Visitados&nbsp;&nbsp;&nbsp;</a></li>
+              <li><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}_redirect" style="color: inherit;padding:0px">OrdenoFacil</a></li>
+
+            </ul>
+          </div>
+          <!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ==== HEADERWRAP ==== -->
+    <div style="height: 50px"></div>
+    <div id="home-section">
+      <div id="headerwrap" name="home" [style.backgroundImage]="'url(' + Fondo + ')'">
+        <header class="clearfix tb">
+          <div class="tb-cell text-center">
+            <i class="fa fa-cutlery icon"></i>
+            <h1 *ngIf="LocalGet!= undefined">{{LocalGet.Nombre}}</h1>
+            <p *ngIf="LocalGet!= undefined">-- {{LocalGet.slogan}} --</p>
+            <span *ngIf="LocalGet!= undefined"><b>Nuestros Horarios: {{LocalGet.nom_img}} hrs.</b></span> <br>
+            <h2 *ngIf="cerrado">Este local esta cerrado</h2>
+            <span *ngIf="LocalGet!=undefined && LocalGet.nom_ico"><b>Aceptamos Tarjetas <i class="fa fa-cc-mastercard">&nbsp;&nbsp;</i><i class="fa fa-cc-visa"></i></b></span>
+
+          </div>
+        </header>
+      </div>
+
+    </div>
+
+    <!--<div class="tb-cell text-center" id="AvisoCook" style="position:sticky; height:30px; width:100%;
+  left:10px;
+  top:80px;background-color:#c2c4c6">-->
+    <div class="tb-cell text-center" id="AvisoCook" style=" height:30px; width:100%;
+            left:10px;
+            top:80px;background-color:#c2c4c6">
+      <span style="color:white">Este Sitio utiliza cookies para su mejor funcionamiento. Haciendo click consientes el uso de esta tecnología en nuestra web.</span><p></p>
+      <button type="button" class="btn btn-primary" (click)="cierraAviso()">Seguir Navegando</button> <a href="Ordenofacil.com/AvisoPriva.html" target="_blank">Más Información</a>
+    </div>
+    <p></p>
+    <div class="alert alert-info" role="alert" (click)="AbreservDom()">
+      Este establecimiento cuenta con servicio a domicilio
+      <a>Ordenar a domicilio</a>
+    </div>
+    <div style="height:50px"></div>
+    <div style="height:30px; width:100%; left:10px; padding-left: 15px;
+            top:250px;">
+      <div class="container">
+        <div class="row">
+          <span style="font-size:small">Publicidad</span>
+          <img src="http://ordenofacil.com/logos/corona.jpg" style="width:100%;" />
+        </div>
+      </div>
+    </div>
+
+    <div style="height:150px;"></div>"
+
+    <div id="price" name="prce">
+      <div class="container">
+        <div class="row">
+          <h2 class="centered">Nuestro Menu</h2>
+
+        </div>
+        <div class="container">
+          <div class="row">
+
+
+            <div id="Cafesesin" class="collapse"> </div>
+
+            <div class="col-md-4 menuItem" *ngFor="let timers of timessorted">
+
+              <div class="col-md-4" style="background-color:#A4CAD1;border:1px solid #eee; cursor:pointer" data-toggle="collapse" [attr.data-target]="'#'+timers">
+                <table style="width:100%">
+                  <tr><td style="width:93%"><h3>{{timers.replace('_',' ')}} </h3></td><td style="width:7%"><i class="fa fa-plus" style="color:black"></i></td></tr>
+                </table>
+              </div>
+              <div [id]="timers" class="collapse">
+                <ul class="menu">
+                  <ng-container *ngFor="let platos of LocalGet.id_Menu?.menu" class="menu">
+
+                    <li *ngIf="(platos.tiempo==timers|| platos.descTime==timers) && platos.Active==1" style="cursor: pointer; " (click)="abreCantos(platos,false)">
+
+                      <img [src]="platos.NomImg" style="width:100%">
+                      <b> {{platos.Nombre}}</b>   <span class="price" *ngIf="platos.precio!=0"><b>${{platos.precio}}</b></span><!--<input type="checkbox" id="ChckNid" class="price" (click)="abreCantos($event, platos)" />-->
+                      <div class="detail">
+                        {{platos.descrip}}.
+                        <!--  <span class="price" *ngIf="platos.tamaPrice!=''"><b>{{platos.tamaPrice.replace('|','=' )}}</b></span>-->
+                      </div>
+                      <p></p>
+
+                    </li>
+
+                  </ng-container>
+
+
+                </ul>
+
+                /u
+                re
+
+                <div class="reservation-link">
+
+                  <button type="button" class="btn reservation-btn" (click)="abreComanda()">Ordenar</button>
+                </div>
+              </div>
+            </div>
+
+
+          </div>
+        </div>
+        <div class="reservation-link">
+          <button type="button" class="btn reservation-btn" (click)="abreComanda()">Ordenar</button>
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+    <div class="modal fade" id="MyModalAlerts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="overflow-y: scroll;">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">Mensaje de la cocina</h4>
+          </div>
+          <div class="modal-body">
+
+            <div class="alert alert-success" role="alert" id="alertBye" style="display:none">
+              La cuenta se ha cerrado. Gracias por tu visita te esperamos Pronto!!!
+
+            </div>
+
+            <div class="alert alert-warning" role="alert" id="alertCancelPlato" style="display:none">
+              Se cancelo este platillo: {{razonCancel}}.<br />
+              <span style="font-size:small">Si lo deseas puedes seleccionar otro producto </span>
+            </div>
+            <div class="alert alert-success" role="alert" id="alertOrderOk" style="display:none">
+              Se levanto correctamente tu Orden.
+            </div>
+
+            <div class="alert alert-success" role="alert" id="alertOrderOknoCode" style="display:none">
+              Se levanto correctamente tu Orden. Puedes pasar a caja a pagar. Con este codigo: {{mycodecob}}
+
+            </div>
+            <div class="alert alert-success" role="alert" id="alertMailer" style="display:none">
+              Binevenido {{mAIL}}.
+
+            </div>
+            <div class="alert alert-success" role="alert" id="alertEntregaPlato" style="display:none">
+              Tu Orden Esta Lista!!!. {{mycodecob}}
+            </div>
+            <div id="divLogin" style="visibility:hidden">
+              Introduce tu correo para mayores beneficios:<p></p>
+              Correo
+              <input type="text" class="form-control" id="correoLog" placeholder="Ingresa un Correo" />
+              <!--Contraseña
+            <input type="password" class="form-control" id="PasswordLog" placeholder="Ingresa una contraseña" />-->
+              <p></p>
+
+              <button type="button" class="btn btn-primary" (click)="createUser()">Enviar</button>
+              <!--<button type="button" class="btn btn-dafault">Olvide mi contraseña</button>-->
+              <p></p>
+
+
+              <!--<div *ngFor="let platoEncue of toEncuesta">-->
+              <div *ngIf="toEncuesta.length>0">
+                <div class="alert alert-success" role="alert">
+                  Que te parecio el platillo:<br /><b>{{toEncuesta[0].Nombre}}?</b>
+                </div>
+                <fieldset class="rating">
+                  <input type="radio" id="star5" name="rating" value="5" (click)="CalifEncuest(5, toEncuesta[0].Nombre)" /><label class="full" for="star5" title="Excelente - 5 estrellas"></label>
+                  <input type="radio" id="star4half" name="rating" value="4 and a half" (click)="CalifEncuest(4.5,toEncuesta[0].Nombre)" /><label class="half" for="star4half" title="Muy bueno - 4.5 estrellas"></label>
+                  <input type="radio" id="star4" name="rating" value="4" (click)="CalifEncuest(4,toEncuesta[0].Nombre)" /><label class="full" for="star4" title="bueno - 4 estrellas"></label>
+                  <input type="radio" id="star3half" name="rating" value="3 and a half" (click)="CalifEncuest(3.5,toEncuesta[0].Nombre)" /><label class="half" for="star3half" title="Puede mejorar - 3.5 estrellas"></label>
+                  <input type="radio" id="star3" name="rating" value="3" (click)="CalifEncuest(3, toEncuesta[0].Nombre)" /><label class="full" for="star3" title="Medio - 3 estrellas"></label>
+                  <input type="radio" id="star2half" name="rating" value="2 and a half" (click)="CalifEncuest(2.5, toEncuesta[0].Nombre)" /><label class="half" for="star2half" title="medio malo - 2.5 estrellas"></label>
+                  <input type="radio" id="star2" name="rating" value="2" (click)="CalifEncuest(2, toEncuesta[0].Nombre)" /><label class="full" for="star2" title="Malo - 2 estrellas"></label>
+                  <input type="radio" id="star1half" name="rating" value="1 and a half" (click)="CalifEncuest(1.5,toEncuesta[0].Nombre)" /><label class="half" for="star1half" title="muy malo - 1.5 strellas"></label>
+                  <input type="radio" id="star1" name="rating" value="1" (click)="CalifEncuest(1,toEncuesta[0].Nombre)" /><label class="full" for="star1" title="apesta - 1 estrella"></label>
+                  <input type="radio" id="starhalf" name="rating" value="half" (click)="CalifEncuest(.5,toEncuesta[0].Nombre)" /><label class="half" for="starhalf" title="no lo vuelvo a pedir - 0.5 estrellas"></label>
+                </fieldset>
+
+                <textarea class="form-control" id="platocomentEnc" name="message" placeholder="Algun Comentario?" rows="5"></textarea>
+                <p></p>
+                <button type="button" class="btn btn-primary" (click)="SendComent()">Evaluar</button>
+              </div>
+
+              <p></p>
+              <div class="alert alert-info" role="alert">
+                Puedes ganar recompensas si contestas la siguiente encuesta:
+                <a href="">Resolver encuesta </a>
+              </div>
+
+              <div class="alert alert-success" role="alert" *ngIf="agradeceenc==true">
+                Gracias!!!
+              </div>
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertnologin" style="display:none">
+              No se firmo el usuario.
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+
+
+    <div id="sound"></div>
+
+
+
+    <!-- ==== PORTFOLIO ==== -->
+    <div id="portfolio" name="portfolio" *ngIf="espe">
+      <div class="container">
+        <div class="row">
+          <h2 class="centered">Especiales</h2>
+          <hr>
+        </div>
+
+        <div *ngFor="let especials of LocalGet.id_PaqEspe">
+          <div class="container" *ngIf="especials.Typo==2 && especials.Is_Active==1">
+            <div class="row">
+              <div class="col-md-4 " (click)="abreCantos(paquet,false)">
+                <!--(click)="myModalPac(especials)">-->
+                <div class="grid overlay">
+                  <div>
+                    <img class="img-responsive" [src]="especials.NomImg" alt="">
+
+                    <h5>{{especials.Nombre}}</h5>
+                    <!--  <a data-toggle="modal" href="#myModal" class="btn btn-default">Más detalles</a>-->
+                    <!-- /figcaption -->
+                  </div>
+                  <!-- /figure -->
+                </div>
+                <!-- /grid-overlay -->
+              </div>
+
+
+            </div>
+            <!-- /row -->
+          </div>
+        </div>
+        <!-- /row -->
+      </div>
+    </div>
+    <!-- /container -->
+
+    <div id="Paquetes" name="portfolio" *ngIf="paq">
+      <div class="container">
+        <div class="row">
+          <h2 class="centered">Paquetes</h2>
+          <hr>
+        </div>
+        <div *ngFor="let paquet of LocalGet.id_PaqEspe">
+          <div class="container" *ngIf="paquet.Typo==1 && paquet.Is_Active==1">
+            <div class="row">
+
+              <!-- PORTFOLIO IMAGE 1 -->
+              <div class="col-md-4 " (click)="abreCantos(paquet,false)">
+                <!--(click)="myModalPac(paquet)">-->
+                <div class="grid overlay">
+                  <figure>
+                    <img class="img-responsive" [src]="paquet.NomImg" alt="">
+                    <div>
+                      <h5>{{paquet.Nombre}}</h5>
+                      <!--  <a data-toggle="modal" href="#myModal" class="btn btn-default" >Más detalles</a>-->
+                    </div>
+                    <!-- /figcaption -->
+                  </figure>
+                  <!-- /figure -->
+                </div>
+                <!-- /grid-overlay -->
+              </div>
+
+
+
+            </div>
+
+          </div>
+        </div>
+        <!-- /row -->
+      </div>
+    </div>
+
+    <div class="modal fade" id="myModalPac" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">{{modals.Nombre}}</h4>
+          </div>
+          <div class="modal-body">
+            <p><img class="img-responsive" [src]="modals.NomImg" alt=""></p>
+            <p>{{modals.descrip}}. <span class="price" *ngIf="modals.precio!=0"><b>${{modals.precio}}</b></span></p>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <div class="modal fade" id="myModaleventPromo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h4 class="modal-title">{{modals.Titulo}}</h4>
+            <img [src]="modals.image" style="width:100%">
+          </div>
+          <div class="modal-body">
+            <p><img class="img-responsive" [src]="modals.imagen" alt=""></p>
+            <p>{{modals.Desc}} </p>
+            <div style="text-align:left">
+              <b>  Comienza:</b> {{modals.Comienza}}
+            </div>
+            <div style="text-align:left">
+              <b *ngIf="modals.Termina!=''">   Termina:</b> {{modals.Termina}}
+            </div>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <div id="Eventer" name="Event" *ngIf="eve">
+      <div class="container">
+        <div class="row">
+          <h2 class="centered">Proximos Eventos</h2>
+          <hr>
+        </div>
+        <!-- /row -->
+        <div *ngFor="let events of LocalGet.id_EvenPromo">
+          <div class="container" *ngIf="events.Typo==1 && events.IsActive==1">
+            <div class="row">
+
+              <!-- PORTFOLIO IMAGE 1 -->
+              <div class="col-md-4 " (click)="myModalEvenprom(events)">
+                <div class="grid overlay">
+                  <figure>
+                    <img class="img-responsive" [src]="events.image" alt="">
+                    <div>
+                      <h5>{{events.Titulo}}</h5>
+                      <!--  <a data-toggle="modal" href="#myModalEvent" class="btn btn-default">Más Información</a>-->
+                    </div>
+                    <!-- /figcaption -->
+                  </figure>
+                  <!-- /figure -->
+                </div>
+                <!-- /grid-overlay -->
+              </div>
+
+
+            </div>
+            <!-- /row -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div id="promos" name="Eventer" *ngIf="promos">
+      <div class="container">
+        <div class="row">
+          <h2 class="centered">Promociones</h2>
+          <hr>
+          <!--  <div class="col-lg-8 col-lg-offset-2 centered">
+            <p class="large">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
+        </div>-->
+        </div>
+        <!-- /row -->
+        <div *ngFor="let proms of LocalGet.id_EvenPromo">
+          <div class="container" *ngIf="proms.Typo==2 && proms.IsActive==1">
+            <div class="row">
+
+              <!-- PORTFOLIO IMAGE 1 -->
+              <div class="col-md-4 " (click)="myModalEvenprom(proms)">
+                <div class="grid overlay">
+                  <figure>
+                    <img class="img-responsive" [src]="proms.image" alt="">
+                    <div>
+                      <h5>{{proms.Titulo}}</h5>
+
+                    </div>
+                    <!-- /figcaption -->
+                  </figure>
+                  <!-- /figure -->
+                </div>
+                <!-- /grid-overlay -->
+              </div>
+            </div>
+
+          </div>
+        </div>
+        <!-- /row -->
+      </div>
+    </div>
+
+
+    <div class="alert alert-info" role="alert">
+      Puedes ganar recompensas si contestas la siguiente encuesta:
+      <a href="">Resolver encuesta </a>
+    </div>
+
+    <div style="height:30px; width:100%; left:10px; padding-left: 15px;">
+      <div class="container">
+        <div class="row">
+          <span style="font-size:small">Publicidad</span>
+          <img src="http://ordenofacil.com/logos/coca.jpg" style="width:100%;" />
+        </div>
+      </div>
+    </div>
+    <div style="height:370px;"></div>
+
+
+    <!-- ==== Redes sociales ==== -->
+    <div id="Redes" name="about" *ngIf="redessplit.length>0">
+      <div class="container">
+        <div class="row white">
+          <h2 class="centered">Siguenos en redes sociales</h2>
+
+          <div id="footerwrap">
+            <div class="container">
+              <div class="row">
+                <!--<div class="col-md-8"> <span class="copyright">Copyright &copy; 2015. Design by <a href="http://www.webthemez.com">Webthemez</a></span> </div>-->
+                <div class="col-md-4">
+                  <ul class="list-inline social-buttons">
+                    <ng-container *ngFor="let red of redessplit">
+                      <!--{{red}}-->
+                      <li *ngIf="red.includes('twitter')"><a href="{{red}}" target="_blank"><i class="fa fa-twitter"></i></a> </li>
+                      <li *ngIf="red.includes('facebook')"><a href="{{red}}" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                      <li *ngIf="red.includes('google')"><a href="{{red}}" target="_blank"><i class="fa fa-google-plus"></i></a> </li>
+                      <li *ngIf="red.includes('linkedin')"><a href="{{red}}" target="_blank"><i class="fa fa-linkedin"></i></a> </li>
+                      <li *ngIf="red.includes('youtube')"><a href="{{red}}" target="_blank"><i class="fa fa-youtube"></i></a> </li>
+                    </ng-container>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ==== Ranking ==== -->
+    <h2 class="centered">{{calificaVar}}</h2>
+    <fieldset class="rating">
+      <input type="radio" id="star5" name="rating" value="5" (click)="Calificame(5)" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
+      <input type="radio" id="star4half" name="rating" value="4 and a half" (click)="Calificame(4.5)" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
+      <input type="radio" id="star4" name="rating" value="4" (click)="Calificame(4)" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
+      <input type="radio" id="star3half" name="rating" value="3 and a half" (click)="Calificame(3.5)" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
+      <input type="radio" id="star3" name="rating" value="3" (click)="Calificame(3)" /><label class="full" for="star3" title="Meh - 3 stars"></label>
+      <input type="radio" id="star2half" name="rating" value="2 and a half" (click)="Calificame(2.5)" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
+      <input type="radio" id="star2" name="rating" value="2" (click)="Calificame(2)" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
+      <input type="radio" id="star1half" name="rating" value="1 and a half" (click)="Calificame(1.5)" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
+      <input type="radio" id="star1" name="rating" value="1" (click)="Calificame(1)" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
+      <input type="radio" id="starhalf" name="rating" value="half" (click)="Calificame(.5)" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
+    </fieldset>
+
+
+    <!-- container -->
+    <!-- ==== CONTACT ==== -->
+    <div id="contact" name="contact">
+      <div class="container">
+        <div class="row">
+          <h2 class="centered">Estamos en contacto</h2>
+          <hr>
+
+        </div>
+        <div class="row">
+          <div class="col-md-7">
+            <strong>por favor mandanos tus Comentarios!</strong>
+            <p>Para nosotros es muy importante, en breve recibiras una respuesta gracias.</p>
+
+            <div class="row">
+              <div class="col-md-12 form-group">
+                <input class="form-control" id="nameComent" name="name" placeholder="Nombre" type="text" />
+              </div>
+              <div class="col-md-12 form-group">
+                <input class="form-control" id="emailComent" name="email" placeholder="Email" type="email" />
+              </div>
+              <div class="col-md-12 form-group">
+                <textarea class="form-control" id="messageComent" name="message" placeholder="Mensaje" rows="5"></textarea>
+                <button class="btn reservation-btn" (click)="GuardaComenta()" id="btnsendmesg">Mandar mensaje</button>
+                <label id="tankLabl" style="visibility:hidden">Gracias!!!</label>
+              </div>
+            </div>
+
+
+
+          </div>
+        </div>
+        <div style="height: 45px"></div>
+        <div class="row">
+          <div class="col-md-5">
+
+            <a [routerLink]="['/mapa/dnE6XnhrjrU_/'+idLocalhash]" style="color: inherit; cursor:pointer" title="Ver en el mapa">
+              <i class="fa fa-map-marker fa-2x"></i>
+              <strong *ngIf="LocalGet!= undefined">{{LocalGet.Nombre}}</strong>
+              <p *ngIf="LocalGet!= undefined">
+                {{LocalGet.Domicilio}}
+              </p>
+            </a>
+
+            <br />
+            <i class="fa fa-envelope-o fa-2x" *ngIf="LocalGet!= undefined&& LocalGet.correo"></i>
+            <p *ngIf="LocalGet!= undefined">{{LocalGet.correo}}</p>
+
+            <br />
+            <i class="fa fa-phone fa-2x" *ngIf="LocalGet!= undefined && LocalGet.telefono"></i>
+            <p *ngIf="LocalGet!= undefined"> {{LocalGet.telefono}}</p>
+
+            <i class="fa fa-globe fa-2x" *ngIf="LocalGet!= undefined && LocalGet.url"></i>
+            <p *ngIf="LocalGet!= undefined"> {{LocalGet.url}}</p>
+          </div>
+        </div>
+        <!-- row -->
+
+      </div>
+    </div>
+
+    <div class="modal fade" id="MyModalPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+      <div id="altos" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Tu Orden</h4>
+          </div>
+          <div class="modal-body">
+
+            <h3>Esta es tu orden:</h3>
+            <table style="width:100%">
+              <tr>
+                <td><b>Cant|</b></td>
+                <td><b>Descripción|</b></td>
+                <td>&nbsp;<b>$ |</b></td>
+                <td><b>Quitar|</b></td>
+                <td><b>Modificar</b></td>
+              </tr>
+              <tr *ngFor="let pedidos of comandaSave">
+                <td>{{pedidos.cantidad}}</td>
+                <td>{{pedidos.Nombre}} {{pedidos.Especificaciones}}</td>
+                <td>${{pedidos.costo}}</td>
+                <td style="text-align:center"><input *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8'" type="checkbox" id="{{pedidos.id}}" (click)="quitarSeleccion(pedidos.id,false)" /> </td>
+                <td style="text-align:left"><input title="Modificar" *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8'" type="checkbox" id="{{pedidos.id}}" (click)="abreCantos(pedidos,true)" /> </td>
+
+              </tr>
+            </table>
+
+            <p></p>
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
+
+            <table style="width:100%"><tr><td style="width:60%"> <h4>es correcta?  </h4></td><td style="width:40%">total:<span>${{getSum()}}</span></td></tr></table>
+            <table style="width:100%"><tr><td style="width:70%"><h4>Tu orden es  para llevar? </h4></td><td style="width:30%"><input type="checkbox" id="isForllevar" (click)="SetToGo()" /> </td></tr></table><p></p>
+
+            <div *ngIf="togoTrue">
+              <span><b>Datos Necesarios para la entrega</b></span><p></p>
+              <span>Ingresa tu Nombre*</span><br />
+              <input type="text" class="form-control" id="Nametogo" placeholder="Nombre" /><p></p>
+
+              <span>Ingresa tu telefono personal*</span><br />
+              <input type="number" class="form-control" id="CeltoGo" placeholder="numero celular" /><p></p>
+
+              <span>Ingresa tu correo personal*</span><br />
+              <input type="text" class="form-control" id="MailToGo" placeholder="Email" /><p></p>
+
+              <span>Ingresa la direcci&oacute;n de entrega*</span><br />
+              <textarea class="form-control" id="directoGo" placeholder="Direccion de entrega"></textarea>
+
+              <p></p><h5>Ó con un codigo tu orden será para llevar</h5>
+            </div>
+            <p></p>
+
+            <div *ngIf="needCode">
+              <span>Ingresa el Codigo que esta sobre la mesa</span><br>
+              <input type="text" class="form-control" id="CodeNeeded" placeholder="En la mesa tu mesero apunto un codigo" />
+            </div>
+
+            <p></p>
+
+            <div *ngIf="!needCode">
+              <span>A que nombre saldrá tu orden?</span><br>
+              <input type="text" class="form-control" id="NameOrder" placeholder="Ingresa tu Nombre y primer letra de tu apellido" />
+            </div>
+
+            <div class="alert alert-success" role="alert" id="alertSecambio" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertSecambio')">&times;</button>
+              Tu cambio se notifico correctamente !!!.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alerCerrao" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alerCerrao')">&times;</button>
+              Este local esta Cerrado aun, tu orden no se levanto.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertBlocking" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBlocking')">&times;</button>
+              Existe un detalle al parecer fuiste bloqueado, te recomendamos revisarlo en caja.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertNameNece" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNameNece')">&times;</button>
+              Se debe ingresar un Nombre para identificar tu Orden.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertLejos" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertLejos')">&times;</button>
+              Es necesario estar cerca del establecimiento.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertLoca" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertLoca')">&times;</button>
+              Es necesario conocer tu ubicacion.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertNoCode" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNoCode')">&times;</button>
+              Se debe ingresar un codigo, si no se tiene uno, por favor solicitelo con un mesero.
+            </div>
+            <div class="alert alert-danger" role="alert" id="alertBadCode" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBadCode')">&times;</button>
+              El codigo ingresado no es correcto, por favor solicite uno a su mesero.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertBadMAil" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBadMAil')">&times;</button>
+              Correo con formato incorrecto.
+            </div>
+            <div class="alert alert-danger" role="alert" id="alertBadCel" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBadCel')">&times;</button>
+              Telefono incorrecto.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertFaltanFields" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertFaltanFields')">&times;</button>
+              Todos los campos son necesarios.
+            </div>
+
+
+
+            <button *ngIf="SepuedePedir==1" type="button" class="btn btn-primary" id="btnOrderCo" (click)="DameNumPedido()">Ordenar</button>
+            <button type="button" class="btn btn-primaryt" data-dismiss="modal">volver a la carta</button>
+            <p></p><span style="font-size:small">*para editar o ver a detalle cualquier platillo solo seleccionalo</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="modal fade" id="MyModalCallMese" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div id="altos" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">LLamar al mesero</h4>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-success" role="alert" id="alertsellamo" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertsellamo')">&times;</button>
+              En un momento viene el Mesero.
+            </div>
+            <div class="alert alert-danger" role="alert" id="alerCerraoCallMese" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alerCerraoCallMese')">&times;</button>
+              Este local esta Cerrado, no se llamará al mesero.
+            </div>
+            <div class="alert alert-danger" role="alert" id="alertNoCoder" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNoCoder')">&times;</button>
+              Para llamar a un mesero. Se debe ingresar el codigo de mesa, que esta en el sticker de Ordeno Facil.
+            </div>
+            <div class="alert alert-danger" role="alert" id="alertBadCoder" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBadCoder')">&times;</button>
+              El codigo ingresado no es correcto, por favor solicite uno.
+            </div>
+            <h3>Mesero!!!</h3>
+
+
+            <p></p>
+
+            <div *ngIf="needCode">
+              <span>Ingresa el Codigo que esta sobre la mesa</span><br>
+              <input type="text" class="form-control" id="CodeMesa" placeholder="En la mesa tu mesero apunto un codigo" />
+            </div>
+            <p></p>
+            <button type="button" class="btn btn-primary" (click)="sendCallerMese()">LLamar Mesero</button>
+            <button type="button" class="btn btn-primaryt" data-dismiss="modal">Cerrar</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="MyNumPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+      <div id="altos" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Listo!!! Tu Orden es la numero:</h4>
+          </div>
+          <div class="modal-body">
+            <span id="mynumPedido"></span>
+
+            <p></p>
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
+
+            <button type="button" class="btn btn-primaryt" data-dismiss="modal">Cerrar</button>
+            <!--<button type="button" class="btn btn-primaryt" data-dismiss="modal" onclick="javascript:DameNumPedido()">si es correcta</button>-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+      <div id="altos" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <img [src]="modals.NomImg" style="width:100%">
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-danger" role="alert" id="alertNotama" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNotama')">&times;</button>
+              Se debe de seleccionar un tamaño.
+            </div>
+            <h4><b>{{modals.Nombre}}</b></h4>piezas por presentación: {{modals.piezas}}<br>{{modals.descrip}}<p></p>
+            <h4>  Solicitudes Opcionales al Articulo</h4>
+            <textarea rows="4" placeholder="ej. sin Mayonesa y sin cebolla ó 1 sin cebolla y la otra sin chile" class="form-control wpcf7-text" id="EspefTxt"></textarea>
+            <p></p>
+            <h4>Cantidad:</h4>
+            <table style="width:100%">
+              <tr>
+                <td> <input type="number" id="NUmProduct" class="form-control wpcf7-text" style="width:60%" placeholder="1" (change)="GuardameCantidad(modals)" /></td>
+                <td style="width:30%"><span><b>${{modals.precio}}</b></span></td>
+              </tr>
+            </table><p></p>
+            <div *ngIf="modals.tamaPrice != ''">
+              <ul *ngFor="let tamanos of arregloPrTm">
+                <li *ngIf="tamanos!=''" style="list-style-type: none; border:1px solid #eee;">
+                  <table style="width:100%">
+                    <tr>
+                      <td style="width:60%"><span>{{tamanos}}</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
+                      <td style="width:40%">  <input type="checkbox" (click)="cantidadTamanos(tamanos)" id="{{tamanos}}" /></td>
+                    </tr>
+                  </table>
+                </li>
+              </ul>
+            </div>
+            <p></p>
+
+            <button type="button" class="btn btn-primary" (click)="agregaPedido(modals,false)">Guardar</button>
+            <button type="button" class="close" data-dismiss="modal">Cerrar</button><p></p>
+            <button type="button" class="btn btn-primary" (click)="agregaPedido(modals,true)">Guardar y Ordenar</button>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="MymodalServDom" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+      <div id="altos" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            Ingresa tus datos para
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+      
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-danger" role="alert" id="alertFaltanFieldspop" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertFaltanFieldspop')">&times;</button>
+              Todos los campos son necesarios.
+            </div>
+
+            <div class="alert alert-danger" role="alert" id="alertBadMAilpop" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBadMAilpop')">&times;</button>
+              Correo con formato incorrecto.
+            </div>
+            <div class="alert alert-danger" role="alert" id="alertBadCelpop" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertBadCelpop')">&times;</button>
+              Telefono incorrecto.
+            </div>
+
+            <div>
+              <span><b>Datos Necesarios para la entrega</b></span><p></p>
+              <span>Ingresa tu Nombre*</span><br />
+              <input type="text" class="form-control" id="Nametogopop" placeholder="Nombre" /><p></p>
+
+              <span>Ingresa tu telefono personal*</span><br />
+              <input type="number" class="form-control" id="CeltoGopop" placeholder="numero celular" /><p></p>
+
+              <span>Ingresa tu correo personal*</span><br />
+              <input type="text" class="form-control" id="MailToGopop" placeholder="Email" /><p></p>
+
+              <span>Ingresa la direcci&oacute;n de entrega*</span><br />
+              <textarea class="form-control" id="directoGopop" placeholder="Direccion de entrega"></textarea>
+
+
+            </div>
+            <p></p>
+            <button type="button" class="btn btn-primary" (click)="guardaDataServDom()">Guardar</button>
+            <p></p>
+            <div class="alert alert-success" role="alert" id="alertServDom" style="display:none">
+              <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertServDom')">&times;</button>
+              Listo ahora puedes elegir tu consumo.
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+    <div class="modal fade" id="myModalCodigo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" style=" overflow-y: scroll;">
+      <div id="altos" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+
+          </div>
+          <div class="modal-body">
+            <div id="DivPath"></div>
+            <table style="width:100%">
+              <tr>
+                <td>
+                  <h4>Solicita un codigo al mesero: </h4>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <input type="text" id="txtCodigo" />
+                </td>
+              </tr>
+
+            </table>
+            <p></p>
+            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
+
+            <input type="button" id="Button1" class="btn btn-primary" Text="Enviar" OnClick="SendCode" />
+
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="modal fade " id="mymodalenabled" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div id="altosi" style="height:70px"></div>
+      <div class="modal-dialog" role="document">
+        <div class="modal-content modal-backdropers">
+
+          <div class="modal-body modal-backdropers" style="text-align:center">
+            <!--<img class="modal-backdropers" src="../../assets/img/animated_spinner.gif" />  <br />-->
+            <h2> <b>Procesando ...</b></h2>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+
+
+    <div *ngIf="false">
+      <header id="header">
+
+        <div class="menu_area">
+          <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+            <div class="container">
+              <div class="navbar-header">
+
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+
+                <a class="navbar-brand" href="https://comandaof.firebaseapp.com/ordenofacil/dnE6XnhrjrU_/algo">Ordeno <span style="color:#37c6f5">Facil</span></a>
+
+
+              </div>
+              <div id="navbar" class="navbar-collapse collapse">
+                <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+                  <li><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>
+                  <li id="FirmarseLi" style="visibility:visible"><a href="javascript:openLog()" runat="server" id="aFirm">Log in</a></li>
+                  <li id="NameUserww"><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}" runat="server" id="NameUser">Regresar a Menú</a></li>
+                  <li id="Closese" style="visibility:hidden"><a href="Index.aspx?logOut=true" runat="server" id="aclosese">Cerrar Sesion</a></li>
+
+
+                </ul>
+              </div>
+            </div>
+          </nav>
+        </div>
+
+      </header>
+      <div style="height:48px"></div>
+
+      <div class="nohay col-ld-12 col-md-12 col-sm-12">
+
+
+        <div style="height:25px" id="altodeltitulo"></div>
+        <div class="alert alert-danger" role="alert" id="alerterrorRec" style="display:visible ">
+          <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alerterrorRec')">&times;</button>
+          Lo sentimos, la suscripción de este establecimiento ha caducado
+        </div>
+        <div class="col-ld-12 col-md-12 col-sm-12"><span style="font-size: 26px; color: #ffffff;"><b>Ordeno</b></span><span style="font-size: 26px; color: #37c6f5;"><b>Facil</b></span> <br><span style="font-size: 15px; color: #ffffff;">La mejor forma de atenderte</span></div>
+        <p></p>
+        <div class="col-ld-4 col-md-4 col-sm-4"></div>
+        <div class="col-ld-4 col-md-4 col-sm-4">
+          <div class="input-group">
+            <input type="text" id="txtfood" class="form-control" placeholder="Busca lugares para comer" (focus)="ShowOptins()" />
+            <span class="input-group-btn">
+              <button id="btnsearch" class="btn btn-primary" Text="Buscar" (click)="SUscribeNews_CLic()">Buscar</button>
+            </span>
+          </div>
+
+          <span style="color:red;visibility:hidden" id="msjNoVa"><b>No se permiten caracteres especiales en la busqueda</b></span>
+          <div class="alert alert-danger" role="alert" id="alertNoResults" style="display:none">
+            <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNoResults')">&times;</button>
+            No se encontraron resultados con la busqueda.
+          </div>
+          <div id="OptionsSearch" style="visibility:hidden; height:0px">
+
+            <h3>Buscar por:</h3>
+
+            <ul style=" margin-bottom:0px; padding:0px; text-align:left">
+              <li class="col-sm-6 col-md-6" style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;">
+                <input type='radio' id="xNomLugar" name='Porlocal' value='1' checked="checked" (click)="deseleccionaUno(1)" /> Por Nombre de Lugar
+              </li>
+              <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' id="xComilona" name='Pornombre' value='2' (click)="deseleccionaUno(2)" /> Por nombre de comida</li>
+              <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;" (click)="GetCercas()"><i class="fa fa-map-marker"></i> Cerca de Mi</li>
+            </ul>
+          </div>
+
+        </div>
+
+        <!--  </div>-->
+
+        <div class="col-ld-12 col-md-12 col-sm-12"></div>
+        <div class="col-ld-4 col-md-4 col-sm-4"></div>
+
+        <div class="col-ld-4 col-md-4 col-sm-4" id="appnose">
+          <a class="footer-mobile-download-button" href="#"><svg width="26" height="30" viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Apple Icon"><path d="M25.08 9.85c-2.27 1.6-3.4 3.54-3.4 5.8 0 2.7 1.4 4.78 4.2 6.23a16.78 16.78 0 0 1-3.27 5.7C21.18 29.19 19.88 30 18.7 30c-.56 0-1.32-.18-2.28-.55l-.46-.18a7.02 7.02 0 0 0-2.5-.55c-.68 0-1.43.15-2.25.43l-.58.21-.73.3a4.69 4.69 0 0 1-1.74.34c-1.37 0-2.9-1.14-4.56-3.4C1.2 23.33 0 19.8 0 15.95c0-2.73.75-4.92 2.25-6.59a7.61 7.61 0 0 1 5.95-2.5c.92 0 1.78.17 2.58.5l.55.23.58.24c.52.22.94.33 1.25.33.41 0 .86-.1 1.36-.29l.75-.3.57-.2c.9-.33 1.9-.5 2.99-.5a7.6 7.6 0 0 1 6.25 2.97zM18.95 0a6.3 6.3 0 0 1-1.83 5.32 5.88 5.88 0 0 1-4.36 1.94 7.47 7.47 0 0 1-.07-.83c0-1.46.58-2.83 1.74-4.11A6.63 6.63 0 0 1 18.95 0z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">App Store</div></a>
+          <a class="footer-mobile-download-button" href="#"><svg width="27" height="30" viewBox="0 0 27 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Google Play Icon"><path d="M.22.88L14.34 15 .22 29.12a2.53 2.53 0 0 1-.1-.7V1.58c0-.26.04-.5.1-.7zm25.75 12.9c.61.35.96.8.96 1.22 0 .43-.35.88-.96 1.23l-5.54 3.14L16.06 15l4.37-4.37 5.54 3.15zm-24.9 16.2L15.2 15.87l4.14 4.13L2.3 29.67c-.46.26-.88.36-1.23.32zm18.27-19.97l-4.14 4.13L1.07.01A2 2 0 0 1 2.3.33l17.04 9.68z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">Google Play</div></a>
+        </div>
+        <div class="col-ld-4 col-md-4 col-sm-4"></div>
+      </div>
+
+      <div *ngIf="recomendaciones" class="serviceing_title" style="width:100%; background-color:white">
+        <h2>{{LoNuevo}}</h2>
+      </div>
+      <p></p>
+      <div class="row">
+        <div *ngIf="recomendaciones" class="col-md-12 menuItem " style="background-color:white; padding-top:30px ">
+          <ul style="background-color:white; margin-bottom:0px; text-align:left">
+            <li *ngFor="let locales  of recomendaciones" class="col-sm-6 col-md-6" style="list-style-type: none;  border: 1px solid #eaebeb;
+        border-radius: 3px;
+        padding: 15px;
+        background: #fafaf8;
+        width: 100%;">
+              <a [routerLink]="['/menu/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">
+                <table style="width:100%">
+                  <tr>
+                    <td style="width:14%"><div *ngFor="let imagenLoc of locales.id_Imgs"><div *ngIf="imagenLoc.tipo==2">  <img [src]="imagenLoc.Nombre" style="width:100%"></div></div></td>
+                    <td style="width:2%"></td>
+                    <td style="width:74%">
+                      <table>
+                        <tr>
+                          <td>
+                            <span><b>{{locales.Nombre}}</b></span>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div *ngIf="locales.tipo==1">
+                              <i class="fa fa-home"></i>&nbsp;&nbsp;<span style="font-size:x-small">Antojitos / Tacos /Fonda</span>
+                            </div>
+                            <div *ngIf="locales.tipo==2">
+                              <i class="fa fa-beer"></i>&nbsp;<span style="font-size:x-small">Bar/Antro</span>
+                            </div>
+                            <div *ngIf="locales.tipo==3">
+                              <i class="fa fa-bitbucket"></i>&nbsp;<span style="font-size:x-small">Comida Rapida</span>
+                            </div>
+                            <div *ngIf="locales.tipo==4">
+                              <i class="fa fa-coffee"></i>&nbsp;<span style="font-size:x-small">Cafeteria/Postres</span>
+                            </div>
+                            <div *ngIf="locales.tipo==5">
+                              <i class="fa fa-truck"></i>&nbsp;<span style="font-size:x-small">Food Truck /Snack comercial</span>
+                            </div>
+                            <div *ngIf="locales.tipo==6">
+                              <i class="fa fa-home" *ngIf="locales.tipo==6"></i>&nbsp;<span style="font-size:x-small" *ngIf="locales.tipo==6">Pizzeria</span>
+                            </div>
+                            <div *ngIf="locales.tipo==7">
+                              <i class="fa fa-cutlery"></i>&nbsp;<span style="font-size:x-small">Restaurante</span>
+                            </div>
+                          </td>
+                        </tr>
+                        <tr>
+                          <td>
+                            <div *ngIf="locales.lat!=''">
+                              <a [routerLink]="['/mapa/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">Ver en el mapa</a>
+                            </div>
+                          </td>
+                        </tr>
+                      </table>
+                    </td>
+                    <td style="width:10%"><i class="fa fa-arrow-right" aria-hidden="true" title="Ir al Establecimiento"></i></td>
+                  </tr>
+                </table>
+              </a>
             </li>
           </ul>
         </div>
       </div>
+
+
+      <section id="serviceing">
+        <div class="container">
+          <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="serviceing_area">
+              <div class="serviceing_title">
+                <hr>
+                <h2>OrdenoFacil </h2>
+                <p>La mejor forma de atenderte</p>
+              </div>
+              <ul class="serviceing_nav">
+                <li>
+                  <a class="serviceing_icon" href="#"><i class="fa fa-cutlery"></i></a>
+                  <h2>¿Que es OrdenoFacil?</h2>
+                  <p>OrdenoFacil tiene la mision de atenderte de la manera mas rapida y eficaz posible, ademas de ofrecerte toda la informacion de tus lugares preferidos. podras buscar lugares o recomendaciones de donde comer o donde encontrar cualquier platillo. </p>
+                  <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+                </li>
+                <li>
+                  <a class="serviceing_icon" href="#"><i class="fa fa-mobile"></i></a>
+                  <h2>Facil de usar</h2>
+                  <p>A través de OrdenoFacil, tu puedes levantar tu orden, solicitar a domicilio, reservar e incluso pagar todo desde tu telefono inteligente, como? facil solo escanea el codigo QR o inserta el codigo en un navegador web, que se encuentra en cada local y listo tendras toda la informacion de ese local.  </p>
+                  <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+                </li>
+                <li>
+                  <a class="serviceing_icon" href="#"><i class="fa fa-bolt"></i></a>
+                  <h2>Ventajas</h2>
+                  <p>Si registras un usuario o descargas la aplicacion de OrdenoFacil, puedes enterarte de las mejores promociones o ganar grandes descuentos antes que nadie. ademas de que en todo momento, .</p>
+                  <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+
+
+
+    </div>
+
+
+
+    <footer id="footer">
+      <!-- Start footer top area -->
+      <div class="footer_top">
+        <div class="container">
+          <div class="row">
+            <div class="col-ld-4  col-md-4 col-sm-4">
+              <div class="single_footer_widget">
+                <h3>Ordeno <span style="color:#37c6f5">Facil</span></h3>
+
+                <a class="footer-mobile-download-button" href="#"><svg width="26" height="30" viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Apple Icon"><path d="M25.08 9.85c-2.27 1.6-3.4 3.54-3.4 5.8 0 2.7 1.4 4.78 4.2 6.23a16.78 16.78 0 0 1-3.27 5.7C21.18 29.19 19.88 30 18.7 30c-.56 0-1.32-.18-2.28-.55l-.46-.18a7.02 7.02 0 0 0-2.5-.55c-.68 0-1.43.15-2.25.43l-.58.21-.73.3a4.69 4.69 0 0 1-1.74.34c-1.37 0-2.9-1.14-4.56-3.4C1.2 23.33 0 19.8 0 15.95c0-2.73.75-4.92 2.25-6.59a7.61 7.61 0 0 1 5.95-2.5c.92 0 1.78.17 2.58.5l.55.23.58.24c.52.22.94.33 1.25.33.41 0 .86-.1 1.36-.29l.75-.3.57-.2c.9-.33 1.9-.5 2.99-.5a7.6 7.6 0 0 1 6.25 2.97zM18.95 0a6.3 6.3 0 0 1-1.83 5.32 5.88 5.88 0 0 1-4.36 1.94 7.47 7.47 0 0 1-.07-.83c0-1.46.58-2.83 1.74-4.11A6.63 6.63 0 0 1 18.95 0z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">App Store</div></a>
+                <a class="footer-mobile-download-button" href="#"><svg width="27" height="30" viewBox="0 0 27 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Google Play Icon"><path d="M.22.88L14.34 15 .22 29.12a2.53 2.53 0 0 1-.1-.7V1.58c0-.26.04-.5.1-.7zm25.75 12.9c.61.35.96.8.96 1.22 0 .43-.35.88-.96 1.23l-5.54 3.14L16.06 15l4.37-4.37 5.54 3.15zm-24.9 16.2L15.2 15.87l4.14 4.13L2.3 29.67c-.46.26-.88.36-1.23.32zm18.27-19.97l-4.14 4.13L1.07.01A2 2 0 0 1 2.3.33l17.04 9.68z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">Google Play</div></a>
+              </div>
+            </div>
+
+            <div class="col-ld-4  col-md-4 col-sm-4">
+              <div class="single_footer_widget">
+                <h3>Redes Sociales</h3>
+                <ul class="footer_social">
+                  <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Facebook" class="soc_tooltip" href="https://www.facebook.com/OrdenoFacil/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Twitter" class="soc_tooltip" href="#"><i class="fa fa-twitter" target="_blank"></i></a></li>
+                  <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Youtube" class="soc_tooltip" href="#"><i class="fa fa-youtube" target="_blank"></i></a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-ld-4  col-md-4 col-sm-4">
+              <div class="single_footer_widget">
+                <h3>LInks</h3>
+                <ul class="footer_widget_nav">
+                  <li style="list-style-type: none;"><a href="#" target="_blank">saber mas de OrdenoFacil</a></li>
+                  <li style="list-style-type: none;"><a href="#" target="_blank">Terminos y Condiciones</a></li>
+                  <li style="list-style-type: none;"><a href="#" target="_blank">Politicas y privacidad</a></li>
+                  <li style="list-style-type: none;"><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>
+                  <li style="list-style-type: none;"><a href="#" target="_blank">FAQ</a></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-8"> <span style="font-size:small">Copyright OrdenoFacil.com 2017. </span> </div>
+          </div>
+        </div>
       </div>
-    </section>
 
-
-
-
-      </div>
-
-   <div *ngIf="LocalGet">
-     <div>
-
-     </div>
-        <input type="hidden" id="lstProds" />
-        <input type="hidden" id="CantProd" />
-        <input type="hidden" id="HFFlagins" />
-        <div id="navbar-main">
-            <!-- Fixed navbar -->
-            <div class="navbar navbar-inverse navbar-fixed-top" [style.backgroundImage]="'url(' + logo + ')'" style="width: 100%;
-          	-webkit-background-size: 100%;
-          	-moz-background-size: 100%;
-          	-o-background-size: 100%;
-          	background-size: 100%;
-          	-webkit-background-size: cover;
-          	-moz-background-size: cover;
-          	-o-background-size: cover;
-          	background-size: cover;">
-                <div class="container">
-
-                    <div class="navbar-header"  >
-
-                        <div class="pull-left logo" >
-                            <a  class="" href="#home"  ><img id="portallogo"   /></a>
-                        </div>
-                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse"> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-                    </div>
-                    <div class="navbar-collapse collapse">
-                        <ul class="nav navbar-nav pull-right">
-                              <li (click)="llamaMese()" *ngIf="needCode">llamar a un mesero</li>
-                              <li (click)="abreComanda()">Mi Orden</li>
-                              <li ><a [routerLink]="['/placesVisit']" style="color: inherit; ">
-                            Mis Lugares Visitados</a></li>
-                              <li><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>
-                              <li><a href="http://ordenofacil.com/cliente" target="_blank">OrdenoFacil</a></li>
-
-                        </ul>
-                    </div>
-                    <!--/.nav-collapse -->
-                </div>
-            </div>
-        </div>
-
-
-        <!-- ==== HEADERWRAP ==== -->
-        <div style="height: 50px"></div>
-        <div id="home-section">
-            <div id="headerwrap" name="home"  [style.backgroundImage]="'url(' + Fondo + ')'">
-                <header class="clearfix tb">
-                    <div class="tb-cell text-center">
-                       <i class="fa fa-cutlery icon"></i>
-                        <h1>{{LocalGet.Nombre}}</h1>
-                        <p>-- {{LocalGet.slogan}} --</p>
-                        <span><b>Nuestros Horarios: {{LocalGet.nom_img}} hrs.</b></span> <br>
-                        <h2 *ngIf="cerrado">Este local esta Cerrado aun</h2>
-                        <span *ngIf="LocalGet.nom_ico=='true'"><b>Aceptamos Tarjetas <i class="fa fa-cc-mastercard">&nbsp;&nbsp;</i><i class="fa fa-cc-visa"></i></b></span>
-
-                    </div>
-                </header>
-            </div>
-
-        </div>
-
-        <div id="price" name="prce">
-            <div class="container">
-                <div class="row">
-                    <h2 class="centered">Nuestro Menu</h2>
-
-                </div>
-                <div class="container">
-                    <div class="row">
-
-
-                        <div id="Cafesesin" class="collapse"> </div>
-
-                        <div class="col-md-4 menuItem" *ngFor="let timers of timessorted">
-
-                        <div class="col-md-4" style="background-color:#A4CAD1;border:1px solid #eee;" data-toggle="collapse" [attr.data-target]="'#'+timers"><table style="width:100%"><tr><td style="width:93%"><h3>{{timers.replace('_',' ')}} </h3></td><td style="width:7%"><i class="fa fa-plus" style="color:black" ></i></td></tr></table></div>
-                        <div  [id]="timers" class="collapse">
-                            <ul class="menu">
-                             <ng-container *ngFor="let platos of LocalGet.id_Menu?.menu" class="menu">
-
-                                <li *ngIf="platos.tiempo==timers" style="cursor: pointer; " (click)="abreCantos(platos,false)" >
-
-                                  <img [src]="platos.NomImg" style="width:100%">
-                                <b > {{platos.Nombre}}</b>   <span class="price" *ngIf="platos.precio!=0"><b>${{platos.precio}}</b></span><!--<input type="checkbox" id="ChckNid" class="price" (click)="abreCantos($event, platos)" />-->
-                                 <div class="detail">{{platos.descrip}}.
-                                <!--  <span class="price" *ngIf="platos.tamaPrice!=''"><b>{{platos.tamaPrice.replace('|','=' )}}</b></span>-->
-                                  </div>
-                                  <p></p>
-
-                                </li>
-
-                                </ng-container>
-
-                            </ul>
-                            <div class="reservation-link">
-                                <button type="button" class="btn reservation-btn" (click)="abreComanda()" >Ordenar</button>
-                            </div>
-                          </div>
-                        </div>
-
-
-                    </div>
-                </div>
-                <div class="reservation-link">
-                    <button type="button" class="btn reservation-btn" (click)="abreComanda()" >Ordenar</button>
-                </div>
-            </div>
-
-        </div>
-
-
-        <div class="modal fade" id="MyModalAlerts" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">Mensaje de la cocina</h4>
-                        </div>
-                        <div class="modal-body">
-                          <div class="alert alert-warning" role="alert" id="alertCancelPlato" style="display:none">
-                          Se cancelo este platillo: {{razonCancel}}.<br/>
-                          <span style="font-size:small">Si lo deseas puedes seleccionar otro producto </span>
-                        </div>
-                          <div class="alert alert-success" role="alert" id="alertOrderOk" style="display:none">
-                          Se levanto correctamente tu Orden.
-                        </div>
-
-                        <div class="alert alert-success" role="alert" id="alertEntregaPlato" style="display:none">
-                        Tu Orden Esta Lista!!!.
-                      </div>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-
-
-
-
-            <!-- ==== PORTFOLIO ==== -->
-            <div id="portfolio" name="portfolio" *ngIf="espe">
-                <div class="container" >
-                    <div class="row">
-                        <h2 class="centered">Especiales</h2>
-                        <hr>
-                      <!--  <div class="col-lg-8 col-lg-offset-2 centered">
-                            <p class="large">Las especialidades del chef es lo que te recomendamos probar.</p>
-                        </div>-->
-                    </div>
-                    <!-- /row -->
-                    <div *ngFor="let especials of LocalGet.id_PacEspe">
-                    <div class="container" *ngIf="especials.Typo==2">
-                        <div class="row">
-
-                            <!-- PORTFOLIO IMAGE 1 -->
-                            <div class="col-md-4 " (click)="myModalPac(especials)">
-                                <div class="grid overlay">
-                                    <div>
-                                        <img class="img-responsive" [src]="especials.imagen" alt="">
-
-                                            <h5>{{especials.Nombre}}</h5>
-                                          <!--  <a data-toggle="modal" href="#myModal" class="btn btn-default">Más detalles</a>-->
-
-                                        <!-- /figcaption -->
-                                    </div>
-                                    <!-- /figure -->
-                                </div>
-                                <!-- /grid-overlay -->
-                            </div>
-
-
-                        </div>
-                        <!-- /row -->
-                    </div>
-                  </div>
-                    <!-- /row -->
-                </div>
-            </div>
-            <!-- /container -->
-
-            <div id="Paquetes" name="portfolio" *ngIf="paq">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="centered">Paquetes</h2>
-                        <hr>
-                      <!--  <div class="col-lg-8 col-lg-offset-2 centered">
-                            <p class="large">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                        </div>-->
-                    </div>
-<div *ngFor="let paquet of LocalGet.id_PacEspe">
-                    <div class="container" *ngIf="paquet.Typo==1">
-                        <div class="row">
-
-                            <!-- PORTFOLIO IMAGE 1 -->
-                            <div class="col-md-4 " (click)="myModalPac(paquet)">
-                                <div class="grid overlay">
-                                    <figure>
-                                        <img class="img-responsive" [src]="paquet.imagen" alt="">
-                                        <div>
-                                            <h5>{{paquet.Nombre}}</h5>
-                                          <!--  <a data-toggle="modal" href="#myModal" class="btn btn-default" >Más detalles</a>-->
-                                        </div>
-                                        <!-- /figcaption -->
-                                    </figure>
-                                    <!-- /figure -->
-                                </div>
-                                <!-- /grid-overlay -->
-                            </div>
-
-
-
-                        </div>
-
-                    </div>
-                  </div>
-                    <!-- /row -->
-                </div>
-            </div>
-
-            <div class="modal fade" id="myModalPac" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">{{modals.Nombre}}</h4>
-                        </div>
-                        <div class="modal-body">
-                            <p><img class="img-responsive" [src]="modals.imagen" alt=""></p>
-                            <p>{{modals.Desc}}. </p>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-
-            <div class="modal fade" id="myModaleventPromo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title">{{modals.Titulo}}</h4>
-                              <img [src]="modals.image" style="width:100%">
-                        </div>
-                        <div class="modal-body">
-                            <p><img class="img-responsive" [src]="modals.imagen" alt=""></p>
-                            <p>{{modals.Desc}} </p>
-                            <div style="text-align:left">
-                            <b>  Comienza:</b> {{modals.Comienza}}
-                            </div>
-                            <div style="text-align:left">
-                            <b *ngIf="modals.Termina!=''">   Termina:</b> {{modals.Termina}}
-                            </div>
-                        </div>
-                    </div>
-                    <!-- /.modal-content -->
-                </div>
-                <!-- /.modal-dialog -->
-            </div>
-
-            <div id="Eventer" name="Event" *ngIf="eve">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="centered">Proximos Eventos</h2>
-                        <hr>
-                    </div>
-                    <!-- /row -->
-                    <div *ngFor="let events of LocalGet.id_EvenPromo">
-                    <div class="container" *ngIf="events.Typo==1">
-                        <div class="row">
-
-                            <!-- PORTFOLIO IMAGE 1 -->
-                            <div class="col-md-4 " (click)="myModalEvenprom(events)">
-                                <div class="grid overlay">
-                                    <figure>
-                                        <img class="img-responsive" [src]="events.image" alt="">
-                                        <div>
-                                            <h5>{{events.Titulo}}</h5>
-                                          <!--  <a data-toggle="modal" href="#myModalEvent" class="btn btn-default">Más Información</a>-->
-                                        </div>
-                                        <!-- /figcaption -->
-                                    </figure>
-                                    <!-- /figure -->
-                                </div>
-                                <!-- /grid-overlay -->
-                            </div>
-
-
-                    </div>
-                    <!-- /row -->
-                </div>
-            </div>
-            </div>
-            </div>
-
-            <div id="Eventer" name="Event" *ngIf="promos">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="centered">Promociones</h2>
-                        <hr>
-                      <!--  <div class="col-lg-8 col-lg-offset-2 centered">
-                            <p class="large">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aut eaque, laboriosam veritatis, quos non quis ad perspiciatis, totam corporis ea, alias ut unde.</p>
-                        </div>-->
-                    </div>
-                    <!-- /row -->
-                    <div *ngFor="let proms of LocalGet.id_EvenPromo">
-                    <div class="container" *ngIf="proms.Typo==2">
-                        <div class="row">
-
-                            <!-- PORTFOLIO IMAGE 1 -->
-                            <div class="col-md-4 " (click)="myModalEvenprom(proms)" >
-                                <div class="grid overlay">
-                                    <figure>
-                                        <img class="img-responsive" [src]="proms.image" alt="">
-                                        <div>
-                                            <h5>{{proms.Titulo}}</h5>
-
-                                        </div>
-                                        <!-- /figcaption -->
-                                    </figure>
-                                    <!-- /figure -->
-                                </div>
-                                <!-- /grid-overlay -->
-                            </div>
-                        </div>
-
-                    </div>
-                    </div>
-                    <!-- /row -->
-                </div>
-            </div>
-
-
-            <!-- ==== TEAM MEMBERS ==== -->
-            <div id="Redes" name="about"  *ngIf="redessplit.length>1">
-                <div class="container">
-                    <div class="row white">
-                        <h2 class="centered">Siguenos en redes sociales</h2>
-
-                        <div id="footerwrap">
-                            <div class="container">
-                                <div class="row">
-                                    <!--<div class="col-md-8"> <span class="copyright">Copyright &copy; 2015. Design by <a href="http://www.webthemez.com">Webthemez</a></span> </div>-->
-                                    <div class="col-md-4">
-                                        <ul class="list-inline social-buttons" >
-                                          <ng-container *ngFor="let red of redessplit">
-                                            <li *ngIf="red.includes('twitter')"><a href="{{red}}"><i class="fa fa-twitter"></i></a> </li>
-                                            <li *ngIf="red.includes('facebook')"><a href="{{red}}"><i class="fa fa-facebook"></i></a> </li>
-                                            <li *ngIf="red.includes('google')"><a href="{{red}}"><i class="fa fa-google-plus"></i></a> </li>
-                                            <li *ngIf="red.includes('linkedin')"><a href="{{red}}"><i class="fa fa-linkedin"></i></a> </li>
-                                            <li *ngIf="red.includes('youtube')"><a href="{{red}}"><i class="fa fa-youtube"></i></a> </li>
-                                            </ng-container>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <h2 class="centered">Calificanos:</h2>
-            <fieldset class="rating">
-                <input type="radio" id="star5" name="rating" value="5" /><label class="full" for="star5" title="Awesome - 5 stars"></label>
-                <input type="radio" id="star4half" name="rating" value="4 and a half" /><label class="half" for="star4half" title="Pretty good - 4.5 stars"></label>
-                <input type="radio" id="star4" name="rating" value="4" /><label class="full" for="star4" title="Pretty good - 4 stars"></label>
-                <input type="radio" id="star3half" name="rating" value="3 and a half" /><label class="half" for="star3half" title="Meh - 3.5 stars"></label>
-                <input type="radio" id="star3" name="rating" value="3" /><label class="full" for="star3" title="Meh - 3 stars"></label>
-                <input type="radio" id="star2half" name="rating" value="2 and a half" /><label class="half" for="star2half" title="Kinda bad - 2.5 stars"></label>
-                <input type="radio" id="star2" name="rating" value="2" /><label class="full" for="star2" title="Kinda bad - 2 stars"></label>
-                <input type="radio" id="star1half" name="rating" value="1 and a half" /><label class="half" for="star1half" title="Meh - 1.5 stars"></label>
-                <input type="radio" id="star1" name="rating" value="1" /><label class="full" for="star1" title="Sucks big time - 1 star"></label>
-                <input type="radio" id="starhalf" name="rating" value="half" /><label class="half" for="starhalf" title="Sucks big time - 0.5 stars"></label>
-            </fieldset>
-            <!-- container -->
-            <!-- ==== CONTACT ==== -->
-            <div id="contact" name="contact">
-                <div class="container">
-                    <div class="row">
-                        <h2 class="centered">Estamos en contacto</h2>
-                        <hr>
-
-                    </div>
-                    <div class="row">
-                        <div class="col-md-7">
-                          <strong>por favor mandanos tus Comentarios!</strong>
-                         <p>Para nosotros es muy importante, en breve recibiras una respuesta gracias.</p>
-
-                            <div class="row">
-                                <div class="col-md-12 form-group">
-                                    <input class="form-control" id="name" name="name" placeholder="Name" type="text" />
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <input class="form-control" id="email" name="email" placeholder="Email" type="email" />
-                                </div>
-                                <div class="col-md-12 form-group">
-                                    <textarea class="form-control" id="message" name="message" placeholder="Message" rows="5"></textarea>
-                                    <button class="btn btn-lg pull-left" type="submit">Mandar mensaje</button>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                        </div>
-                        <div style="height: 45px"></div>
-                        <div class="row">
-                        <div class="col-md-5">
-
-
-                            <i class="fa fa-map-marker fa-2x" ></i>
-                            <strong>{{LocalGet.Nombre}}</strong>
-                            <p>
-                                {{LocalGet.Domicilio}}
-                            </p>
-
-                            <br />
-                            <i class="fa fa-envelope-o fa-2x" *ngIf="LocalGet.correo"></i>
-                            <p>{{LocalGet.correo}}</p>
-
-                            <br />
-                            <i class="fa fa-phone fa-2x" *ngIf="LocalGet.telefono"></i>
-                            <p> {{LocalGet.telefono}}</p>
-
-                        </div>
-                    </div>
-                    <!-- row -->
-
-                </div>
-            </div>
-
-            <div class="modal fade" id="MyModalPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div id="altos" style="height:100px"></div>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Tu Orden</h4>
-                        </div>
-                        <div class="modal-body">
-
-                          <div class="alert alert-danger" role="alert" id="alerCerrao" style="display:none">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          Este local esta Cerrado aun, tu orden no se levanto.
-                          </div>
-
-                          <div class="alert alert-danger" role="alert" id="alertBlocking" style="display:none">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          Existe un detalle al parecer fuiste bloqueado, te recomendamos revisarlo en caja.
-                          </div>
-
-                          <div class="alert alert-danger" role="alert" id="alertNameNece" style="display:none">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          Se debe ingresar un Nombre para identificar tu Orden.
-                        </div>
-
-                          <div class="alert alert-danger" role="alert" id="alertNoCode" style="display:none">
-                          <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                          Se debe ingresar un codigo, si no se tiene uno, por favor solicitelo con un mesero.
-                        </div>
-                        <div class="alert alert-danger" role="alert" id="alertBadCode" style="display:none">
-                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                        El codigo ingresado no es correcto, por favor solicite uno a su mesero.
-                      </div>
-<h3>Esta es tu orden:</h3>
-                              <table style="width:100%">
-                                <tr>
-                                <td><b >Cant|</b></td><td><b>Descripción|</b></td><td>&nbsp;<b>$ |</b></td><td><b>Quitar|</b></td><td><b>Modificar</b></td>  </tr>
-                                  <tr *ngFor="let pedidos of comandaSave">
-                                    <td>{{pedidos.cantidad}}</td><td>{{pedidos.Nombre}}</td><td>${{pedidos.precio}}</td>
-                                    <td style="text-align:center"><input *ngIf="pedidos.id !='1'" type="checkbox"  id="{{pedidos.id}}" (click)="quitarSeleccion(pedidos.id,false)" /> </td>
-                                    <td style="text-align:left"><input title="Modificar" *ngIf="pedidos.id !='1'" type="checkbox"  id="{{pedidos.id}}" (click)="abreCantos(pedidos,true)" /> </td>
-
-                                </tr>
-                              </table>
-
-                            <p></p>
-                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
-
-                          <table style="width:100%"><tr><td style="width:60%"> <h4>es correcta?  </h4></td><td style="width:40%">total:<span>${{getSum()}}</span></td></tr></table><p></p>
-                            <div *ngIf="needCode">
-                              <span>Ingresa el Codigo que esta sobre la mesa</span><br>
-                              <input type="text" class="form-control" id="CodeNeeded" placeholder="En la mesa tu mesero apunto un codigo" />
-                            </div>
-                            <div *ngIf="!needCode">
-                              <span>A que nombre saldrá tu orden?</span><br>
-                              <input type="text" class="form-control" id="NameOrder" placeholder="Ingresa tu Nombre y primer letra de tu apellido" />
-                            </div>
-<p></p>
-                            <button type="button" class="btn btn-primary"  (click)="DameNumPedido()">Ordenar</button>
-                            <button type="button" class="btn btn-primaryt" data-dismiss="modal">volver a la carta</button>
-                            <p></p><span style="font-size:small">*para editar o ver a detalle cualquier platillo solo seleccionalo</span>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-
-            <div class="modal fade" id="MyModalCallMese" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div id="altos" style="height:100px"></div>
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="myModalLabel">LLamar al mesero</h4>
-                                    </div>
-                                    <div class="modal-body">
-
-                                      <div class="alert alert-danger" role="alert" id="alertNoCoder" style="display:none">
-                                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    Para llamar a un mesero. Se debe ingresar el codigo de mesa, que esta en el sticker de Ordeno Facil.
-                                    </div>
-                                    <div class="alert alert-danger" role="alert" id="alertBadCoder" style="display:none">
-                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                    El codigo ingresado no es correcto, por favor solicite uno.
-                                  </div>
-                      <h3>Mesero!!!</h3>
-
-
-                                        <p></p>
-
-                                        <div *ngIf="needCode">
-                                          <span>Ingresa el Codigo que esta sobre la mesa</span><br>
-                                          <input type="text" class="form-control" id="CodeMesa" placeholder="En la mesa tu mesero apunto un codigo" />
-                                        </div>
-            <p></p>
-                                        <button type="button" class="btn btn-primary"  (click)="sendCallerMese()">LLamar Mesero</button>
-                                        <button type="button" class="btn btn-primaryt" data-dismiss="modal">Cerrar</button>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </div>
-
-
-            <div class="modal fade" id="MyNumPedido" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div id="altos" style="height:100px"></div>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Listo!!! Tu Orden es la numero:</h4>
-                        </div>
-                        <div class="modal-body">
-                            <span id="mynumPedido"></span>
-
-                            <p></p>
-                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
-
-                            <button type="button" class="btn btn-primaryt" data-dismiss="modal">Cerrar</button>
-                            <!--<button type="button" class="btn btn-primaryt" data-dismiss="modal" onclick="javascript:DameNumPedido()">si es correcta</button>-->
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                      <div id="altos" style="height:100px"></div>
-                      <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <img [src]="modals.NomImg" style="width:100%">
-                              </div>
-                              <div class="modal-body">
-                                <div class="alert alert-danger" role="alert" id="alertNotama" style="display:none">
-                                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                                Se debe de seleccionar un tamaño.
-                              </div>
-                                            <h4><b>{{modals.Nombre}}</b></h4>piezas por presentación: {{modals.piezas}}<br>{{modals.descrip}}<p></p>
-                                            <h4>  Solicitudes Opcionales al Articulo</h4>
-                                              <textarea rows="4" placeholder="ej. sin Mayonesa y sin cebolla ó 1 sin cebolla y la otra sin chile" class="form-control wpcf7-text" id="EspefTxt"></textarea>
-                                  <p></p>
-                                  <h4>Cantidad:</h4>
-                                  <table style="width:100%" ><tr>
-                                    <td> <input type="number" id="NUmProduct" class="form-control wpcf7-text" style="width:60%" placeholder="1" (change)="GuardameCantidad(modals)"/></td>
-                                    <td style="width:30%" ><span ><b>${{modals.precio}}</b></span></td></tr></table><p></p>
-                                    <div *ngIf="modals.tamaPrice != ''">
-                                    <ul *ngFor="let tamanos of arregloPrTm" >
-                                      <li *ngIf="tamanos!=''" style="list-style-type: none; border:1px solid #eee;"><table style="width:100%"><tr> <td style="width:60%"><span>{{tamanos}}</span>&nbsp;&nbsp;&nbsp;&nbsp;</td>
-                                      <td style="width:40%">  <input type="checkbox" (click)="cantidadTamanos(tamanos)" id="{{tamanos}}"  /></td></tr></table></li>
-                                    </ul>
-                                </div>
-                                  <p></p>
-
-                                  <button type="button" class="btn btn-primary"  (click)="agregaPedido(modals,false)">Guardar</button>
-                                  <button type="button" class="close" data-dismiss="modal">Cerrar</button><p></p>
-                                  <button type="button" class="btn btn-primary" (click)="agregaPedido(modals,true)" >Guardar y Ordenar</button>
-
-                              </div>
-
-                          </div>
-                      </div>
-                  </div>
-
-
-
-
-
-            <div class="modal fade" id="myModalCodigo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                <div id="altos" style="height:100px"></div>
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-
-                        </div>
-                        <div class="modal-body">
-                            <div id="DivPath"></div>
-                            <table style="width:100%">
-                                <tr>
-                                    <td>
-                                        <h4>Solicita un codigo al mesero: </h4>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="text" id="txtCodigo" />
-                                    </td>
-                                </tr>
-
-                            </table>
-                            <p></p>
-                            <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
-
-                            <input type="button" id="Button1"  class="btn btn-primary" Text="Enviar" OnClick="SendCode" />
-
-                        </div>
-
-                    </div>
-                </div>
-
-            </div>
-
-       </div>
-
-       <footer id="footer">
-             <!-- Start footer top area -->
-             <div class="footer_top">
-               <div class="container">
-                 <div class="row">
-                   <div class="col-ld-4  col-md-4 col-sm-4">
-                     <div class="single_footer_widget">
-                         <h3>Ordeno <span style="color:#37c6f5">Facil</span></h3>
-
-                         <a class="footer-mobile-download-button" href="#"><svg width="26" height="30" viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Apple Icon"><path d="M25.08 9.85c-2.27 1.6-3.4 3.54-3.4 5.8 0 2.7 1.4 4.78 4.2 6.23a16.78 16.78 0 0 1-3.27 5.7C21.18 29.19 19.88 30 18.7 30c-.56 0-1.32-.18-2.28-.55l-.46-.18a7.02 7.02 0 0 0-2.5-.55c-.68 0-1.43.15-2.25.43l-.58.21-.73.3a4.69 4.69 0 0 1-1.74.34c-1.37 0-2.9-1.14-4.56-3.4C1.2 23.33 0 19.8 0 15.95c0-2.73.75-4.92 2.25-6.59a7.61 7.61 0 0 1 5.95-2.5c.92 0 1.78.17 2.58.5l.55.23.58.24c.52.22.94.33 1.25.33.41 0 .86-.1 1.36-.29l.75-.3.57-.2c.9-.33 1.9-.5 2.99-.5a7.6 7.6 0 0 1 6.25 2.97zM18.95 0a6.3 6.3 0 0 1-1.83 5.32 5.88 5.88 0 0 1-4.36 1.94 7.47 7.47 0 0 1-.07-.83c0-1.46.58-2.83 1.74-4.11A6.63 6.63 0 0 1 18.95 0z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">App Store</div></a>
-                         <a class="footer-mobile-download-button" href="#"><svg width="27" height="30" viewBox="0 0 27 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Google Play Icon"><path d="M.22.88L14.34 15 .22 29.12a2.53 2.53 0 0 1-.1-.7V1.58c0-.26.04-.5.1-.7zm25.75 12.9c.61.35.96.8.96 1.22 0 .43-.35.88-.96 1.23l-5.54 3.14L16.06 15l4.37-4.37 5.54 3.15zm-24.9 16.2L15.2 15.87l4.14 4.13L2.3 29.67c-.46.26-.88.36-1.23.32zm18.27-19.97l-4.14 4.13L1.07.01A2 2 0 0 1 2.3.33l17.04 9.68z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">Google Play</div></a>
-                     </div>
-                   </div>
-
-                   <div class="col-ld-4  col-md-4 col-sm-4">
-                     <div class="single_footer_widget">
-                       <h3>Redes Sociales</h3>
-                       <ul class="footer_social">
-                         <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Facebook" class="soc_tooltip" href="https://www.facebook.com/OrdenoFacil/" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                         <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Twitter" class="soc_tooltip"  href="#"><i class="fa fa-twitter" target="_blank"></i></a></li>
-                         <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Youtube" class="soc_tooltip"  href="#"><i class="fa fa-youtube" target="_blank"></i></a></li>
-                       </ul>
-                     </div>
-                   </div>
-                     <div class="col-ld-4  col-md-4 col-sm-4">
-                     <div class="single_footer_widget">
-                       <h3>LInks</h3>
-                       <ul class="footer_widget_nav">
-                         <li style="list-style-type: none;"><a href="#" target="_blank">saber mas de OrdenoFacil</a></li>
-                         <li style="list-style-type: none;"><a href="#" target="_blank">Terminos y Condiciones</a></li>
-                         <li style="list-style-type: none;"><a href="#" target="_blank">Politicas y privacidad</a></li>
-                         <li style="list-style-type: none;"><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>
-                         <li style="list-style-type: none;"><a href="#" target="_blank">FAQ</a></li>
-                       </ul>
-                     </div>
-                   </div>
-                 <div class="col-md-8"> <span style="font-size:small">Copyright OrdenoFacil.com 2017. </span> </div>
-                 </div>
-               </div>
-             </div>
-
-           </footer>
+    </footer>
 
 
 

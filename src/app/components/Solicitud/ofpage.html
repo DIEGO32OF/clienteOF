@@ -1,0 +1,255 @@
+<html lang="es">
+<head>
+    <title>Product App</title>
+    <!-- Bootstrap core CSS -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <meta name="author" content="acomer" />
+    <meta name="mobile-web-app-capable" content="yes" />
+
+  </head>
+  <body>
+<div >
+      <header id="header">
+
+   <div class="menu_area">
+     <nav class="navbar navbar-default navbar-fixed-top" role="navigation">  <div class="container">
+         <div class="navbar-header">
+
+           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+             <span class="sr-only">Toggle navigation</span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+             <span class="icon-bar"></span>
+           </button>
+
+           <a class="navbar-brand" href="https://comandaof.firebaseapp.com/ordenofacil/dnE6XnhrjrU_/algo">Ordeno <span style="color:#37c6f5">Facil</span></a>
+
+
+         </div>
+         <div id="navbar" class="navbar-collapse collapse">
+           <ul id="top-menu" class="nav navbar-nav navbar-right main-nav">
+             <!--<li><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>-->
+             <li id="FirmarseLi" style="visibility:visible"><a href="javascript:openLog()" runat="server" id="aFirm">Log in&nbsp;&nbsp;&nbsp;</a></li>
+             <li id="NameUserww"><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}" runat="server" id="NameUser">Regresar a Menú&nbsp;&nbsp;&nbsp;</a></li>
+             <li id="maPAS"><a href="https://comandaof.firebaseapp.com/mapa/{{tipoLocal}}/{{idLocalhash}}" runat="server" id="mapaid">Mapa&nbsp;&nbsp;&nbsp;</a></li>
+             <li id="Closese" style="visibility:hidden"><a href="Index.aspx?logOut=true" runat="server" id="aclosese">Cerrar Sesion</a></li>
+
+
+           </ul>
+         </div>
+       </div>
+     </nav>
+   </div>
+
+ </header>
+ <div style="height:48px"></div>
+
+ <div class="nohay col-ld-12 col-md-12 col-sm-12">
+
+
+   <div style="height:25px" id="altodeltitulo"></div>
+   <div class="alert alert-danger" role="alert" id="alerterrorRec" style="visibility:hidden">
+     <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alerterrorRec')">&times;</button>
+     Lo sentimos, la suscripción de este establecimiento ha caducado
+   </div>
+   <div class="col-ld-12 col-md-12 col-sm-12"><span style="font-size: 26px; color: #ffffff;"><b>Ordeno</b></span><span style="font-size: 26px; color: #37c6f5;"><b>Facil</b></span> <br><span style="font-size: 15px; color: #ffffff;">La mejor forma de atenderte</span></div>
+   <p></p>
+   <div class="col-ld-4 col-md-4 col-sm-4"></div>
+   <div class="col-ld-4 col-md-4 col-sm-4">
+     <div class="input-group">
+       <input type="text" id="txtfood" class="form-control" placeholder="Busca lugares para comer" (focus)="ShowOptins()" />
+       <span class="input-group-btn">
+         <button id="btnsearch" class="btn btn-primary" Text="Buscar" (click)="SUscribeNews_CLic()">Buscar</button>
+       </span>
+     </div>
+
+     <span style="color:red;visibility:hidden" id="msjNoVa"><b>No se permiten caracteres especiales en la busqueda</b></span>
+     <div class="alert alert-danger" role="alert" id="alertNoResults" style="display:none">
+       <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNoResults')">&times;</button>
+       No se encontraron resultados con la busqueda.
+     </div>
+     <div id="OptionsSearch" style="visibility:hidden; height:0px">
+
+       <h3>Buscar por:</h3>
+
+       <ul style=" margin-bottom:0px; padding:0px; text-align:left">
+         <li class="col-sm-6 col-md-6" style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;">
+           <input type='radio' id="xNomLugar" name='Porlocal' value='1' checked="checked" (click)="deseleccionaUno(1)" /> Por Nombre de Lugar
+         </li>
+         <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' id="xComilona" name='Pornombre' value='2' (click)="deseleccionaUno(2)" /> Por nombre de comida</li>
+         <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;" (click)="GetCercas()"><i class="fa fa-map-marker"></i> Cerca de Mi</li>
+       </ul>
+     </div>
+
+   </div>
+
+   <!--  </div>-->
+
+   <div class="col-ld-12 col-md-12 col-sm-12"></div>
+   <div class="col-ld-4 col-md-4 col-sm-4"></div>
+   <div class="col-ld-4 col-md-4 col-sm-4" id="appnose">
+     <a class="footer-mobile-download-button" href="#"><svg width="26" height="30" viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Apple Icon"><path d="M25.08 9.85c-2.27 1.6-3.4 3.54-3.4 5.8 0 2.7 1.4 4.78 4.2 6.23a16.78 16.78 0 0 1-3.27 5.7C21.18 29.19 19.88 30 18.7 30c-.56 0-1.32-.18-2.28-.55l-.46-.18a7.02 7.02 0 0 0-2.5-.55c-.68 0-1.43.15-2.25.43l-.58.21-.73.3a4.69 4.69 0 0 1-1.74.34c-1.37 0-2.9-1.14-4.56-3.4C1.2 23.33 0 19.8 0 15.95c0-2.73.75-4.92 2.25-6.59a7.61 7.61 0 0 1 5.95-2.5c.92 0 1.78.17 2.58.5l.55.23.58.24c.52.22.94.33 1.25.33.41 0 .86-.1 1.36-.29l.75-.3.57-.2c.9-.33 1.9-.5 2.99-.5a7.6 7.6 0 0 1 6.25 2.97zM18.95 0a6.3 6.3 0 0 1-1.83 5.32 5.88 5.88 0 0 1-4.36 1.94 7.47 7.47 0 0 1-.07-.83c0-1.46.58-2.83 1.74-4.11A6.63 6.63 0 0 1 18.95 0z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">App Store</div></a>
+     <a class="footer-mobile-download-button" href="#"><svg width="27" height="30" viewBox="0 0 27 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Google Play Icon"><path d="M.22.88L14.34 15 .22 29.12a2.53 2.53 0 0 1-.1-.7V1.58c0-.26.04-.5.1-.7zm25.75 12.9c.61.35.96.8.96 1.22 0 .43-.35.88-.96 1.23l-5.54 3.14L16.06 15l4.37-4.37 5.54 3.15zm-24.9 16.2L15.2 15.87l4.14 4.13L2.3 29.67c-.46.26-.88.36-1.23.32zm18.27-19.97l-4.14 4.13L1.07.01A2 2 0 0 1 2.3.33l17.04 9.68z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">Google Play</div></a>
+   </div>
+   <div class="col-ld-4 col-md-4 col-sm-4"></div>
+ </div>
+
+<div *ngIf="recomendaciones" class="serviceing_title" style="width:100%; background-color:white" >
+<h2>{{LoNuevo}}</h2>
+</div>
+<p></p>
+<div class="row" >
+<div *ngIf="recomendaciones" class="col-md-12 menuItem " style="background-color:white;  ">
+<ul style="background-color:white; margin-bottom:0px; text-align:left">
+  <li *ngFor="let locales  of recomendaciones" class="col-sm-6 col-md-6"   style="list-style-type: none;  border: 1px solid #eaebeb;
+  border-radius: 3px;
+  padding: 15px;
+  background: #fafaf8;
+  width: 100%;">
+  <a [routerLink]="['/menu/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">
+    <table style="width:100%">
+      <tr><td style="width:14%" ><div *ngFor="let imagenLoc of locales.id_Imgs"><div *ngIf="imagenLoc.tipo==2">  <img [src]="imagenLoc.Nombre" style="width:100%"></div></div></td>
+        <td style="width:2%" ></td>
+        <td style="width:74%"><table><tr><td>
+  <span><b>{{locales.Nombre}}</b></span>
+</td>
+</tr>
+<tr><td>
+<div *ngIf="locales.tipo==1">
+<i class="fa fa-home" ></i>&nbsp;&nbsp;<span style="font-size:x-small" >Antojitos / Tacos /Fonda</span>
+</div>
+  <div *ngIf="locales.tipo==2">
+<i class="fa fa-beer" ></i>&nbsp;<span style="font-size:x-small" >Bar/Antro</span>
+</div>
+<div *ngIf="locales.tipo==3">
+<i class="fa fa-bitbucket" ></i>&nbsp;<span style="font-size:x-small" >Comida Rapida</span>
+</div>
+<div *ngIf="locales.tipo==4">
+<i class="fa fa-coffee" ></i>&nbsp;<span style="font-size:x-small" >Cafeteria/Postres</span>
+</div>
+<div *ngIf="locales.tipo==5">
+<i class="fa fa-truck" ></i>&nbsp;<span style="font-size:x-small" >Food Truck /Snack comercial</span>
+</div>
+<div *ngIf="locales.tipo==6">
+<i class="fa fa-home" *ngIf="locales.tipo==6"></i>&nbsp;<span style="font-size:x-small" *ngIf="locales.tipo==6">Pizzeria</span>
+</div>
+<div *ngIf="locales.tipo==7">
+<i class="fa fa-cutlery" ></i>&nbsp;<span style="font-size:x-small" >Restaurante</span>
+</div>
+</td></tr>
+<tr>
+            <td><div *ngIf="locales.lat!=''">
+<a [routerLink]="['/mapa/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">Ver en el mapa</a>
+              <!--<p><a href="">Mas informaci</a></p>-->
+</div></td>
+          </tr>
+</table>
+  </td>
+<td style="width:10%"><i class="fa fa-arrow-right" aria-hidden="true" title="Ir al Establecimiento"></i></td></tr>
+</table>
+</a>
+</li>
+</ul>
+</div>
+</div>
+
+
+ <section id="serviceing">
+     <div class="container">
+<div class="col-lg-12 col-md-12 col-sm-12">
+      <div class="serviceing_area">
+        <div class="serviceing_title">
+          <hr>
+          <h2>OrdenoFacil </h2>
+            <p>La mejor forma de atenderte</p>
+        </div>
+        <ul class="serviceing_nav">
+          <li>
+            <a class="serviceing_icon" href="#"><i class="fa fa-cutlery"></i></a>
+            <h2>¿Que es OrdenoFacil?</h2>
+            <p>OrdenoFacil tiene la mision de atenderte de la manera mas rapida y eficaz posible, ademas de ofrecerte toda la informacion de tus lugares preferidos. podras buscar lugares o recomendaciones de donde comer o donde encontrar cualquier platillo. </p>
+          <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+          </li>
+         <li>
+            <a class="serviceing_icon" href="#"><i class="fa fa-mobile"></i></a>
+            <h2>Facil de usar</h2>
+            <p>A través de OrdenoFacil, tu puedes levantar tu orden, solicitar a domicilio, reservar e incluso pagar todo desde tu telefono inteligente, como? facil solo escanea el codigo QR o inserta el codigo en un navegador web, que se encuentra en cada local y listo tendras toda la informacion de ese local.  </p>
+          <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+          </li>
+          <li>
+            <a class="serviceing_icon" href="#"><i class="fa fa-bolt"></i></a>
+            <h2>Ventajas</h2>
+            <p>Si registras un usuario o descargas la aplicacion de OrdenoFacil, puedes enterarte de las mejores promociones o ganar grandes descuentos antes que nadie. ademas de que en todo momento, .</p>
+          <!--  <a class="read_more" href="#">leer mas<i class="fa fa-long-arrow-right"></i></a>-->
+          </li>
+        </ul>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+
+    </div>
+
+<footer id="footer">
+      <!-- Start footer top area -->
+      <div class="footer_top">
+        <div class="container">
+          <div class="row">
+            <div class="col-ld-4  col-md-4 col-sm-4">
+              <div class="single_footer_widget">
+                  <h3>Ordeno <span style="color:#37c6f5">Facil</span></h3>
+
+                  <a class="footer-mobile-download-button" href="#"><svg width="26" height="30" viewBox="0 0 26 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Apple Icon"><path d="M25.08 9.85c-2.27 1.6-3.4 3.54-3.4 5.8 0 2.7 1.4 4.78 4.2 6.23a16.78 16.78 0 0 1-3.27 5.7C21.18 29.19 19.88 30 18.7 30c-.56 0-1.32-.18-2.28-.55l-.46-.18a7.02 7.02 0 0 0-2.5-.55c-.68 0-1.43.15-2.25.43l-.58.21-.73.3a4.69 4.69 0 0 1-1.74.34c-1.37 0-2.9-1.14-4.56-3.4C1.2 23.33 0 19.8 0 15.95c0-2.73.75-4.92 2.25-6.59a7.61 7.61 0 0 1 5.95-2.5c.92 0 1.78.17 2.58.5l.55.23.58.24c.52.22.94.33 1.25.33.41 0 .86-.1 1.36-.29l.75-.3.57-.2c.9-.33 1.9-.5 2.99-.5a7.6 7.6 0 0 1 6.25 2.97zM18.95 0a6.3 6.3 0 0 1-1.83 5.32 5.88 5.88 0 0 1-4.36 1.94 7.47 7.47 0 0 1-.07-.83c0-1.46.58-2.83 1.74-4.11A6.63 6.63 0 0 1 18.95 0z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">App Store</div></a>
+                  <a class="footer-mobile-download-button" href="#"><svg width="27" height="30" viewBox="0 0 27 30" xmlns="http://www.w3.org/2000/svg" class="footer-mobile-download-button_icon" aria-label="Google Play Icon"><path d="M.22.88L14.34 15 .22 29.12a2.53 2.53 0 0 1-.1-.7V1.58c0-.26.04-.5.1-.7zm25.75 12.9c.61.35.96.8.96 1.22 0 .43-.35.88-.96 1.23l-5.54 3.14L16.06 15l4.37-4.37 5.54 3.15zm-24.9 16.2L15.2 15.87l4.14 4.13L2.3 29.67c-.46.26-.88.36-1.23.32zm18.27-19.97l-4.14 4.13L1.07.01A2 2 0 0 1 2.3.33l17.04 9.68z" fill-rule="evenodd"></path></svg><div class="footer-mobile-download-button_text">Google Play</div></a>
+              </div>
+            </div>
+
+            <div class="col-ld-4  col-md-4 col-sm-4">
+              <div class="single_footer_widget">
+                <h3>Redes Sociales</h3>
+                <ul class="footer_social">
+                  <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Facebook" class="soc_tooltip" href="https://www.facebook.com/OrdenoFacil/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                  <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Twitter" class="soc_tooltip"  href="#"><i class="fa fa-twitter" target="_blank"></i></a></li>
+                  <li style="list-style-type: none;"><a data-toggle="tooltip" data-placement="top" title="Youtube" class="soc_tooltip"  href="#"><i class="fa fa-youtube" target="_blank"></i></a></li>
+                </ul>
+              </div>
+            </div>
+              <div class="col-ld-4  col-md-4 col-sm-4">
+              <div class="single_footer_widget">
+                <h3>LInks</h3>
+                <ul class="footer_widget_nav">
+                  <li style="list-style-type: none;"><a href="#" target="_blank">saber mas de OrdenoFacil</a></li>
+                  <li style="list-style-type: none;"><a href="#" target="_blank">Terminos y Condiciones</a></li>
+                  <li style="list-style-type: none;"><a href="#" target="_blank">Politicas y privacidad</a></li>
+                  <li style="list-style-type: none;"><a href="http://ordenofacil.com/Contacto.aspx" target="_blank">Contacto</a></li>
+                  <li style="list-style-type: none;"><a href="#" target="_blank">FAQ</a></li>
+                </ul>
+              </div>
+            </div>
+          <div class="col-md-8"> <span style="font-size:small">Copyright OrdenoFacil.com 2017. </span> </div>
+          </div>
+        </div>
+      </div>
+
+    </footer>
+
+
+
+</body>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+
+<script src="../../assets/js/jquery.js"></script>
+<script type="text/javascript" src="../../../../assets/js/modernizr.custom.js"></script>
+<script type="text/javascript" src="../../../../assets/bootstrap/bootstrap.min.js"></script>
+<script type="text/javascript" src="../../../../assets/js/jquery.easing.1.3.js"></script>
+<script type="text/javascript" src="../../../../assets/js/smoothscroll.js"></script>
+<script type="text/javascript" src="../../../../assets/js/custom-scripts.js"></script>
+
+
+
+</html>

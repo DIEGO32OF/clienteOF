@@ -2,15 +2,15 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title>Administra tus comandas</title>
-    <link href="http://ordenofacil.com/Dashboard/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="http://ordenofacil.com/Dashboard/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <!--<link href="http://ordenofacil.com/Dashboard/vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <link href="http://ordenofacil.com/Dashboard/vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">-->
 
     <!--<link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
     <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">-->
     <!-- Custom Theme Style -->
-    <link href="http://ordenofacil.com/Dashboard/build/css/custom.min.css" rel="stylesheet">
+    <!--<link href="http://ordenofacil.com/Dashboard/build/css/custom.min.css" rel="stylesheet">-->
 </head>
 <body>
 
@@ -18,7 +18,7 @@
     <script src="HTTPS://cdn.socket.io/socket.io-1.2.0.js"></script>
     <script src="https://code.jquery.com/jquery-1.11.1.js"></script>
 
-        <div class="right_col" role="main">
+        <div class="right_col" role="main" style="padding:20px">
         <div class="">
             <div class="page-title">
                 <div class="title_left">
@@ -45,6 +45,10 @@
                         La Cuenta</a>
                       </button>
 
+                      <button type="button" id="btnOrden" class="btn btn-primary"   >    <a [routerLink]="[locaOrdenar]" style="color: inherit; ">
+                        Levantar Orden</a>
+                      </button>
+
                         <div class="clearfix"></div>
                     </div>
                     <div class="x_content">
@@ -56,6 +60,7 @@
                                     <option value="4">Comandas terminadas en cocina</option>
 
                                   </select>-->
+                              <span id="mesajeTOk" style="color:red"><b>{{myTokenMesaje}}</b></span>
   </p>
                                   <div *ngFor="let CallMese of order">
 
@@ -75,47 +80,60 @@
 
                                         <div  *ngFor="let Comanda of final_data  " >
                                           <div *ngIf="ordenalo.id==Comanda.codigo && ordenalo.fecha==Comanda.fecha">
-<!--{'alert alert-success alert-dismissible fade in':!Comanda.yatardo,'alert alert-warning alert-dismissible fade in':Comanda.yatardo}-->
+                                            <!--{'alert alert-success alert-dismissible fade in':!Comanda.yatardo,'alert alert-warning alert-dismissible fade in':Comanda.yatardo}-->
+                                            
+                                            <!-- comandas terminadas en cocina -->
+
+                                            <div *ngIf="Comanda.Estatus=='4' && Comanda.Estatus!= undefined " class="alert alert-success alert-dismissible fade in" role="alert">
+                                              <div class="alert alert-info alert-dismissible fade in" role="alert">
+                                                <span style="font-size:x-large" *ngIf="Comanda.mesa!=undefined"><strong> Mesa: {{Comanda.mesa}} - </strong></span>   <span style="font-size:x-large"><strong>  Codigo: {{Comanda.codigo}}</strong></span>
+                                                <button type="button" class="btn btn-primary" (click)="declinComand(Comanda)">finalizar entrega</button><br />
+                                                Terminado en cocina: {{Comanda.FechaEntregado}}
+                                                <span><strong> Total:${{getSum(Comanda.codigo)}}  </strong></span> <marquee *ngIf="Comanda.Allevar"><strong>Esta orden es para llevar</strong></marquee>
+
+                                              </div>
+
+                                              <div class="alert alert-info alert-dismissible fade in" *ngIf="Comanda.snap[0].Mesa!=undefined && Comanda.snap[0].Mesa==0 &&  Comanda.servicioDom!= undefined" role="alert" style="cursor:pointer" data-toggle="collapse" [attr.data-target]="'#'+Comanda.servicioDom[0]._id">
+                                                <table style="width:100%"><tr><td style="width:93%">  <span style="font-size:medium"><strong>  Esta orden es para entrega a domicilio</strong></span></td><td style="width:7%; text-align:right"><i class="fa fa-plus" style="color:black"></i></td></tr></table>
+                                                <div [id]="Comanda.servicioDom[0]._id" class="collapse">
+                                                  A nombre de: {{Comanda.servicioDom[0].Nombre}}<br />
+                                                  Correo: {{Comanda.servicioDom[0].Correo}} &nbsp;&nbsp;&nbsp; Telefono:{{Comanda.servicioDom[0].Telefono}}<br />
+                                                  Dirección: {{Comanda.servicioDom[0].Direccion}}
+                                                </div>
+                                              </div>
+
+                                              <div class="input-group" *ngFor="let plato of Comanda.snap">
+                                                <strong *ngIf="plato.Estatus!='0'&& plato.Estatus!='1' && plato.Estatus!='3'&& plato.Estatus!='6' ">
+                                                  <span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  </span>
+                                                  <br *ngIf="plato.plus>0" /><span *ngIf="plato.plus>0"><i class="fa fa-plus"></i>&nbsp;{{plato.plus}}</span>
+                                                </strong>
+                                                <br><span *ngIf="plato.Cantidad && (plato.Estatus=='2'|| plato.Estatus=='5'|| plato.Estatus=='8')">Precio: ${{plato.costo}}</span>
+                                                <strong *ngIf="plato.Estatus=='0'&& plato.Estatus=='1' "><span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  Aun Preparando </span></strong>
+                                                <div class="input-group-btn">
+                                                  <span style="font-size:medium"> </span>
+                                                </div>
+                                              </div>
+
+                                            </div>
 
 
-<!-- comandas terminadas en cocina -->
 
-                                           <div *ngIf="Comanda.Estatus=='4' " class="alert alert-success alert-dismissible fade in" role="alert" >
-                                           <div class="alert alert-info alert-dismissible fade in" role="alert" >
-                                        <span style="font-size:x-large" *ngIf="Comanda.mesa!=undefined"><strong> Mesa: {{Comanda.mesa}} - </strong></span>   <span style="font-size:x-large" ><strong>  Codigo: {{Comanda.codigo}}</strong></span>
-                                           <button type="button" class="btn btn-primary" (click)="declinComand(Comanda)" >finalizar entrega</button><br/>
-                                           Terminado en cocina: {{Comanda.FechaEntregado}}
-                                           </div>
-                                           <div class="input-group" *ngFor="let plato of Comanda.snap">
-                                          <strong *ngIf="plato.Estatus!='0'&& plato.Estatus!='1' && plato.Estatus!='3'&& plato.Estatus!='6' "><span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  </span></strong><br><span *ngIf="plato.Cantidad && plato.Estatus=='2'">Precio: ${{plato.precio}}</span>
-                                          <strong *ngIf="plato.Estatus=='0'&& plato.Estatus=='1' "><span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  Aun Preparando </span></strong>
-                                          <div class="input-group-btn" >
-                                          <span style="font-size:medium"> </span></div>
+                                            <!--     <div *ngIf="!Comanda.iscode && Comanda.Estatus!='4'" class="alert alert-danger alert-dismissible fade in" role="alert" >
+          <div class="alert alert-info alert-dismissible fade in" role="alert" >
+          <span style="font-size:x-large" ><strong>  Nombre: {{Comanda.codigo}}, Por confirmar  </strong></span>&nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-primary" (click)="ConfirmOrder(Comanda)" >Confirmar</button>
+          <button type="button" class="btn btn-primary" (click)="declinComand(Comanda)" >Declinar</button><br/>
+          </div>
+          <div class="input-group" *ngFor="let plato of Comanda.snap">
+    <strong><span style="font-size:large">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  </span></strong>
+    <div class="input-group-btn" >
+    <span style="font-size:medium"> </span></div>
+    </div>
+
+  </div> -->
+                                            <!--termina comandas entregadas en cocina-->
+                                            <!-- hay que meter la seccion en ver consumo de mesa o codigo-->
+
                                           </div>
-
-                                          </div>
-
-
-
-                                        <!--     <div *ngIf="!Comanda.iscode && Comanda.Estatus!='4'" class="alert alert-danger alert-dismissible fade in" role="alert" >
-                                             <div class="alert alert-info alert-dismissible fade in" role="alert" >
-                                             <span style="font-size:x-large" ><strong>  Nombre: {{Comanda.codigo}}, Por confirmar  </strong></span>&nbsp;&nbsp;&nbsp; <button type="button" class="btn btn-primary" (click)="ConfirmOrder(Comanda)" >Confirmar</button>
-                                             <button type="button" class="btn btn-primary" (click)="declinComand(Comanda)" >Declinar</button><br/>
-                                             </div>
-                                             <div class="input-group" *ngFor="let plato of Comanda.snap">
-                                       <strong><span style="font-size:large">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  </span></strong>
-                                       <div class="input-group-btn" >
-                                       <span style="font-size:medium"> </span></div>
-                                       </div>
-
-                                     </div> -->
-
-
-<!--termina comandas entregadas en cocina-->
-
-<!-- hay que meter la seccion en ver consumo de mesa o codigo-->
-
-</div>
                                         </div>
                                         </div>
                                         </div>
@@ -133,10 +151,10 @@
 
 
     <!-- jQuery -->
-    <script src="http://ordenofacil.com/Dashboard/vendors/jquery/dist/jquery.min.js"></script>
+    <!--<script src="http://ordenofacil.com/Dashboard/vendors/jquery/dist/jquery.min.js"></script>-->
     <!-- Bootstrap -->
-    <script src="http://ordenofacil.com/Dashboard/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="http://ordenofacil.com/Dashboard/build/js/custom.min.js"></script>
+    <!--<script src="http://ordenofacil.com/Dashboard/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="http://ordenofacil.com/Dashboard/build/js/custom.min.js"></script>-->
 <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
         </body>
         </html>

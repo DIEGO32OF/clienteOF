@@ -1,0 +1,13 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\components",
+    "\\src\\app\\components\\Solicitud",
+    "\\src\\app\\models",
+    "\\src\\app\\Services"
+  ],
+  "SelectedNode": "\\src\\app\\components\\Solicitud\\FinishCocina.ts",
+  "PreviewInSolutionExplorer": false
+}

@@ -38,7 +38,7 @@ this.places=[];
  			});}
  		}
  	}
- 	console.log(this.places);
+ 	
 
  }
 
@@ -65,8 +65,12 @@ this.Rutas.navigateByUrl('/menu/'+place+'/'+id);
   return "";
 }
 
- ngOnInit(){
-this.getLugares();
+  ngOnInit() {
+    document.body.scrollTop = 0;
+    $("html, body").delay(100).animate({ scrollTop: 0 }, 1000);
+    
+   this.getLugares();
+
  }
 
   }
