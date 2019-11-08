@@ -147,8 +147,7 @@ export class MapsComponent implements OnInit {
          this._getService.damelosactivos().subscribe(respuesta => {
           
 
-           var arreglo = respuesta.Searching;
-           console.log(arreglo);
+           var arreglo = respuesta.Searching;           
 
           for (var i = 0; i < arreglo.length; i++) {
             if (arreglo[i].lat != undefined) {

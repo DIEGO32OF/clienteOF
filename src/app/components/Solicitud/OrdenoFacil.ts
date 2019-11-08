@@ -67,6 +67,7 @@ public  CalificaEncues: string = '';
   public togoTrue: boolean = false;
   public SepuedePedir: number = 0;
   public serdomPop: any[] = [];
+  public canTogo: boolean;
 
 
 	constructor(private activatedRoute: ActivatedRoute, private _getService:GetService, private _haversineService: HaversineService, private route:Router)
@@ -103,6 +104,7 @@ public  CalificaEncues: string = '';
       this.KeysComapara = [];
       this.Allevar = false;
       this.serdomPop= [];
+      this.canTogo = true;
 
 	}
 
@@ -137,11 +139,19 @@ public  CalificaEncues: string = '';
 				{
                   if (response.local != '') {
 
-
-
                     this.LocalGet = response.local;
                     this.SepuedePedir = response.local.setComand;
-                    
+
+                    if(response.local.servDom != 1){
+                      document.getElementById('servDomicilia').style.visibility = "hidden";
+                     // document.getElementById('setToGoTable').style.visibility = "hidden";
+                     this.canTogo = false;
+                      
+                    }
+
+                    if(response.local.makeReserve != 1 ){
+                      
+                    }
 
                     var micomandante = this.getCookie('MyComand' + local);
                     if (micomandante != '') {
@@ -564,7 +574,12 @@ Calificame(rank){
     //this.CierraAlerts('alertOrderOknoCode');
     var idService = '';
     var NAmetogo = '';
-    var coderTogo = (<HTMLInputElement>document.getElementById('CodeNeeded')).value;
+    var coderTogo ='';
+    if(this.needCode)
+    coderTogo = (<HTMLInputElement>document.getElementById('CodeNeeded')).value;
+    else
+    coderTogo = (<HTMLInputElement>document.getElementById('NameOrder')).value;
+    
     var chek = <HTMLInputElement>document.getElementById('isForllevar');
     if (chek.checked) {
       //aqi hay que jalar los datos si uno no viene poner  Allevar=false
@@ -813,8 +828,8 @@ console.log(error);
                       // aqi checa si esta cerca del local 15 metros
                       let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
                       if (meters > 20) {
-                        $('#alertLejos').show();
-                        return;
+                       /*  $('#alertLejos').show();
+                        return; */
                       }
 
 					var d = new Date();
@@ -1213,9 +1228,8 @@ if(childSnapshot.$value=="4"){
 				
 				this.activatedRoute.params.subscribe((params: Params) => {
 					let local = params['Esta'];
-                  this._getService.creaUser(correo, '', local).subscribe(
-		 response=>{
-			 
+                  this._getService.creaUser(correo, local).subscribe(
+		 response=>{			 
 			 if(response.user!=null){
 				 //usuario logeado cerramos el pop up de login o mandamos un anuncion de bienvenido
                  document.getElementById('divLogin').style.visibility = "hidden";
@@ -1229,7 +1243,9 @@ if(childSnapshot.$value=="4"){
 			 }
 		 });
 		});
-		}
+    }
+    else { // no tiene el formato correcto
+    }
   }
 
 
@@ -1546,7 +1562,6 @@ myModalEvenprom(eventosPromos){
       return;
       
     }
-
 
   }
 

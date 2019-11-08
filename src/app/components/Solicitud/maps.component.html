@@ -31,7 +31,7 @@
 <!-- the component as the initial center of the map: -->
 <div style="height:50px"></div>
 <h3>{{titulo}}</h3>
-                   <button type="button" id="btnNear" class="btn btn-primary" (click)="GetCercas()">
+                   <button type="button" id="btnNear" class="btn btn-info" (click)="GetCercas()">
                      Mostrar Cercanos a mi Ubicación
                    </button>
                    <p></p>
@@ -43,15 +43,17 @@
       <strong>
         <span style="font-size:medium;text-align:center">{{latLong.Nombre}}</span><br /><span style="font-size:small"><p></p>
   - {{latLong.Domicilio}}<br />
-  - Horarios:{{latLong.nom_img}}<br />
+  - Horarios: {{latLong.nom_img}}<br />
          
-  - <b *ngIf="latLong.encuesta==1">Cuenta con Servicio a Domicilio</b><br />
+   <b *ngIf="latLong.servDom==1">- Cuenta con Servicio a Domicilio</b><br />
             
-</span><p></p> <button type="button" id="btnLevantadas" class="btn btn-primary">
+</span><p></p> <button type="button" id="btnLevantadas" class="btn btn-info">
           <a [routerLink]="'/menu/dnE6XnhrjrU_/'+latLong.id_Hashed" style="color: inherit; ">
             Ver Menú
           </a>
-        </button><p></p><button class="btn btn-primary">Hacer Reservación</button>
+        </button><p></p>
+          <button class="btn btn-info">Como llegar?</button>
+        <p></p><button class="btn btn-info">Hacer Reservación</button>
       </strong>
     </agm-info-window>
   </agm-marker>

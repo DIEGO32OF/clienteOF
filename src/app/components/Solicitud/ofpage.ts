@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ɵConsole} from '@angular/core';
 import {Routes, ActivatedRoute, Params} from '@angular/router';
 import {GetService} from '../../Services/primerRequest';
 import {local} from '../../models/local';
@@ -145,10 +145,10 @@ SUscribeNews_CLic(){
           
           this._getService.GetTypeSeaarch(tipo, lugar).subscribe(
             response => {
-              
+              console.log(response.buscados)
             if (response.buscados != undefined) {
               if (response.buscados.length > 0) {
-                this.recomendaciones = null;
+                this.recomendaciones = [];
                   document.getElementById('msjNoVa').style.visibility = "hidden";
                   $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
                   this.LoNuevo = 'Resultados de la Busqueda';

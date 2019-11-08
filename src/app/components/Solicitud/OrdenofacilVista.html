@@ -161,29 +161,27 @@
             <p *ngIf="LocalGet!= undefined">-- {{LocalGet.slogan}} --</p>
             <span *ngIf="LocalGet!= undefined"><b>Nuestros Horarios: {{LocalGet.nom_img}} hrs.</b></span> <br>
             <h2 *ngIf="cerrado">Este local esta cerrado</h2>
-            <span *ngIf="LocalGet!=undefined && LocalGet.nom_ico"><b>Aceptamos Tarjetas <i class="fa fa-cc-mastercard">&nbsp;&nbsp;</i><i class="fa fa-cc-visa"></i></b></span>
-
+            <span *ngIf="LocalGet!=undefined && LocalGet.nom_ico"><b>Aceptamos Tarjetas <i class="fa fa-cc-mastercard">&nbsp;&nbsp;</i><i class="fa fa-cc-visa"></i></b></span><br>
+            <u *ngIf="LocalGet!= undefined" style="cursor:pointer"><a href="https://comandaof.firebaseapp.com/mapa/{{tipoLocal}}/{{idLocalhash}}" >Ver en el mapa</a></u> <br>
           </div>
         </header>
+         
       </div>
-
+    
     </div>
 
-    <!--<div class="tb-cell text-center" id="AvisoCook" style="position:sticky; height:30px; width:100%;
-  left:10px;
-  top:80px;background-color:#c2c4c6">-->
-    <div class="tb-cell text-center" id="AvisoCook" style=" height:30px; width:100%;
+     <div class="tb-cell text-center" id="AvisoCook" style=" height:30px; width:100%;
             left:10px;
             top:80px;background-color:#c2c4c6">
       <span style="color:white">Este Sitio utiliza cookies para su mejor funcionamiento. Haciendo click consientes el uso de esta tecnología en nuestra web.</span><p></p>
-      <button type="button" class="btn btn-primary" (click)="cierraAviso()">Seguir Navegando</button> <a href="Ordenofacil.com/AvisoPriva.html" target="_blank">Más Información</a>
+      <button type="button" class="btn btn-info" (click)="cierraAviso()">Seguir Navegando</button> <a href="Ordenofacil.com/AvisoPriva.html" target="_blank">Más Información</a>
     </div>
     <p></p>
-    <div class="alert alert-info" role="alert" (click)="AbreservDom()">
+    <div class="alert alert-info" role="alert" id="servDomicilia" (click)="AbreservDom()">
       Este establecimiento cuenta con servicio a domicilio
       <a>Ordenar a domicilio</a>
     </div>
-    <div style="height:50px"></div>
+    
     <div style="height:30px; width:100%; left:10px; padding-left: 15px;
             top:250px;">
       <div class="container">
@@ -199,7 +197,7 @@
     <div id="price" name="prce">
       <div class="container">
         <div class="row">
-          <h2 class="centered">Nuestro Menu</h2>
+          <h2 class="centered">Nuestro Menú</h2>
 
         </div>
         <div class="container">
@@ -366,7 +364,7 @@
         <div *ngFor="let especials of LocalGet.id_PaqEspe">
           <div class="container" *ngIf="especials.Typo==2 && especials.Is_Active==1">
             <div class="row">
-              <div class="col-md-4 " (click)="abreCantos(paquet,false)">
+              <div class="col-md-4 " (click)="abreCantos(especials,false)">
                 <!--(click)="myModalPac(especials)">-->
                 <div class="grid overlay">
                   <div>
@@ -698,7 +696,7 @@
             <!--<button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>-->
 
             <table style="width:100%"><tr><td style="width:60%"> <h4>es correcta?  </h4></td><td style="width:40%">total:<span>${{getSum()}}</span></td></tr></table>
-            <table style="width:100%"><tr><td style="width:70%"><h4>Tu orden es  para llevar? </h4></td><td style="width:30%"><input type="checkbox" id="isForllevar" (click)="SetToGo()" /> </td></tr></table><p></p>
+            <table style="width:100%" *ngIf="canTogo"><tr><td style="width:70%"><h4>Tu orden es  para llevar? </h4></td><td style="width:30%"><input type="checkbox" id="isForllevar" (click)="SetToGo()" /> </td></tr></table><p></p>
 
             <div *ngIf="togoTrue">
               <span><b>Datos Necesarios para la entrega</b></span><p></p>
@@ -729,6 +727,7 @@
               <span>A que nombre saldrá tu orden?</span><br>
               <input type="text" class="form-control" id="NameOrder" placeholder="Ingresa tu Nombre y primer letra de tu apellido" />
             </div>
+            <p></p>
 
             <div class="alert alert-success" role="alert" id="alertSecambio" style="display:none">
               <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertSecambio')">&times;</button>
@@ -920,7 +919,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            Ingresa tus datos para
+            <h2 class="centered">Ingresa tus datos para</h2>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       
           </div>

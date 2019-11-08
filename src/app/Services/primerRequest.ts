@@ -280,10 +280,10 @@ getSixLocals(){
 //           return idC;
 //       }
 
-creaUser(mail,pass,local){
+creaUser(mail,local){
 
   let headers = new Headers({ 'content-type': 'application/json' });
-  return this._http.post(this.url + 'newValidateUser/' + mail+'/'+pass+'/'+local, { headers: headers })
+  return this._http.post(this.url + 'newValidateUser/' + mail+'/leter/'+local, { headers: headers })
     .map(res => res.json());
 
 }
