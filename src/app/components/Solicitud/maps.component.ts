@@ -6,6 +6,9 @@ import { MapsAPILoader, MouseEvent } from '@agm/core';
 //import { } from '@types/googlemaps';
 //import { Observable } from 'rxjs/Observable';
 
+
+declare var $:any;
+
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
@@ -119,6 +122,10 @@ export class MapsComponent implements OnInit {
     var myfec = [year, month, day].join('/') + ' ' + hour + ':' + minute;
 
     return myfec;
+  }
+
+  openReserve(idLocal){
+    $('#mymodalReserve').modal('show'); 
   }
 
   GetCercas() {

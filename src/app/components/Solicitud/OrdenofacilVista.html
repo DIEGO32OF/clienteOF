@@ -140,6 +140,7 @@
               <li (click)="llamaMese()" *ngIf="needCode">llamar a un mesero&nbsp;&nbsp;&nbsp;</li>
               <li (click)="abreComanda()">Mi Orden&nbsp;&nbsp;&nbsp;</li>
               <li><a [routerLink]="['/placesVisit']" style="color: inherit;padding:0px">Mis Lugares Visitados&nbsp;&nbsp;&nbsp;</a></li>
+              <li><a (click)="openReserve()" style="color: inherit;padding:0px">Hacer Reservación&nbsp;&nbsp;&nbsp;</a></li>
               <li><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}_redirect" style="color: inherit;padding:0px">OrdenoFacil</a></li>
 
             </ul>
@@ -177,10 +178,20 @@
       <button type="button" class="btn btn-info" (click)="cierraAviso()">Seguir Navegando</button> <a href="Ordenofacil.com/AvisoPriva.html" target="_blank">Más Información</a>
     </div>
     <p></p>
+     
+    <!-- <div class="tb-cell text-center" id="getNotification" style ="width:100%;
+    left:10px;background-color:white;"  >
+    
+<span >Este Sitio utiliza cookies para su mejor funcionamiento. Haciendo click consientes el uso de esta tecnología en nuestra web.</span><p></p>
+<button type="button" class="btn btn-info" (click)="cierraAviso()">Seguir Navegando</button> <a href="Ordenofacil.com/AvisoPriva.html" target="_blank">Más Información</a>
+
+</div> -->
     <div class="alert alert-info" role="alert" id="servDomicilia" (click)="AbreservDom()">
       Este establecimiento cuenta con servicio a domicilio
       <a>Ordenar a domicilio</a>
     </div>
+    <p></p>
+   
     
     <div style="height:30px; width:100%; left:10px; padding-left: 15px;
             top:250px;">
@@ -192,7 +203,7 @@
       </div>
     </div>
 
-    <div style="height:150px;"></div>"
+    <div style="height:150px;"></div>
 
     <div id="price" name="prce">
       <div class="container">
@@ -233,9 +244,6 @@
 
 
                 </ul>
-
-                /u
-                re
 
                 <div class="reservation-link">
 
@@ -793,6 +801,7 @@
       </div>
     </div>
 
+   
 
 
     <div class="modal fade" id="MyModalCallMese" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -955,12 +964,13 @@
 
             </div>
             <p></p>
-            <button type="button" class="btn btn-primary" (click)="guardaDataServDom()">Guardar</button>
-            <p></p>
             <div class="alert alert-success" role="alert" id="alertServDom" style="display:none">
               <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertServDom')">&times;</button>
               Listo ahora puedes elegir tu consumo.
             </div>
+            <p></p>
+            <button type="button" class="btn btn-primary" (click)="guardaDataServDom()">Guardar</button>
+          
 
           </div>
 
@@ -1022,6 +1032,41 @@
         </div>
       </div>
     </div>
+
+
+    <div class="modal fade " id="mymodalReserve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div id="altosi" style="height:100px"></div>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                  
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h5 >Reservaciones</h5>
+              </div>
+              <div class="modal-body">
+                  <b>Ingresa los datos para tu reservación</b><p></p>
+                  <span>A que Nombre quedaria la reseración*</span><br />
+                  <input type="text" class="form-control" id="NameReserv" placeholder="Nombre" /><p></p>
+    
+                  <span>Ingresa tu telefono personal*</span><br />
+                  <input type="number" class="form-control" id="CellReserv" placeholder="numero celular" /><p></p>
+    
+                  <span>Ingresa tu correo personal*</span><br />
+                  <input type="text" class="form-control" id="MailReserve" placeholder="Email" /><p></p>
+
+                  <span>para cuantas personas*</span><br />
+                  <input type="number" class="form-control" id="cuantasReserve" placeholder="# de personas" /><p></p>
+
+                  <span>fecha de tu reservación*</span><br />
+               
+                  <textarea class="form-control" id="comentReserv" name="message" placeholder="Algun Comentario?" rows="5"></textarea><p></p>
+
+                  <button type="button" class="btn btn-info" (click)="saveReservation()">Reservar</button>                  
+
+                </div>
+          </div>
+        </div>
+      </div>
 
 
 

@@ -142,6 +142,18 @@
   <td style="width:10%"><i class="fa fa-arrow-right" aria-hidden="true" title="Ir al Establecimiento"></i></td></tr>
   </table>
 </a>
+<div style="padding-left:45px"   data-toggle="collapse" [attr.data-target]="'#'+locales.IdPlace">
+    <i class="fa fa-plus" style="color:black"></i> Mas información
+  </div>
+<div style="padding-left:45px; background-color: white; border: whitesmoke; border: 1px" [id]="locales.IdPlace" class="collapse">
+{{locales.nombre}}<p></p>
+<a class="btn btn-info" [routerLink]="['/menu/dnE6XnhrjrU_/'+locales.IdPlace]" >Ver menú</a><p></p>
+<a class="btn btn-info" [routerLink]="['/mapa/dnE6XnhrjrU_/'+locales.IdPlace]" >Ver en el mapa</a><p></p>
+<button class="btn btn-info">Hacer reservación</button>
+
+
+</div>
+
   </li>
 </ul>
 </div>

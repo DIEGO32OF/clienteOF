@@ -23,7 +23,7 @@ this.places=[];
 
 
  getLugares(){
- 	var AllPlaces=this.getCookie('OFClient').split('+');
+   var AllPlaces=this.getCookie('OFClient').split('+');   
  	if(this.places.length==0){
  		for(var p=0;p<AllPlaces.length;p++)
  		{

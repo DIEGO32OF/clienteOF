@@ -50,10 +50,10 @@
 
 
    <div style="height:25px" id="altodeltitulo"></div>
-   <div class="alert alert-danger" role="alert" id="alerterrorRec" style="visibility:hidden">
+  <!--  <div class="alert alert-danger" role="alert" id="alerterrorRec" style="visibility:hidden">
      <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alerterrorRec')">&times;</button>
      Lo sentimos, la suscripción de este establecimiento ha caducado
-   </div>
+   </div> -->
    <div class="col-ld-12 col-md-12 col-sm-12"><span style="font-size: 26px; color: #ffffff;"><b>Ordeno</b></span><span style="font-size: 26px; color: #37c6f5;"><b>Facil</b></span> <br><span style="font-size: 15px; color: #ffffff;">La mejor forma de atenderte</span></div>
    <p></p>
    <div class="col-ld-4 col-md-4 col-sm-4"></div>
@@ -75,10 +75,8 @@
        <h3>Buscar por:</h3>
 
        <ul style=" margin-bottom:0px; padding:0px; text-align:left">
-         <li class="col-sm-6 col-md-6" style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;">
-           <input type='radio' id="xNomLugar" name='Porlocal' value='1' checked="checked" (click)="deseleccionaUno(1)" /> Por Nombre de Lugar
-         </li>
-         <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' id="xComilona" name='Pornombre' value='2' (click)="deseleccionaUno(2)" /> Por nombre de comida</li>
+         <li class="col-sm-6 col-md-6" style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' id="xNomLugar" name='Porlocal' value='1' checked="checked" (click)="deseleccionaUno(1)" /> Por Nombre de Lugar</li><div style="height:3px"></div>
+         <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;"><input type='radio' id="xComilona" name='Pornombre' value='2' (click)="deseleccionaUno(2)" /> Por nombre de comida</li><div style="height:3px"></div>
          <li style="list-style-type: none;  border: 1px solid #eaebeb; border-radius: 10px; padding: 15px; background: #fafaf8;width: 100%;" (click)="GetCercas()"><i class="fa fa-map-marker"></i> Cerca de Mi</li>
        </ul>
      </div>
@@ -139,17 +137,37 @@
 <i class="fa fa-cutlery" ></i>&nbsp;<span style="font-size:x-small" >Restaurante</span>
 </div>
 </td></tr>
-<tr>
-            <td><div *ngIf="locales.lat!=''">
-<a [routerLink]="['/mapa/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">Ver en el mapa</a>
-              <!--<p><a href="">Mas informaci</a></p>-->
-</div></td>
+
+<tr>  
+<td>
+
+<a [routerLink]="['/mapa/dnE6XnhrjrU_/'+locales.id_Hashed]" style="color: inherit; ">Ver en el mapa</a>              
+</td>
           </tr>
 </table>
   </td>
 <td style="width:10%"><i class="fa fa-arrow-right" aria-hidden="true" title="Ir al Establecimiento"></i></td></tr>
 </table>
 </a>
+<p></p>
+<div>
+<div style="padding-left:45px"   data-toggle="collapse" [attr.data-target]="'#'+locales.id_Hashed">
+        <i class="fa fa-plus" style="color:black"></i> Mas información
+      </div>
+     
+   
+<div style="padding-left:45px; background-color: white; border: whitesmoke; border: 1px" [id]="locales.id_Hashed" class="collapse">
+  {{locales.Nombre}}<p></p>
+  - {{locales.Domicilio}}<br />
+  - Horarios: {{locales.nom_img}}<br />
+  - Telefono: {{locales.telefono}}<br/>
+   <b *ngIf="locales.servDom == 1">- Cuenta con Servicio a Domicilio</b>
+   <b *ngIf="locales.servDom != 1">- No cuenta con Servicio a Domicilio</b><p></p>
+   <a class="btn btn-info" [routerLink]="['/menu/dnE6XnhrjrU_/'+locales.id_Hashed]" >Ver menú</a><p></p>
+   <a class="btn btn-info" [routerLink]="['/mapa/dnE6XnhrjrU_/'+locales.id_Hashed]" >Ver en el mapa</a><p></p>
+   <button class="btn btn-info" (click)="openReserve(locales.id_Hashed)">Hacer reservación</button>
+</div>
+</div>
 </li>
 </ul>
 </div>
@@ -191,7 +209,39 @@
   </section>
 
 
+  <div class="modal fade " id="mymodalReserve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div id="altosi" style="height:100px"></div>
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+                
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              <h5 >Reservaciones</h5>
+            </div>
+            <div class="modal-body">
+                <b>Ingresa los datos para tu reservación</b><p></p>
+                <span>A que Nombre quedaria la reseración*</span><br />
+                <input type="text" class="form-control" id="NameReserv" placeholder="Nombre" /><p></p>
+  
+                <span>Ingresa tu telefono personal*</span><br />
+                <input type="number" class="form-control" id="CellReserv" placeholder="numero celular" /><p></p>
+  
+                <span>Ingresa tu correo personal*</span><br />
+                <input type="text" class="form-control" id="MailReserve" placeholder="Email" /><p></p>
 
+                <span>para cuantas personas*</span><br />
+                <input type="number" class="form-control" id="MailReserve" placeholder="# de personas" /><p></p>
+
+                <span>fecha de tu reservación*</span><br />
+             
+                <textarea class="form-control" id="comentReserv" name="message" placeholder="Algun Comentario?" rows="5"></textarea><p></p>
+                
+                <button type="button" class="btn btn-info" (click)="saveReservation()">Reservar</button>  <p></p>                
+
+              </div>
+        </div>
+      </div>
+    </div>
 
     </div>
 

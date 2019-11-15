@@ -43,9 +43,9 @@
       <strong>
         <span style="font-size:medium;text-align:center">{{latLong.Nombre}}</span><br /><span style="font-size:small"><p></p>
   - {{latLong.Domicilio}}<br />
-  - Horarios: {{latLong.nom_img}}<br />
-         
-   <b *ngIf="latLong.servDom==1">- Cuenta con Servicio a Domicilio</b><br />
+  - Horarios: {{latLong.nom_img}}<br />          
+  <b *ngIf="latLong.servDom == 1">- Cuenta con Servicio a Domicilio</b>
+  <b *ngIf="latLong.servDom != 1">- No cuenta con Servicio a Domicilio</b><br />
             
 </span><p></p> <button type="button" id="btnLevantadas" class="btn btn-info">
           <a [routerLink]="'/menu/dnE6XnhrjrU_/'+latLong.id_Hashed" style="color: inherit; ">
@@ -53,9 +53,43 @@
           </a>
         </button><p></p>
           <button class="btn btn-info">Como llegar?</button>
-        <p></p><button class="btn btn-info">Hacer Reservación</button>
+        <p></p><button class="btn btn-info" (click)="openReserve(latLong.id_Hashed)">Hacer Reservación</button>
       </strong>
     </agm-info-window>
   </agm-marker>
 </agm-map>
 
+
+<div class="modal fade " id="mymodalReserve" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div id="altosi" style="height:100px"></div>
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+              
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h5 >Reservaciones</h5>
+          </div>
+          <div class="modal-body">
+              <b>Ingresa los datos para tu reservación</b><p></p>
+              <span>A que Nombre quedaria la reseración*</span><br />
+              <input type="text" class="form-control" id="NameReserv" placeholder="Nombre" /><p></p>
+
+              <span>Ingresa tu telefono personal*</span><br />
+              <input type="number" class="form-control" id="CellReserv" placeholder="numero celular" /><p></p>
+
+              <span>Ingresa tu correo personal*</span><br />
+              <input type="text" class="form-control" id="MailReserve" placeholder="Email" /><p></p>
+
+              <span>para cuantas personas*</span><br />
+              <input type="number" class="form-control" id="MailReserve" placeholder="# de personas" /><p></p>
+
+              <span>fecha de tu reservación*</span><br />
+           
+              <textarea class="form-control" id="comentReserv" name="message" placeholder="Algun Comentario?" rows="5"></textarea><p></p>
+              
+              <button type="button" class="btn btn-info" (click)="saveReservation()">Reservar</button>  <p></p>                
+
+            </div>
+      </div>
+    </div>
+  </div>

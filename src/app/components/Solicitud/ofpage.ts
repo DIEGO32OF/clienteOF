@@ -82,8 +82,15 @@ export class ofpageComponent implements OnInit {
               //$("#altodeltitulo").css("height", 100);
               this.idLocalhash = this.idLocalhash.replace('_redirect', '');
             }
+            if(response.firtsSix){
             this.LoNuevo = 'Lo más Nuevo';
             this.recomendaciones = response.firtsSix;
+            } else {
+              
+              this.LoNuevo = 'plaza carso';
+              this.recomendaciones = response.bussinesSquare;
+             // $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
+            }
           });
       }
       else {
@@ -102,6 +109,11 @@ export class ofpageComponent implements OnInit {
     });
     document.body.scrollTop = 0;
 }
+
+openReserve(idLocal){
+  $('#mymodalReserve').modal('show'); 
+}
+
 
 ShowOptins(){
   document.getElementById('OptionsSearch').style.visibility = "visible";
@@ -144,8 +156,7 @@ SUscribeNews_CLic(){
         if (tipo != 0) {
           
           this._getService.GetTypeSeaarch(tipo, lugar).subscribe(
-            response => {
-              console.log(response.buscados)
+            response => {             
             if (response.buscados != undefined) {
               if (response.buscados.length > 0) {
                 this.recomendaciones = [];
@@ -157,14 +168,14 @@ SUscribeNews_CLic(){
                 }
                 else {
                   $('#alertNoResults').show();
-                $("html, body").delay(100).animate({ scrollTop: $('#btnsearch').offset().top }, 2000);
+               // $("html, body").delay(100).animate({ scrollTop: $('#btnsearch').offset().top }, 2000);
                                     
                                   }
 
                                 }
                                 else {
                                   $('#alertNoResults').show();
-              $("html, body").delay(100).animate({ scrollTop: $('#btnsearch').offset().top }, 2000);
+              //$("html, body").delay(100).animate({ scrollTop: $('#btnsearch').offset().top }, 2000);
                                 }
             });
         }

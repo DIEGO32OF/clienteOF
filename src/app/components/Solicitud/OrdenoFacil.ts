@@ -68,6 +68,7 @@ public  CalificaEncues: string = '';
   public SepuedePedir: number = 0;
   public serdomPop: any[] = [];
   public canTogo: boolean;
+  public innerWidth: number
 
 
 	constructor(private activatedRoute: ActivatedRoute, private _getService:GetService, private _haversineService: HaversineService, private route:Router)
@@ -105,10 +106,13 @@ public  CalificaEncues: string = '';
       this.Allevar = false;
       this.serdomPop= [];
       this.canTogo = true;
+      this.innerWidth = 0
 
 	}
 
 	ngOnInit(){
+
+    this.innerWidth = window.innerHeight;
       $('#mymodalenabled').modal('show');
       this.activatedRoute.params.subscribe((params: Params) => {
         let tipo = params['typer'];
@@ -150,7 +154,7 @@ public  CalificaEncues: string = '';
                     }
 
                     if(response.local.makeReserve != 1 ){
-                      
+
                     }
 
                     var micomandante = this.getCookie('MyComand' + local);
@@ -2142,5 +2146,23 @@ getSum():number{
 
 
  }
+
+  openReserve(){
+    $('#mymodalReserve').modal('show'); 
+  }
+
+  saveReservation(){    
+   
+     var nameReserve = (<HTMLInputElement>document.getElementById('NameReserv')).value;
+      var celReserve = (<HTMLInputElement>document.getElementById('CellReserv')).value;
+      var mailReserve = (<HTMLInputElement>document.getElementById('MailReserve')).value;
+      var dateReserve = (<HTMLInputElement>document.getElementById('cuantasReserve')).value;
+      var comentReserve = (<HTMLInputElement>document.getElementById('comentReserv')).value;
+
+    if (nameReserve != '' && celReserve != '' && mailReserve != '' && dateReserve != '' && comentReserve != '') {
+      
+    }
+
+  }
 
 }
