@@ -68,7 +68,8 @@ public  CalificaEncues: string = '';
   public SepuedePedir: number = 0;
   public serdomPop: any[] = [];
   public canTogo: boolean;
-  public innerWidth: number
+  public innerWidth: number;
+  public imgPublicidad : any[] =[];
 
 
 	constructor(private activatedRoute: ActivatedRoute, private _getService:GetService, private _haversineService: HaversineService, private route:Router)
@@ -145,7 +146,7 @@ public  CalificaEncues: string = '';
 
                     this.LocalGet = response.local;
                     this.SepuedePedir = response.local.setComand;
-
+                    this.imgPublicidad = response.imagesArr
                     if(response.local.servDom != 1){
                       document.getElementById('servDomicilia').style.visibility = "hidden";
                      // document.getElementById('setToGoTable').style.visibility = "hidden";
@@ -618,7 +619,7 @@ Calificame(rank){
           this._getService.SaveServicetogo(NAmetogo, this.LocalGet.id_Hashed, MailToGo, celtogo, directoGo, '', '').subscribe(idServ => {
             
             idService = idServ.IdService._id;
-           
+            this.serdomPop = []
           });
         }
 
@@ -635,6 +636,9 @@ Calificame(rank){
       }
     }
     else {
+      if(this.serdomPop.length > 0)
+      this.Allevar = true;
+      else      
       this.Allevar = false;
     }
     
@@ -1450,7 +1454,7 @@ myModalEvenprom(eventosPromos){
 		}
     }
 
-		GetCercas() {
+/* 		GetCercas() {
 	       if (navigator.geolocation) {
 					  this.recomendaciones = [];
 	         navigator.geolocation.getCurrentPosition(position => {
@@ -1463,13 +1467,13 @@ myModalEvenprom(eventosPromos){
 	             longitude: position.coords.longitude
 	           };
 
-	           this._getService.damelosactivos().subscribe(respuesta => {
+	           this._getService.damelosactivos().subscribe(respuesta => { */
 							 //respuesta.forEach((localinescerca) => {
 
-                  var arreglo = respuesta.Searching;
+             //     var arreglo = respuesta.Searching;
                   
                   //var arrayArreglo = new Array();
-                  for (var i = 0; i < arreglo.length; i++) {
+               /*    for (var i = 0; i < arreglo.length; i++) {
                     if (arreglo[i].lat != undefined) {
                       if (arreglo[i].lat != "") {
  	                   let bilbao = {
@@ -1481,29 +1485,29 @@ myModalEvenprom(eventosPromos){
  	                   
  	                   if (meters < 8000) {
                      
-                          this.recomendaciones.push(arreglo[i]);
+                          this.recomendaciones.push(arreglo[i]); */
                          // arrayArreglo.push(arreglo[i]);
- 	                   }
+ 	                /*    }
  	                 }
  	               }
-                  }//);
-									if (this.recomendaciones.length > 0) {
+                  } *///);
+								/* 	if (this.recomendaciones.length > 0) {
 	                    $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
 	                    this.LoNuevo = 'Resultados de la Busqueda';
 	                  }
 	                  else
-	                    $('#alertNoResults').show();
+	                    $('#alertNoResults').show(); */
                   //this.recomendaciones = this.recomendaciones2;
- 	           });
+ 	         //  });
 	           // va x todas las lats y va comparando quien si quien no y sacas un listado
 	             //let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
-	         });
-	       }
+	      //   });
+	    //   }
 	       //obtiene los cercanos
 	       //if (typeof navigator.geolocation == 'object') {
 	       //  navigator.geolocation.getCurrentPosition(this.mostrarUbicacion);
 	       //}
-	     }
+	    // }
 
 	    ///var latLnCurrency = '';
 
@@ -1977,6 +1981,14 @@ abreComanda()
   $('#MyModalPedido').modal('show');
   if (this.SepuedePedir == 1)
   document.getElementById('btnOrderCo').style.visibility = "visible";
+
+  if(this.serdomPop.length > 0)
+  {
+    this.togoTrue = true;
+    this.canTogo = true;
+
+  }
+  
 
 }
 

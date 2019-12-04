@@ -99,9 +99,7 @@ export class ofpageComponent implements OnInit {
           response => {
 
             
-              $('#alerterrorRec').hide();
-              //$("#altodeltitulo").css("height", 100);
-            
+              $('#alerterrorRec').hide();                          
             this.LoNuevo = 'Lo más Nuevo';
             this.recomendaciones = response.firtsSix;
           });
@@ -189,64 +187,32 @@ SUscribeNews_CLic(){
 
   GetCercas() {
        if (navigator.geolocation) {
-          this.recomendaciones = [];
+         
          navigator.geolocation.getCurrentPosition(position => {
            this.location = position.coords;
 
-           var latLnCurrency = position.coords.latitude + ',' + position.coords.longitude;
-           
-           let actual = {
-             latitude: position.coords.latitude,
-             longitude: position.coords.longitude
-           };
-
-           this._getService.damelosactivos().subscribe(respuesta => {
-             //respuesta.forEach((localinescerca) => {
-
-                var arreglo = respuesta.Searching;
-                
-                //var arrayArreglo = new Array();
-                for (var i = 0; i < arreglo.length; i++) {
-                  if (arreglo[i].lat != undefined) {
-                    if (arreglo[i].lat != "") {
-                   let bilbao = {
-                        latitude: arreglo[i].lat,
-                        longitude: arreglo[i].lng
-                   };
-                   let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
-
-                   
-                   if (meters < 8000) {
-                        
-                        this.recomendaciones.push(arreglo[i]);
-                       // arrayArreglo.push(arreglo[i]);
-                   }
-                 }
-               }
-                }//);
+           this._getService.damelosactivos(position.coords.latitude, position.coords.longitude ).subscribe(respuesta => {
+            
+                if(respuesta.Locals){
+                  this.recomendaciones = [];
+                  console.log(respuesta.Locals)
+                  this.recomendaciones = respuesta.Locals;
+                }
+              
                 if (this.recomendaciones.length > 0) {  
                     $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
                     this.LoNuevo = 'Resultados de la Busqueda';
                   }
                   else
                     $('#alertNoResults').show();
-
            });
-
          });
        }
-
      }
 
 
  mostrarUbicacion(p) {
    var latLnCurrency = p.coords.latitude + ',' + p.coords.longitude;
-   
-   //let actual = {
-   //  latitude: latLnCurrency.Coordinates.latitude,
-   //  longitude: datos.lng
-   //};
-   //// va x todas las lats y va comparando quien si quien no y sacas un listado
-   //let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
+
     }
 }

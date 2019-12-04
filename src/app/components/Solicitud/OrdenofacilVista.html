@@ -140,7 +140,8 @@
               <li (click)="llamaMese()" *ngIf="needCode">llamar a un mesero&nbsp;&nbsp;&nbsp;</li>
               <li (click)="abreComanda()">Mi Orden&nbsp;&nbsp;&nbsp;</li>
               <li><a [routerLink]="['/placesVisit']" style="color: inherit;padding:0px">Mis Lugares Visitados&nbsp;&nbsp;&nbsp;</a></li>
-              <li><a (click)="openReserve()" style="color: inherit;padding:0px">Hacer Reservación&nbsp;&nbsp;&nbsp;</a></li>
+              <li *ngIf="LocalGet!= undefined"><a (click)="openReserve()" style="color: inherit;padding:0px">Hacer Reservación en {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
+              <li *ngIf="LocalGet!= undefined"><a (click)="openReserve()" style="color: inherit;padding:0px">Recibir ofertas del {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
               <li><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}_redirect" style="color: inherit;padding:0px">OrdenoFacil</a></li>
 
             </ul>
@@ -198,7 +199,7 @@
       <div class="container">
         <div class="row">
           <span style="font-size:small">Publicidad</span>
-          <img src="http://ordenofacil.com/logos/corona.jpg" style="width:100%;" />
+          <img *ngIf="imgPublicidad != undefined" src={{imgPublicidad[0]}} style="width:100%;" />
         </div>
       </div>
     </div>
@@ -558,7 +559,7 @@
       <div class="container">
         <div class="row">
           <span style="font-size:small">Publicidad</span>
-          <img src="http://ordenofacil.com/logos/coca.jpg" style="width:100%;" />
+          <img *ngIf="imgPublicidad != undefined" src={{imgPublicidad[1]}} style="width:100%;" />
         </div>
       </div>
     </div>
@@ -709,16 +710,16 @@
             <div *ngIf="togoTrue">
               <span><b>Datos Necesarios para la entrega</b></span><p></p>
               <span>Ingresa tu Nombre*</span><br />
-              <input type="text" class="form-control" id="Nametogo" placeholder="Nombre" /><p></p>
+              <input type="text" class="form-control" id="Nametogo" placeholder="Nombre" [value]="serdomPop[0].Nombre" /><p></p>
 
               <span>Ingresa tu telefono personal*</span><br />
-              <input type="number" class="form-control" id="CeltoGo" placeholder="numero celular" /><p></p>
+              <input type="number" class="form-control" id="CeltoGo" placeholder="numero celular" [value]="serdomPop[0].Cel" /><p></p>
 
               <span>Ingresa tu correo personal*</span><br />
-              <input type="text" class="form-control" id="MailToGo" placeholder="Email" /><p></p>
+              <input type="text" class="form-control" id="MailToGo" placeholder="Email" [value]="serdomPop[0].Mail"/><p></p>
 
               <span>Ingresa la direcci&oacute;n de entrega*</span><br />
-              <textarea class="form-control" id="directoGo" placeholder="Direccion de entrega"></textarea>
+              <textarea class="form-control" id="directoGo" placeholder="Direccion de entrega" [value]="serdomPop[0].Direccion"></textarea>
 
               <p></p><h5>Ó con un codigo tu orden será para llevar</h5>
             </div>
