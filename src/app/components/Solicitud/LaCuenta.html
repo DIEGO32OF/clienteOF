@@ -43,6 +43,10 @@
                         Levantar Orden</a>
                       </button>
 
+                      <button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[reservation]" style="color: inherit; ">
+                        Reservaciones ({{CountComandaC}})</a>
+                      </button>
+
 
                         <div class="clearfix"></div>
                     </div>
@@ -89,7 +93,7 @@
                                   <div class="alert alert-info alert-dismissible fade in" role="alert">
                                     <span style="font-size:x-large" *ngIf="Comanda.mesa!=undefined"><strong> Mesa: {{Comanda.mesa}} - </strong></span> <span style="font-size:x-large"><strong>  Codigo: {{Comanda.codigoStr}}</strong></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                     <!--<span style="font-size:x-large" *ngIf="ordenalo.Mesa!=undefined"><strong>  Mesa: {{ordenalo.Mesa}}</strong></span>-->&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                    <button type="button" class="btn btn-primary" (click)="PayComand(Comanda)" [id]="" *ngIf="Comanda.Estatus=='4' && neddcode">Cobrar</button>
+                                    <button type="button" class="btn btn-primary" (click)="PayComand(Comanda)" [id]="Comanda.codigoStr+'btn_'" *ngIf="Comanda.Estatus=='4' && neddcode">Cobrar</button>
                                     <button type="button" class="btn btn-primary" (click)="Imprime(Comanda, Comanda.codigoStr+'_Ticket')">Ticket</button>
                                     <br />
                                     Terminado en cocina: {{Comanda.fecha_Entrega}}

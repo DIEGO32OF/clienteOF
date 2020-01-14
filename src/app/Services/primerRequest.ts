@@ -24,13 +24,15 @@ this.url=GLOBAL.url;
 
 
 
+
   damelosactivos(lat, lng) {
     let params=JSON.stringify({lat:lat, lng:lng});
     let headers = new Headers({ 'content-type': 'application/json' });
     return this._http.post(this.url + 'SearchNear', params,   { headers: headers })
       .map(res => res.json());
 
-  }
+
+}
 
  
 
@@ -66,6 +68,14 @@ getCUenta(local,codigo, fecha){
   let headers=new Headers({'content-type':'application/json'});
 	return this._http.post(this.url+'myCount', params, {headers:headers})
 	            .map(res=>res.json());
+}
+
+setDishDelivered(local, codigo, id ){
+  var d = new Date();
+  let date=this.formatoDate(d);
+
+   this.afDB.object(local+'/'+codigo+'/'+id)
+  .update({Estatus:"4", comienzo:date, plus:0});
 }
 
 setComandaEntregada(local,codigo,comanda, id){

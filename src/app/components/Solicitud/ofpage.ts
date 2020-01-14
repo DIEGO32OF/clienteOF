@@ -138,6 +138,7 @@ SUscribeNews_CLic(){
       var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
 
       if (!format.test(lugar)) {
+        $('#alertNoResults').hide();
         var tipo = 0;
         var xNomlugar = (<HTMLInputElement>document.getElementById('xNomLugar'));
         if (xNomlugar.checked) {
@@ -186,6 +187,7 @@ SUscribeNews_CLic(){
   }
 
   GetCercas() {
+
        if (navigator.geolocation) {
          
          navigator.geolocation.getCurrentPosition(position => {
@@ -209,6 +211,7 @@ SUscribeNews_CLic(){
          });
        }
      }
+
 
 
  mostrarUbicacion(p) {

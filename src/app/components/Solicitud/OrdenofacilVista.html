@@ -695,8 +695,8 @@
                 <td>{{pedidos.cantidad}}</td>
                 <td>{{pedidos.Nombre}} {{pedidos.Especificaciones}}</td>
                 <td>${{pedidos.costo}}</td>
-                <td style="text-align:center"><input *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8'" type="checkbox" id="{{pedidos.id}}" (click)="quitarSeleccion(pedidos.id,false)" /> </td>
-                <td style="text-align:left"><input title="Modificar" *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8'" type="checkbox" id="{{pedidos.id}}" (click)="abreCantos(pedidos,true)" /> </td>
+                <td style="text-align:center"><input *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8' && pedidos.Estatus !='4' " type="checkbox" id="{{pedidos.id}}" (click)="quitarSeleccion(pedidos.id,false)" /> </td>
+                <td style="text-align:left"><input title="Modificar" *ngIf="pedidos.Estatus !='2' && pedidos.Estatus !='8' && pedidos.Estatus !='4'" type="checkbox" id="{{pedidos.id}}" (click)="abreCantos(pedidos,true)" /> </td>
 
               </tr>
             </table>
@@ -707,7 +707,7 @@
             <table style="width:100%"><tr><td style="width:60%"> <h4>es correcta?  </h4></td><td style="width:40%">total:<span>${{getSum()}}</span></td></tr></table>
             <table style="width:100%" *ngIf="canTogo"><tr><td style="width:70%"><h4>Tu orden es  para llevar? </h4></td><td style="width:30%"><input type="checkbox" id="isForllevar" (click)="SetToGo()" /> </td></tr></table><p></p>
 
-            <div *ngIf="togoTrue">
+            <div *ngIf="togoTrue && serdomPop.length > 0">
               <span><b>Datos Necesarios para la entrega</b></span><p></p>
               <span>Ingresa tu Nombre*</span><br />
               <input type="text" class="form-control" id="Nametogo" placeholder="Nombre" [value]="serdomPop[0].Nombre" /><p></p>
@@ -720,6 +720,8 @@
 
               <span>Ingresa la direcci&oacute;n de entrega*</span><br />
               <textarea class="form-control" id="directoGo" placeholder="Direccion de entrega" [value]="serdomPop[0].Direccion"></textarea>
+
+
 
               <p></p><h5>Ó con un codigo tu orden será para llevar</h5>
             </div>
@@ -929,7 +931,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h2 class="centered">Ingresa tus datos para</h2>
+            <h4>Servicio a Domicilio </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
       
           </div>
@@ -1060,7 +1062,7 @@
 
                   <span>fecha de tu reservación*</span><br />
                
-                  <textarea class="form-control" id="comentReserv" name="message" placeholder="Algun Comentario?" rows="5"></textarea><p></p>
+                  <textarea class="form-control" id="comentReserv" name="message" placeholder="dd/mm/yyyy hh:mm  Ingresa en este formato la fecha de tu reservacion" rows="5"></textarea><p></p>
 
                   <button type="button" class="btn btn-info" (click)="saveReservation()">Reservar</button>                  
 

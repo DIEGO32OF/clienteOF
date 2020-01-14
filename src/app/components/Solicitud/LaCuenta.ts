@@ -23,6 +23,7 @@ export class LaCuentaComponent implements OnInit {
   locaCuenta:string='';
   locaComanda:string='';
   locaTermino:string='';
+  reservation: string = '';
   CountComandaL:number=0;
   CountFinishL:number=0;
   myTokenMesaje: string = '';
@@ -63,6 +64,7 @@ export class LaCuentaComponent implements OnInit {
             this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
             this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
             this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
+            this.reservation = '/Reservaciones/dnE6XnhrjrU_/' + local;
 
             var myfec = new Date();
             var fecha = this.formatoDate(myfec, '');
@@ -279,7 +281,8 @@ getSum(code):number{
       
           var popupWinindow = window.open('', '_blank', 'width=800,height=700,scrollbars=no,menubar=no,toolbar=no,location=no,status=no,titlebar=no');
           popupWinindow.document.open();
-      popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()"><div style="text-align:center"><h2>'+respuestada.local.Nombre+'</h2><hr><span><small>Dirección: '+respuestada.local.Domicilio+'</small></span><h6>'+fecha+'</h6></div><p></p>'+innerContents+'</body></html>');
+      popupWinindow.document.write('<html><head><link rel="stylesheet" type="text/css" href="style.css" /></head><body onload="window.print()"><div style="text-align:center"><h2>'+respuestada.local.Nombre+'</h2><hr><span><small>Dirección: '+respuestada.local.Domicilio+'</small></span><h6>'+fecha+
+      '</h6></div><p></p>'+innerContents+'</body></html>');
           popupWinindow.document.close();
 
         });
@@ -330,7 +333,7 @@ getSum(code):number{
                else {
                //console.log('valida code');
                if (response.coderFound != null) {
-                 (<HTMLInputElement>document.getElementById(comanda.codigoStr)).style.visibility = 'hidden';
+                 (<HTMLInputElement>document.getElementById(comanda.codigoStr+'btn_')).style.visibility = 'hidden';
                  this._getService.payComanda(response.coderFound._id, comanda._id).subscribe(responde => {
 
                    this.Imprime(comanda, comanda.codigoStr + '_Ticket');

@@ -32,10 +32,6 @@
                 <div class="x_panel">
                     <div class="x_title">
 <div class="form-group">
-<button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[locaComanda]" style="color: inherit; ">
-  Comandas Levantadas ({{CountComandaC}})</a>
-</button>
-
 
 <button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[locaTermino]" style="color: inherit; ">
   Comandas terminadas en Cocina ({{CountFinishC}})</a>
@@ -47,6 +43,10 @@
 
 <button type="button" id="btnOrden" class="btn btn-primary"   >    <a [routerLink]="[locaOrdenar]" style="color: inherit; ">
   Levantar Orden</a>
+</button>
+
+<button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[reservation]" style="color: inherit; ">
+  Reservaciones ({{CountComandaC}})</a>
 </button>
 
 </div>
@@ -173,14 +173,15 @@
 
                                                 <strong>
                                                   <span style="font-size:large" *ngIf="plato.Estatus!='3' && plato.Estatus!='6' && plato.Cantidad && ( plato.Estatus!='5' ||plato.comienzo!=undefined)">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}</span>
-                                                  <br *ngIf="plato.plus>0" /><span *ngIf="plato.plus>0"><i class="fa fa-plus"></i>&nbsp;{{plato.plus}}</span>
+                                                  <br *ngIf="plato.plus>0" /><span *ngIf="plato.plus>0"><i class="fa fa-plus"></i>&nbsp;{{plato.plus}}</span> 
                                                 </strong>
                                                 <span *ngIf="plato.Cantidad&& plato.Estatus!='3' && plato.Estatus!='6' && ( plato.Estatus!='5' || plato.comienzo!=undefined)"><br>Precio: ${{plato.costo}}</span>
                                                 <div class="input-group-btn" *ngIf="plato.Estatus!='3' && plato.Estatus!='6' && ( plato.Estatus!='5' || plato.comienzo!=undefined)">
                                                   <button type="button" class="btn btn-primary" *ngIf="(plato.Estatus!='2' && plato.Cantidad && plato.comienzo==undefined && plato.Estatus!='8' && plato.Estatus!='7' )||plato.plus>0" (click)="toWork(Comanda.codigo,plato.$key,Comanda)">Preparar</button>
+                                                  <button type="button" class="btn btn-primary" *ngIf="(plato.Estatus =='2' && plato.Cantidad && plato.comienzo != undefined  )||plato.plus>0" (click)="deliverDish(Comanda, Comanda.codigo, plato.$key)">Entregar</button>
                                                   <button type="button" class="btn btn-primary" *ngIf="(plato.Estatus!='2' && plato.Cantidad && plato.comienzo==undefined && plato.Estatus!='8' && plato.Estatus!='7')||plato.plus>0" (click)="comienzaEditar(Comanda.codigo,plato.$key,plato.Platillo)">Editar</button>
-                                                  <button type="button" class="btn btn-primary" (click)="abreCampo(Comanda.codigo,plato.$key)" *ngIf="plato.Cantidad">Cancelar</button><br>
-
+                                                  <button type="button" class="btn btn-primary" (click)="abreCampo(Comanda.codigo,plato.$key)" *ngIf="plato.Cantidad && plato.Estatus!='4'">Cancelar</button>
+                                                  <button type="button" class="btn btn-primary" *ngIf="plato.Estatus =='4'">Entregado</button><br>
 
                                                 </div>
                                                 <span style="font-size:medium"> </span>

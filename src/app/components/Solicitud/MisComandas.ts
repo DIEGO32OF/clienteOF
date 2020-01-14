@@ -30,6 +30,7 @@ export class ComandasComponent implements OnInit {
   locaCuenta: string = '';
   locaComanda: string = '';
   locaTermino: string = '';
+  reservation: string = '';
   CountComandaC: number = 0;
   CountFinishC: number = 0;
   myTokenMesaje: string = '';
@@ -57,6 +58,7 @@ export class ComandasComponent implements OnInit {
             this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
             this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
             this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
+            this.reservation = '/Reservaciones/dnE6XnhrjrU_/' + local;
 
             this.final_data = [];
             this.Service_dom = [];
@@ -110,9 +112,9 @@ export class ComandasComponent implements OnInit {
                 }
              // });
 
-              data.forEach((childSnapshot) => {
-
-
+              data.forEach((childSnapshot) => { 
+                
+               
                 if (childSnapshot.Estatus == '4') {
 
                   this.CountFinishC += +1;
@@ -224,6 +226,10 @@ export class ComandasComponent implements OnInit {
                               }
                               snaper.push(dontWork);
                             }
+                            if(dontWork.Estatus == '4') {
+
+                              this.CountFinishC += +1;
+                            }
                           });
 
                           if (snaper.length > 0) {
@@ -269,9 +275,7 @@ export class ComandasComponent implements OnInit {
                         }
                       }
 
-                      this.final_datas.sort(function (a, b) { return b.fecha - a.fecha });
-                      
-
+                      this.final_datas.sort(function (a, b) { return b.fecha - a.fecha });                      
                     }
                   //});
                   }
@@ -370,13 +374,27 @@ export class ComandasComponent implements OnInit {
   //   });
   // }
 
+  deliverDish(Comanda, codigo, id){    
+    
+    let platillos = Comanda.snap.filter(x=> x.Estatus == '2' || x.Estatus == '')
+
+      this.activatedRoute.params.subscribe((params: Params) => {
+        let tipo = params['typer'];
+        let local = params['Esta'];
+        this._getService.setDishDelivered(local, codigo, id)
+      })  
+  if(platillos.length === 1){        
+    this.EntregaOrden(Comanda)           
+    }
+  }
+
   toWork(Codigo, id, Comanda) {
 
    this.activatedRoute.params.subscribe((params: Params) => {
      let tipo = params['typer'];
      let local = params['Esta'];
      this._getService.BeginWorkPlato(local, Codigo, id);
-
+     //document.getElementById('btnEntrega' + id).style.visibility = "visible";
      Comanda.snap.forEach((toSave) => {
        if (toSave.isconfirm != undefined && toSave.Estatus != '8') {
          var idMongo = localStorage.getItem('ComandaLevantada');
@@ -401,10 +419,12 @@ export class ComandasComponent implements OnInit {
         if (dontWork.Cantidad != undefined) {
 
           snaper.push(dontWork);
+          if (dontWork.Estatus == '4' || dontWork.Estatus == '') {
+              dontWork.Estatus = '2'          
+          }
         }
       });
-      Comanda.snap = snaper;
-      
+      Comanda.snap = snaper;      
       this._getService.setComandaEntregada(local, Comanda.codigo, Comanda, Comanda.snap[0].$key).subscribe(respuesta => {
         if (respuesta.Comandas._id != undefined) {
           
@@ -417,6 +437,8 @@ export class ComandasComponent implements OnInit {
     //if(this.CountComandaC>0)
     //this.CountComandaC=this.CountComandaC-1;
   }
+
+ 
 
   getOthersComand(valorSelected) {
     if (valorSelected == '1')
