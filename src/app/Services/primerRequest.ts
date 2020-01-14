@@ -24,11 +24,13 @@ this.url=GLOBAL.url;
 
 
 
-damelosactivos(lat, lng) {
-  let params=JSON.stringify({lat:lat, lng:lng});
-  let headers = new Headers({ 'content-type': 'application/json' });
-  return this._http.post(this.url + 'SearchNear', params,   { headers: headers })
-    .map(res => res.json());
+
+  damelosactivos(lat, lng) {
+    let params=JSON.stringify({lat:lat, lng:lng});
+    let headers = new Headers({ 'content-type': 'application/json' });
+    return this._http.post(this.url + 'SearchNear', params,   { headers: headers })
+      .map(res => res.json());
+
 
 }
 
@@ -47,7 +49,7 @@ GetTypeSeaarch(tipe_Search, search) {
 
  signUp(tipe_Local, idLocal, timer)
 {
-	//let json=JSON.stringify({typer:'dnE6XnhrjrU=',Esta:'9YiXOJhlzhk='});
+
 	let json=JSON.stringify({typer:tipe_Local,Esta:idLocal, Time:timer});
 	let params=json;//'dnE6XnhrjrU=/9YiXOJhlzhk=';
 	//let headers=new Headers({'Acces-Controll-Allow-Origin':'*','content-type':'application/json','Cache-Control':'No-Cache'});

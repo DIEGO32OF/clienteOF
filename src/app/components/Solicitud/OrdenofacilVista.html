@@ -140,7 +140,8 @@
               <li (click)="llamaMese()" *ngIf="needCode">llamar a un mesero&nbsp;&nbsp;&nbsp;</li>
               <li (click)="abreComanda()">Mi Orden&nbsp;&nbsp;&nbsp;</li>
               <li><a [routerLink]="['/placesVisit']" style="color: inherit;padding:0px">Mis Lugares Visitados&nbsp;&nbsp;&nbsp;</a></li>
-              <li><a (click)="openReserve()" style="color: inherit;padding:0px">Hacer Reservación&nbsp;&nbsp;&nbsp;</a></li>
+              <li *ngIf="LocalGet!= undefined"><a (click)="openReserve()" style="color: inherit;padding:0px">Hacer Reservación en {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
+              <li *ngIf="LocalGet!= undefined"><a (click)="openReserve()" style="color: inherit;padding:0px">Recibir ofertas del {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
               <li><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}_redirect" style="color: inherit;padding:0px">OrdenoFacil</a></li>
 
             </ul>
@@ -198,7 +199,7 @@
       <div class="container">
         <div class="row">
           <span style="font-size:small">Publicidad</span>
-          <img src="http://ordenofacil.com/logos/corona.jpg" style="width:100%;" />
+          <img *ngIf="imgPublicidad != undefined" src={{imgPublicidad[0]}} style="width:100%;" />
         </div>
       </div>
     </div>
@@ -558,7 +559,7 @@
       <div class="container">
         <div class="row">
           <span style="font-size:small">Publicidad</span>
-          <img src="http://ordenofacil.com/logos/coca.jpg" style="width:100%;" />
+          <img *ngIf="imgPublicidad != undefined" src={{imgPublicidad[1]}} style="width:100%;" />
         </div>
       </div>
     </div>
@@ -719,6 +720,7 @@
 
               <span>Ingresa la direcci&oacute;n de entrega*</span><br />
               <textarea class="form-control" id="directoGo" placeholder="Direccion de entrega" [value]="serdomPop[0].Direccion"></textarea>
+
 
 
               <p></p><h5>Ó con un codigo tu orden será para llevar</h5>

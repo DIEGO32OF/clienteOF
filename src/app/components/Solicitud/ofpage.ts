@@ -99,9 +99,7 @@ export class ofpageComponent implements OnInit {
           response => {
 
             
-              $('#alerterrorRec').hide();
-              //$("#altodeltitulo").css("height", 100);
-            
+              $('#alerterrorRec').hide();                          
             this.LoNuevo = 'Lo más Nuevo';
             this.recomendaciones = response.firtsSix;
           });
@@ -189,39 +187,35 @@ SUscribeNews_CLic(){
   }
 
   GetCercas() {
-    if (navigator.geolocation) {
-      
-      navigator.geolocation.getCurrentPosition(position => {
-        this.location = position.coords;
 
-        this._getService.damelosactivos(position.coords.latitude, position.coords.longitude ).subscribe(respuesta => {
+       if (navigator.geolocation) {
          
-             if(respuesta.Locals){
-               this.recomendaciones = [];               
-               this.recomendaciones = respuesta.Locals;
-             }
-           
-             if (this.recomendaciones.length > 0) {  
-              $('#alertNoResults').hide();
-                 $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
-                 this.LoNuevo = 'Resultados de la Busqueda';
-               }
-               else
-                 $('#alertNoResults').show();
-        });
-      });
-    }
-  }
+         navigator.geolocation.getCurrentPosition(position => {
+           this.location = position.coords;
+
+           this._getService.damelosactivos(position.coords.latitude, position.coords.longitude ).subscribe(respuesta => {
+            
+                if(respuesta.Locals){
+                  this.recomendaciones = [];
+                  console.log(respuesta.Locals)
+                  this.recomendaciones = respuesta.Locals;
+                }
+              
+                if (this.recomendaciones.length > 0) {  
+                    $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
+                    this.LoNuevo = 'Resultados de la Busqueda';
+                  }
+                  else
+                    $('#alertNoResults').show();
+           });
+         });
+       }
+     }
+
 
 
  mostrarUbicacion(p) {
    var latLnCurrency = p.coords.latitude + ',' + p.coords.longitude;
-   
-   //let actual = {
-   //  latitude: latLnCurrency.Coordinates.latitude,
-   //  longitude: datos.lng
-   //};
-   //// va x todas las lats y va comparando quien si quien no y sacas un listado
-   //let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
+
     }
 }
