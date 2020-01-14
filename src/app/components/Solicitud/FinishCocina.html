@@ -37,9 +37,9 @@
                       </button>
 
 
-                      <button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[locaTermino]" style="color: inherit; ">
+                   <!--    <button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[locaTermino]" style="color: inherit; ">
                         Comandas terminadas en Cocina ({{CountFinish}})</a>
-                      </button>
+                      </button> -->
 
                       <button type="button" id="btnCuenta" class="btn btn-primary"   >    <a [routerLink]="[locaCuenta]" style="color: inherit; ">
                         La Cuenta</a>
@@ -47,6 +47,9 @@
 
                       <button type="button" id="btnOrden" class="btn btn-primary"   >    <a [routerLink]="[locaOrdenar]" style="color: inherit; ">
                         Levantar Orden</a>
+                      </button>
+                      <button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[reservation]" style="color: inherit; ">
+                        Reservaciones ({{CountComandaC}})</a>
                       </button>
 
                         <div class="clearfix"></div>
@@ -84,10 +87,10 @@
                                             
                                             <!-- comandas terminadas en cocina -->
 
-                                            <div *ngIf="Comanda.Estatus=='4' && Comanda.Estatus!= undefined " class="alert alert-success alert-dismissible fade in" role="alert">
+                                            <div *ngIf="(Comanda.Estatus=='4' || Comanda.unoEntregado) && Comanda.Estatus!= undefined " class="alert alert-success alert-dismissible fade in" role="alert">
                                               <div class="alert alert-info alert-dismissible fade in" role="alert">
                                                 <span style="font-size:x-large" *ngIf="Comanda.mesa!=undefined"><strong> Mesa: {{Comanda.mesa}} - </strong></span>   <span style="font-size:x-large"><strong>  Codigo: {{Comanda.codigo}}</strong></span>
-                                                <button type="button" class="btn btn-primary" (click)="declinComand(Comanda)">finalizar entrega</button><br />
+                                                <button *ngIf="Comanda.unoEntregado == undefined" type="button" class="btn btn-primary" (click)="declinComand(Comanda)">finalizar entrega</button><br />
                                                 Terminado en cocina: {{Comanda.FechaEntregado}}
                                                 <span><strong> Total:${{getSum(Comanda.codigo)}}  </strong></span> <marquee *ngIf="Comanda.Allevar"><strong>Esta orden es para llevar</strong></marquee>
 
@@ -106,9 +109,9 @@
                                                 <strong *ngIf="plato.Estatus!='0'&& plato.Estatus!='1' && plato.Estatus!='3'&& plato.Estatus!='6' ">
                                                   <span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  </span>
                                                   <br *ngIf="plato.plus>0" /><span *ngIf="plato.plus>0"><i class="fa fa-plus"></i>&nbsp;{{plato.plus}}</span>
-                                                </strong>
-                                                <br><span *ngIf="plato.Cantidad && (plato.Estatus=='2'|| plato.Estatus=='5'|| plato.Estatus=='8')">Precio: ${{plato.costo}}</span>
-                                                <strong *ngIf="plato.Estatus=='0'&& plato.Estatus=='1' "><span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  Aun Preparando </span></strong>
+                                                </strong>                                                
+                                                <br><span *ngIf="plato.Cantidad && (plato.Estatus=='2'|| plato.Estatus=='5'|| plato.Estatus=='8')">Precio: ${{plato.costo}}</span>&nbsp;
+                                                <strong *ngIf="plato.Estatus=='0'|| plato.Estatus=='1' "><span style="font-size:large" *ngIf="plato.Cantidad">Cantidad:{{plato.Cantidad}}   {{plato.Platillo}}  <- Aun Preparando </span></strong>
                                                 <div class="input-group-btn">
                                                   <span style="font-size:medium"> </span>
                                                 </div>

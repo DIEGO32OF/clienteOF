@@ -140,6 +140,7 @@ SUscribeNews_CLic(){
       var format = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/;
 
       if (!format.test(lugar)) {
+        $('#alertNoResults').hide();
         var tipo = 0;
         var xNomlugar = (<HTMLInputElement>document.getElementById('xNomLugar'));
         if (xNomlugar.checked) {
@@ -188,55 +189,29 @@ SUscribeNews_CLic(){
   }
 
   GetCercas() {
-       if (navigator.geolocation) {
-          this.recomendaciones = [];
-         navigator.geolocation.getCurrentPosition(position => {
-           this.location = position.coords;
+    if (navigator.geolocation) {
+      
+      navigator.geolocation.getCurrentPosition(position => {
+        this.location = position.coords;
 
-           var latLnCurrency = position.coords.latitude + ',' + position.coords.longitude;
+        this._getService.damelosactivos(position.coords.latitude, position.coords.longitude ).subscribe(respuesta => {
+         
+             if(respuesta.Locals){
+               this.recomendaciones = [];               
+               this.recomendaciones = respuesta.Locals;
+             }
            
-           let actual = {
-             latitude: position.coords.latitude,
-             longitude: position.coords.longitude
-           };
-
-           this._getService.damelosactivos().subscribe(respuesta => {
-             //respuesta.forEach((localinescerca) => {
-
-                var arreglo = respuesta.Searching;
-                
-                //var arrayArreglo = new Array();
-                for (var i = 0; i < arreglo.length; i++) {
-                  if (arreglo[i].lat != undefined) {
-                    if (arreglo[i].lat != "") {
-                   let bilbao = {
-                        latitude: arreglo[i].lat,
-                        longitude: arreglo[i].lng
-                   };
-                   let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
-
-                   
-                   if (meters < 8000) {
-                        
-                        this.recomendaciones.push(arreglo[i]);
-                       // arrayArreglo.push(arreglo[i]);
-                   }
-                 }
+             if (this.recomendaciones.length > 0) {  
+              $('#alertNoResults').hide();
+                 $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
+                 this.LoNuevo = 'Resultados de la Busqueda';
                }
-                }//);
-                if (this.recomendaciones.length > 0) {  
-                    $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
-                    this.LoNuevo = 'Resultados de la Busqueda';
-                  }
-                  else
-                    $('#alertNoResults').show();
-
-           });
-
-         });
-       }
-
-     }
+               else
+                 $('#alertNoResults').show();
+        });
+      });
+    }
+  }
 
 
  mostrarUbicacion(p) {

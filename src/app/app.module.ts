@@ -19,6 +19,7 @@ import { AngularFireModule } from 'angularfire2';
 import { HaversineService } from "ng2-haversine";
 import { AgmCoreModule } from '@agm/core';
 import { MapsComponent } from './components/Solicitud/maps.component';
+import { ReservationComponent } from './components/Solicitud/reservation.component';
 
 //import {TabsModule} from "ng2-tabs";
 //import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
@@ -46,6 +47,7 @@ const firebaseConfig= {
    ofpageComponent,
    OrdenarComponent,
    MapsComponent,
+   ReservationComponent
   ],
   imports: [
     BrowserModule,

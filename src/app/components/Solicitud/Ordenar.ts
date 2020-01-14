@@ -27,6 +27,7 @@ export class OrdenarComponent implements OnInit {
     locaCuenta:string='';
     locaComanda:string='';
   locaTermino: string = '';
+  reservation: string = '';
   public Allevar: boolean;
   public Mycode: string;
     		public needCode:boolean;
@@ -58,6 +59,7 @@ ngOnInit(){
     this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
     this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
     this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
+    this.reservation = '/Reservaciones/dnE6XnhrjrU_/' + local;
 
     let token = this._getService.getCookie('verificaexpired');// params['Toke']; //this._getService.getCookie('verificaexpired');
 

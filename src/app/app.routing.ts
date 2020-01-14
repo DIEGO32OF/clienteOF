@@ -10,6 +10,7 @@ import {verfycheckComponent} from './components/Solicitud/verifycheck'
 import {ofpageComponent} from './components/Solicitud/ofpage'
 import { OrdenarComponent } from './components/Solicitud/Ordenar'
 import { MapsComponent } from './components/Solicitud/maps.component';
+import { ReservationComponent } from './components/Solicitud/reservation.component';
 
 
 
@@ -24,8 +25,9 @@ const appRoutes:Routes=[
 {path:'placesVisit',component:placesVisitS},
 {path:'LaCuenta/:typer/:Esta',component:LaCuentaComponent},
 {path:'ordenofacil/:typer/:Esta',component:ofpageComponent},
-  { path: 'mapa/:typer/:Esta', component: MapsComponent },
-  { path: 'Ordenar/:typer/:Esta', component: OrdenarComponent }
+{ path: 'mapa/:typer/:Esta', component: MapsComponent },
+{ path: 'Ordenar/:typer/:Esta', component: OrdenarComponent },
+{ path: 'Reservaciones/:typer/:Esta', component: ReservationComponent }
 
 
 

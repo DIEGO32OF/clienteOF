@@ -35,16 +35,20 @@
             </button>
 
 
-            <button type="button" id="btnLevantadas" class="btn btn-primary">
+             <button type="button" id="btnLevantadas" class="btn btn-primary">
               <a [routerLink]="[locaTermino]" style="color: inherit; ">
                 Comandas terminadas en Cocina ({{CountFinishC}})
               </a>
-            </button>
+            </button> 
 
             <button type="button" id="btnCuenta" class="btn btn-primary">
               <a [routerLink]="[locaCuenta]" style="color: inherit; ">
                 La Cuenta
               </a>
+            </button>
+
+            <button type="button" id="btnLevantadas" class="btn btn-primary"   >    <a [routerLink]="[reservation]" style="color: inherit; ">
+              Reservaciones ({{CountComandaC}})</a>
             </button>
 
             <div class="clearfix"></div>
@@ -120,7 +124,7 @@
                 <button type="button" class="close" data-hide="alert" (click)="CierraAlerts('alertNotama')">&times;</button>
                 Se debe de seleccionar un tamaño.
               </div>
-              <h4><b *ngIf="modals[0]!=undefined">{{modals[0].Nombre}}</b></h4>piezas por presentación: {{modals[0].piezas}}<br>{{modals[0].descrip}}<p></p>
+              <h4><b *ngIf="modals[0]!=undefined">{{modals[0].Nombre}}</b></h4>piezas por presentación: <span *ngIf="modals[0]!=undefined">{{modals[0].piezas}}</span><br><span *ngIf="modals[0]!=undefined">{{modals[0].descrip}}</span><p></p>
               <h4>  Solicitudes Opcionales al Articulo</h4>
               <textarea rows="4" placeholder="ej. sin Mayonesa y sin cebolla ó 1 sin cebolla y la otra sin chile" class="form-control wpcf7-text" id="EspefTxt"></textarea>
               <p></p>
@@ -128,7 +132,7 @@
               <table style="width:100%">
                 <tr>
                   <td> <input type="number" id="NUmProduct" class="form-control wpcf7-text" style="width:60%" placeholder="1" (change)="GuardameCantidad(modals)" /></td>
-                  <td style="width:30%"><span><b>${{modals[0].precio}}</b></span></td>
+                  <td style="width:30%" ><span *ngIf="modals[0]!=undefined"><b>${{modals[0].precio}}</b></span></td>
                 </tr>
               </table><p></p>
               <div *ngIf="modals[0]!=undefined">

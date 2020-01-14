@@ -51,40 +51,16 @@ export class MapsComponent implements OnInit {
 
          
 
-            this._getService.damelosactivos().subscribe(respuesta => {
-              //respuesta.forEach((localinescerca) => {
-
-              var arreglo = respuesta.Searching;
+            this._getService.damelosactivos(this.lats, this.lngs).subscribe(respuesta => {
               
-              //var arrayArreglo = new Array();
-              for (var i = 0; i < arreglo.length; i++) {
-                if (arreglo[i].lat != undefined) {
-                  if (arreglo[i].lat != "") {
-                    let bilbao = {
-                      latitude: arreglo[i].lat,
-                      longitude: arreglo[i].lng
-                    };
-                    let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
 
-                    
-                    if (meters < 8000) {
-                      
+              var arreglo = respuesta.Locals;              
+              for (var i = 0; i < arreglo.length; i++) {
+                                                          
                       arreglo[i].lat = +arreglo[i].lat;
                       arreglo[i].lng = +arreglo[i].lng;
-                      this.recomendaciones.push(arreglo[i]);
-                      // arrayArreglo.push(arreglo[i]);
-                    }
-                  }
-                }
-              }
-              
-              //);
-              //if (this.recomendaciones.length > 0) {
-              //  $("html, body").delay(100).animate({ scrollTop: $('#appnose').offset().top }, 2000);
-              //  this.LoNuevo = 'Resultados de la Busqueda';
-              //}
-              //else
-              //  $('#alertNoResults').show();
+                      this.recomendaciones = respuesta.Locals                                                        
+              }              
 
             });
             return this.recomendaciones;
@@ -148,47 +124,24 @@ export class MapsComponent implements OnInit {
         this.lats = +position.coords.latitude;
         this.lngs = +position.coords.longitude;
 
-        this.idHas = ''; //response.local.id_Hashed;
-        this.titulo = '';// response.local.Nombre;
+        this.idHas = '';
+        this.titulo = '';
 
-         this._getService.damelosactivos().subscribe(respuesta => {
+         this._getService.damelosactivos(this.lats, this.lngs).subscribe(respuesta => {
           
 
-           var arreglo = respuesta.Searching;           
+           var arreglo = respuesta.Locals;           
 
-          for (var i = 0; i < arreglo.length; i++) {
+           for (var i = 0; i < arreglo.length; i++) {
             if (arreglo[i].lat != undefined) {
               if (arreglo[i].lat != "") {
-                let bilbao = {
-                  latitude: arreglo[i].lat,
-                    longitude: arreglo[i].lng
-                };
+                arreglo[i].lat = +arreglo[i].lat;
+                arreglo[i].lng = +arreglo[i].lng;
 
-               ////this.mapsAPILoader.load().then(() => {
-               // let metrosgoo = google.maps.geometry.spherical.computeDistanceBetween(new google.maps.LatLng(arreglo[i].lat, arreglo[i].lng), new google.maps.LatLng(position.coords.latitude, position.coords.longitude));
-               //   console.log(metrosgoo);
-               // //});
-
-                let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
-               // console.log(arreglo[i].lat + ',' + arreglo[i].lng + arreglo[i].Nombre + meters);
-               
-                if (meters <= 8000) {
-                  arreglo[i].lat = +arreglo[i].lat;
-                  arreglo[i].lng = +arreglo[i].lng;
-                  this.recomendaciones.push(arreglo[i]);
-                  //console.log(arreglo[i].lat + ',' + arreglo[i].lng + arreglo[i].Nombre + meters);
-                  //if (i == 0) {
-                  //  this.lats = +arreglo[i].lat;
-                  //  this.lngs = +arreglo[i].lng;
-
-                    
-                  //}
-                  
-                }
+                this.recomendaciones.push(arreglo[i])
+               }
               }
-            }
-          }
-         
+            }         
         });
       });
       

@@ -25,6 +25,7 @@ locaOrdenar:string='';
 locaCuenta:string='';
 locaComanda:string='';
 locaTermino:string='';
+reservation: string = '';
 CountComanda:number=0;
 CountFinish:number=0;
   myTokenMesaje: string = '';
@@ -56,6 +57,7 @@ constructor(private activatedRoute: ActivatedRoute, private _getService:GetServi
           this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
           this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
           this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
+          this.reservation = '/Reservaciones/dnE6XnhrjrU_/' + local;
           this.final_data = [];
           this.keys = [];
           var date_ = new Date();
@@ -143,12 +145,11 @@ constructor(private activatedRoute: ActivatedRoute, private _getService:GetServi
 
                     var snaper = new Array();
                     snap.forEach((dontWork) => {
-                      if ((dontWork.Estatus != '0' || dontWork.Estatus != '1') && childSnapshot.FechaEntregado != undefined) {
+                      if ((dontWork.Estatus != '0' && dontWork.Estatus != '1' ) && childSnapshot.FechaEntregado != undefined) {
                         snaper.push(dontWork);
                       }
                     });
-                    var DomServ = this.Service_dom.filter(x => x._id === childSnapshot.idService);
-
+                    var DomServ = this.Service_dom.filter(x => x._id === childSnapshot.idService);                      
                     if (snap[0].fechaCreado != undefined) {
                       this.final_data.push({
                         Estatus: childSnapshot.Estatus,
@@ -174,10 +175,15 @@ constructor(private activatedRoute: ActivatedRoute, private _getService:GetServi
 
 
                   else {
-                    if (snap[0].fechaCreado != undefined && snap[0].Estatus == '4') {
 
+                    if(childSnapshot.Estatus != '7'){
+                    let unoEntregado = snap.filter(x => x.Estatus == '4')
+                    
+                    if (unoEntregado.length > 0){  //snap[0].fechaCreado != undefined && snap[0].Estatus == '4') {                      
+
+                      
                       var DomServ = this.Service_dom.filter(x => x._id === childSnapshot.idService);
-
+                      let snap = unoEntregado
                       this.final_data.push({
                         snap,
                         codigo: childSnapshot.$key,
@@ -187,19 +193,21 @@ constructor(private activatedRoute: ActivatedRoute, private _getService:GetServi
                         fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
                         Allevar: childSnapshot.Allevar,
                         Estatus: childSnapshot.Estatus,
-                        servicioDom: DomServ
+                        servicioDom: DomServ,
+                        unoEntregado
                         //  FechaEntregado:childSnapshot.FechaEntregado.replace(' ','').replace(':','').replace('/','').replace('/',''),
-                      });
+                      });                                     
                       this.final_datas.push({
                         fecha: +snap[0].fechaCreado.replace(' ', '').replace(':', '').replace('/', '').replace('/', ''),
                         id: childSnapshot.$key
                       });
+                      
                     }
+                  }
                   }
 
                   //this.final_datas.sort(function(a, b){return a.fecha - b.fecha});
-                  this.final_datas.sort(function (a, b) { return b.fecha - a.fecha });
-
+                  this.final_datas.sort(function (a, b) { return b.fecha - a.fecha });                 
 
                 }
 
@@ -257,11 +265,13 @@ declinComand(Comanda)
   Comanda.snap.forEach((dontWork) => {
     if(dontWork.Estatus!=undefined)
     {
-      if(dontWork.Estatus=="0"||dontWork.Estatus=="1"){
+      
+      if(dontWork.Estatus=="0"||dontWork.Estatus=="1" || dontWork.Estatus=="" ){
         existenPedidos=true;
       }
     }
   });
+  
   if(existenPedidos){
     if(confirm("Aun hay platillos preparandose, si se finaliza se eliminara la comanda de pantalla, ¿desea continuar?")){
   this.activatedRoute.params.subscribe((params: Params) => {
