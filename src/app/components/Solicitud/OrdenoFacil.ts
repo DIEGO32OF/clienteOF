@@ -74,9 +74,6 @@ public  CalificaEncues: string = '';
 
 	constructor(private activatedRoute: ActivatedRoute, private _getService:GetService, private _haversineService: HaversineService, private route:Router)
 	{
-
-
-
 		this.titulo="Bienvenid@";
 		this.tiempos=new Array();
 		this.timessorted=new Array();
