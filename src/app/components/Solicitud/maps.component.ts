@@ -49,8 +49,6 @@ export class MapsComponent implements OnInit {
               longitude: this.lngs
             };
 
-         
-
             this._getService.damelosactivos(this.lats, this.lngs).subscribe(respuesta => {
               
 

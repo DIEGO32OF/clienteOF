@@ -72,8 +72,6 @@ export class ofpageComponent implements OnInit {
       var myfechoria = new Date();
       var fecha = this.formatoDate(myfechoria, '');
       if (tipo && local) {
-
-
         this._getService.signUp(tipo, local, fecha.replace('/', '|').replace('/', '|').replace('/', '|').replace(':', '-').replace(':', '-').replace(':', '-').replace(' ', '_')).subscribe(
           response => {
 
