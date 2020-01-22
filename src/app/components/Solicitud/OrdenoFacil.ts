@@ -1232,8 +1232,10 @@ if(childSnapshot.$value=="4"){
 				//var myPass=btoa(pass);
 				
 				this.activatedRoute.params.subscribe((params: Params) => {
+          var myfec = new Date();
+          var fecha = this.formatoDate(myfec, '');
 					let local = params['Esta'];
-                  this._getService.creaUser(correo, local).subscribe(
+                  this._getService.creaUser(correo, local, fecha.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_')).subscribe(
 		 response=>{			 
 			 if(response.user!=null){
 				 //usuario logeado cerramos el pop up de login o mandamos un anuncion de bienvenido
