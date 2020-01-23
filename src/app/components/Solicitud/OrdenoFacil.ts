@@ -574,6 +574,8 @@ Calificame(rank){
     this.CierraAlerts('alertBadCode');
     this.CierraAlerts('alertCancelPlato');
     //this.CierraAlerts('alertOrderOknoCode');
+     this.toEncuesta = [];
+    this.agradeceenc = false;
     var idService = '';
     var NAmetogo = '';
     var coderTogo ='';
@@ -583,7 +585,8 @@ Calificame(rank){
     coderTogo = (<HTMLInputElement>document.getElementById('NameOrder')).value;
     
     var chek = <HTMLInputElement>document.getElementById('isForllevar');
-    if (chek.checked) {
+     if (chek != undefined){
+    if (chek.checked || this.togoTrue) {
       //aqi hay que jalar los datos si uno no viene poner  Allevar=false
       NAmetogo = (<HTMLInputElement>document.getElementById('Nametogo')).value;
       var celtogo = (<HTMLInputElement>document.getElementById('CeltoGo')).value;
@@ -613,6 +616,7 @@ Calificame(rank){
 
         if (this.Allevar) {
           // quiere decir que metieron una locacion para llevar hay que guardarla
+          this.togoTrue = false
           this._getService.SaveServicetogo(NAmetogo, this.LocalGet.id_Hashed, MailToGo, celtogo, directoGo, '', '').subscribe(idServ => {
             
             idService = idServ.IdService._id;
@@ -632,6 +636,7 @@ Calificame(rank){
         this.Allevar = true;
       }
     }
+  }
     else {
       if(this.serdomPop.length > 0)
       this.Allevar = true;
@@ -1016,7 +1021,7 @@ if(childSnapshot.$value=="4"){
 			if(childSnapshot.$value=="11"){
 
               this.playSound('');
-              var someone = this.comandaSave.filter(x => x.Estatus === '2');
+              var someone = this.comandaSave.filter(x => x.Estatus === '2'|| x.Estatus === '4' );
 
               if (someone.length > 0) {
                 this.toEncuesta.push(someone[0]);// = someone[0];
