@@ -291,10 +291,10 @@ getSixLocals(){
 //           return idC;
 //       }
 
-creaUser(mail,local){
+creaUser(mail,local, fecha){
 
   let headers = new Headers({ 'content-type': 'application/json' });
-  return this._http.post(this.url + 'newValidateUser/' + mail+'/leter/'+local, { headers: headers })
+  return this._http.post(this.url + 'newValidateUser/' + mail+'/leter/'+local+'/'+fecha, { headers: headers })
     .map(res => res.json());
 
 }
