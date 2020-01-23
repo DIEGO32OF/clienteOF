@@ -574,6 +574,8 @@ Calificame(rank){
     this.CierraAlerts('alertNoCode');
     this.CierraAlerts('alertBadCode');
     this.CierraAlerts('alertCancelPlato');
+    this.toEncuesta = [];
+    this.agradeceenc = false;
     //this.CierraAlerts('alertOrderOknoCode');
      this.toEncuesta = [];
     this.agradeceenc = false;
@@ -586,7 +588,7 @@ Calificame(rank){
     coderTogo = (<HTMLInputElement>document.getElementById('NameOrder')).value;
     
     var chek = <HTMLInputElement>document.getElementById('isForllevar');
-     if (chek != undefined){
+    if (chek != undefined){
     if (chek.checked || this.togoTrue) {
       //aqi hay que jalar los datos si uno no viene poner  Allevar=false
       NAmetogo = (<HTMLInputElement>document.getElementById('Nametogo')).value;
@@ -1022,7 +1024,7 @@ if(childSnapshot.$value=="4"){
 			if(childSnapshot.$value=="11"){
 
               this.playSound('');
-              var someone = this.comandaSave.filter(x => x.Estatus === '2'|| x.Estatus === '4' );
+              var someone = this.comandaSave.filter(x => x.Estatus === '2' || x.Estatus === '4' );
 
               if (someone.length > 0) {
                 this.toEncuesta.push(someone[0]);// = someone[0];
@@ -1459,8 +1461,8 @@ myModalEvenprom(eventosPromos){
 		}
     }
 
-/* 		GetCercas() {
-	       if (navigator.geolocation) {
+		GetCercas() {
+	      /*  if (navigator.geolocation) {
 					  this.recomendaciones = [];
 	         navigator.geolocation.getCurrentPosition(position => {
 	           this.location = position.coords;
@@ -1475,10 +1477,10 @@ myModalEvenprom(eventosPromos){
 	           this._getService.damelosactivos().subscribe(respuesta => { */
 							 //respuesta.forEach((localinescerca) => {
 
-             //     var arreglo = respuesta.Searching;
+               //   var arreglo = respuesta.Searching;
                   
                   //var arrayArreglo = new Array();
-               /*    for (var i = 0; i < arreglo.length; i++) {
+                  /* for (var i = 0; i < arreglo.length; i++) {
                     if (arreglo[i].lat != undefined) {
                       if (arreglo[i].lat != "") {
  	                   let bilbao = {
@@ -1492,8 +1494,8 @@ myModalEvenprom(eventosPromos){
                      
                           this.recomendaciones.push(arreglo[i]); */
                          // arrayArreglo.push(arreglo[i]);
- 	                /*    }
- 	                 }
+ 	                   }
+ 	              /*    }
  	               }
                   } *///);
 								/* 	if (this.recomendaciones.length > 0) {
@@ -1503,16 +1505,16 @@ myModalEvenprom(eventosPromos){
 	                  else
 	                    $('#alertNoResults').show(); */
                   //this.recomendaciones = this.recomendaciones2;
- 	         //  });
+ 	          // });
 	           // va x todas las lats y va comparando quien si quien no y sacas un listado
 	             //let meters = this._haversineService.getDistanceInMeters(bilbao, actual);
-	      //   });
-	    //   }
+	       //  });
+	      // }
 	       //obtiene los cercanos
 	       //if (typeof navigator.geolocation == 'object') {
 	       //  navigator.geolocation.getCurrentPosition(this.mostrarUbicacion);
 	       //}
-	    // }
+	   //  }
 
 	    ///var latLnCurrency = '';
 
@@ -1988,12 +1990,10 @@ abreComanda()
   document.getElementById('btnOrderCo').style.visibility = "visible";
 
   if(this.serdomPop.length > 0)
-  {
+  {    
     this.togoTrue = true;
-    this.canTogo = true;
-
+    this.canTogo = true;        
   }
-  
 
 }
 
