@@ -43,6 +43,10 @@ export class ReservationComponent implements OnInit {
             this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
             this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
             this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
+
+            this._getService.getComandas(local).subscribe(data => {
+              console.log(data)
+            });
           }
         }
       }
