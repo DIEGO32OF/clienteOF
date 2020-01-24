@@ -299,6 +299,12 @@ creaUser(mail,local, fecha){
 
 }
 
+getActivityUser(mail){
+  let headers = new Headers({ 'content-type': 'application/json' });
+  return this._http.post(this.url + 'activitiesUser/' + mail, { headers: headers })
+    .map(res => res.json());
+}
+
 getIdentity(){
 	let identity=JSON.parse(localStorage.getItem('identity'));
 	if(identity!="undefined"){
@@ -680,6 +686,26 @@ getCookie(nameCook): string {
     }
   }
   return "";
+}
+
+setReservasion(nombre, fecha, numPersonas, telefono, correo, local)
+{  
+  var d = new Date();
+  let date = this.formatoDate(d);
+  let params = JSON.stringify({ nombre: nombre, fechaReserv: fecha.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_'), personas: numPersonas, mail: correo, local: local, telefono: telefono,  solicitado: date.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_')})  
+  let headers = new Headers({ 'content-type': 'application/json' });
+
+  return this._http.post(this.url + 'setReservation/'+ nombre+'/'+ fecha.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_')+'/'+numPersonas+'/'+correo+'/'+local+'/'+telefono+'/'+date.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_'), params, { headers: headers })
+    .map(res => res.json());
+}
+
+setReservasionFB (local, nombre, fecha, activity, numPersonas){
+
+  var d = new Date();
+  let date = this.formatoDate(d);
+  this.afDB.list('/'+local + '/reservasion'  )
+  .push({'nombre': nombre, 'fechaReservasion': fecha, 'seLevanto': date, 'numPersonas': numPersonas, 'activity': activity, 'estatus': 1});
+
 }
 
 }

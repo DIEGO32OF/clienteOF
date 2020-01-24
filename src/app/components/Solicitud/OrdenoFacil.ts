@@ -70,6 +70,7 @@ public  CalificaEncues: string = '';
   public canTogo: boolean;
   public innerWidth: number;
   public imgPublicidad : any[] =[];
+  public canReserv : boolean = false;
 
 
 	constructor(private activatedRoute: ActivatedRoute, private _getService:GetService, private _haversineService: HaversineService, private route:Router)
@@ -151,8 +152,8 @@ public  CalificaEncues: string = '';
                       
                     }
 
-                    if(response.local.makeReserve != 1 ){
-
+                    if(response.local.makeReserve === 1 ){
+                      this.canReserv = true;
                     }
 
                     var micomandante = this.getCookie('MyComand' + local);
@@ -1235,7 +1236,7 @@ if(childSnapshot.$value=="4"){
           var myfec = new Date();
           var fecha = this.formatoDate(myfec, '');
 					let local = params['Esta'];
-                  this._getService.creaUser(correo, local+'_1'+, fecha.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_')).subscribe(
+                  this._getService.creaUser(correo, local+'_1', fecha.replace('/', '|').replace('/', '|').replace(':', '-').replace(' ', '_')).subscribe(
 		 response=>{			 
 			 if(response.user!=null){
 				 //usuario logeado cerramos el pop up de login o mandamos un anuncion de bienvenido
@@ -2172,6 +2173,40 @@ getSum():number{
 
     if (nameReserve != '' && celReserve != '' && mailReserve != '' && dateReserve != '' && comentReserve != '') {
       
+      if(comentReserve.includes('/') && comentReserve.includes(':') && comentReserve.length === 16){
+        let Activity = false
+  
+        this._getService.getActivityUser(mailReserve).subscribe(activity => {          
+
+          let userAct = activity.user
+        this.activatedRoute.params.subscribe((params: Params) => {
+        let local = params['Esta'];
+        let exist = false
+        try{
+         exist = userAct.LocalContact.filter(x=> x.id.includes(local))
+        }
+        catch(ex){}
+        
+        if( exist) {
+          Activity = true
+        }
+        // se guarda la reservacion en FB
+      this._getService.setReservasionFB(local, nameReserve, comentReserve, Activity, dateReserve)
+      
+      this._getService.setReservasion(nameReserve, comentReserve, dateReserve, celReserve, mailReserve, local ).subscribe(reservationSave =>
+        {
+          console.log(reservationSave)
+        })
+
+      });
+
+
+        });
+    }
+    else{
+      // formato de fecha incorrecto
+    }
+     
     }
 
   }
