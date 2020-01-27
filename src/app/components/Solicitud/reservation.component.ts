@@ -16,7 +16,7 @@ export class ReservationComponent implements OnInit {
   locaCuenta:string='';
   locaComanda:string='';
   locaTermino:string='';
-
+ public final_data = []
   constructor(private activatedRoute: ActivatedRoute, private _getService:GetService) { }
 
   ngOnInit() {
@@ -43,9 +43,19 @@ export class ReservationComponent implements OnInit {
             this.locaCuenta = '/LaCuenta/dnE6XnhrjrU_/' + local;
             this.locaComanda = '/Comandas/dnE6XnhrjrU_/' + local;
             this.locaTermino = '/TerminadosCocina/dnE6XnhrjrU_/' + local;
-
-            this._getService.getComandas(local).subscribe(data => {
-              console.log(data)
+            this.final_data = [];
+            this._getService.getComandas(local).subscribe(data => {              
+              data.forEach((childSnapshot) => { 
+                console.log(childSnapshot)
+                if(childSnapshot.$key === 'reservasion'){
+                  this._getService.ComandasGetCode(local, childSnapshot.$key).subscribe(snap => {
+                   snap.forEach(snapchot =>{
+                    this.final_data.push(snapchot)
+                   })
+                  })
+                  } 
+              })
+              console.log(this.final_data)
             });
           }
         }
