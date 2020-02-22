@@ -63,6 +63,70 @@
               <div class="alert alert-success" role="alert" id="alertOrderOk" style="display:none">
                 Se levanto correctamente la Orden. Con el Codigo: {{Mycode}}
               </div>
+              
+              <div class="form-group">
+  <div class="col-md-8">
+  <div class="input-group">
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-primary" (click)="btnBuscar_click()" >Buscar</button>
+    </span>
+  <input type="text" class="form-control" id="txtDishSearch" placeholder="introduzca un platillo para buscarlo">
+</div>
+   </div>
+                
+                
+</div>
+              <div *ngIf = "coinciden.length > 0">
+                
+                  <h2 class="centered">Resultados de la busqueda</h2>
+
+            
+            <div class="container">
+              <div class="row">
+
+
+               
+
+                
+
+                  
+                  <div [id]="timers" class="collapse">
+                    <ul class="menu">
+                      <ng-container *ngFor="let platos of coinciden" class="menu">
+                
+                        <li *ngIf=" platos.Active==1" style="cursor: pointer; " (click)="abreCantos(platos,false)">
+
+                          <img *ngIf="platos!=undefined" [src]="platos.NomImg" style="width:100%">
+                          <b> {{platos.Nombre}}</b>   <span class="price" *ngIf="platos.precio!=0"><b>${{platos.precio}}</b></span>
+                          <div class="detail">
+                            {{platos.descrip}}.
+
+                          </div>
+                          <p></p>
+
+                        </li>
+
+                      </ng-container>
+
+                    </ul>
+                    <div class="reservation-link">
+                      <button type="button" class="btn reservation-btn" (click)="abreComanda()">Ordenar</button>
+                    </div>
+                  </div>
+                
+              </div>
+
+              
+            </div>
+              </div>
+              
+              
+              
+              
+              
+              
+              
+              
               <h2 class="centered">Nuestro Menu</h2>
 
             </div>
