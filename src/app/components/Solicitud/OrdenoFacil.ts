@@ -71,6 +71,8 @@ public  CalificaEncues: string = '';
   public innerWidth: number;
   public imgPublicidad : any[] =[];
   public canReserv : boolean = false;
+  public encuestaCan: boolean = false;
+  public serviceLealtad: boolean = false;
 
 
 	constructor(private activatedRoute: ActivatedRoute, private _getService:GetService, private _haversineService: HaversineService, private route:Router)
@@ -145,15 +147,22 @@ public  CalificaEncues: string = '';
                     this.LocalGet = response.local;
                     this.SepuedePedir = response.local.setComand;
                     this.imgPublicidad = response.imagesArr
-                    if(response.local.servDom != 1){
+                    if(response.local.servDom != '1'){
                       document.getElementById('servDomicilia').style.visibility = "hidden";
                      // document.getElementById('setToGoTable').style.visibility = "hidden";
                      this.canTogo = false;
                       
                     }
 
-                    if(response.local.makeReserve === 1 ){
+                    if(response.local.makeReserve === '1' ){
                       this.canReserv = true;
+                    }
+                    
+                    if(response.local.EncuestaServ === '1'){
+                      this.encuestaCan = true;
+                    }
+                    if(response.local.lealServ === '1'){
+                      this.serviceLealtad = true;
                     }
 
                     var micomandante = this.getCookie('MyComand' + local);
