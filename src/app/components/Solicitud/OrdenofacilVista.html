@@ -141,7 +141,7 @@
               <li (click)="abreComanda()">Mi Orden&nbsp;&nbsp;&nbsp;</li>
               <li><a [routerLink]="['/placesVisit']" style="color: inherit;padding:0px">Mis Lugares Visitados&nbsp;&nbsp;&nbsp;</a></li>
               <li *ngIf="canReserv"><a (click)="openReserve()" style="color: inherit;padding:0px">Hacer Reservación en {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
-              <li *ngIf="LocalGet!= undefined"><a  style="color: inherit;padding:0px">Recibir ofertas del {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
+              <li *ngIf="serviceLealtad"><a  style="color: inherit;padding:0px">Recibir ofertas del {{LocalGet.Nombre}}&nbsp;&nbsp;&nbsp;</a></li>
               <li><a href="https://comandaof.firebaseapp.com/menu/{{tipoLocal}}/{{idLocalhash}}_redirect" style="color: inherit;padding:0px">OrdenoFacil</a></li>
 
             </ul>
