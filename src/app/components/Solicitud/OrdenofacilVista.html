@@ -312,7 +312,7 @@
 
 
               <!--<div *ngFor="let platoEncue of toEncuesta">-->
-              <div *ngIf="toEncuesta.length>0">
+              <div *ngIf="toEncuesta.length>0 && encuestaCan">
                 <div class="alert alert-success" role="alert">
                   Que te parecio el platillo:<br /><b>{{toEncuesta[0].Nombre}}?</b>
                 </div>
@@ -335,7 +335,7 @@
               </div>
 
               <p></p>
-              <div class="alert alert-info" role="alert">
+              <div *ngIf="encuestaCan" class="alert alert-info" role="alert">
                 Puedes ganar recompensas si contestas la siguiente encuesta:
                 <a href="">Resolver encuesta </a>
               </div>
